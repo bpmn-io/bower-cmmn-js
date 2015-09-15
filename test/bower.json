@@ -1,0 +1,9 @@
+{
+  "name": "cmmn-js-test",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "cmmn-js": "../",
+    "jquery": "~2.1.1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "cmmn-js",
+  "version": "0.0.0",
+  "authors": [
+    "bpmn.io"
+  ],
+  "description": "A CMMN 1.1 renderer",
+  "main": "dist/cmmn-viewer.js",
+  "keywords": [
+    "models",
+    "diagram",
+    "renderer",
+    "cmmn"
+  ],
+  "ignore": [
+    "test/*"
+  ],
+  "homepage": "http://bpmn.io"
+}
