@@ -1,5 +1,5 @@
 /*!
- * cmmn-js - cmmn-modeler v0.3.0
+ * cmmn-js - cmmn-modeler v0.4.0
 
  * Copyright 2014, 2015 camunda Services GmbH and other contributors
  *
@@ -8,14 +8,14 @@
  *
  * Source Code: https://github.com/bpmn-io/cmmn-js
  *
- * Date: 2016-05-19
+ * Date: 2016-06-07
  */
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.CmmnJS = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var Ids = _dereq_(229);
+var Ids = _dereq_(246);
 
 var Viewer = _dereq_(3);
 
@@ -39,6 +39,7 @@ var initialDiagram = '<?xml version="1.0" encoding="UTF-8"?>' +
         '<cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />' +
         '<cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">' +
           '<dc:Bounds x="114" y="63" width="534" height="389" />' +
+          '<cmmndi:CMMNLabel />' +
         '</cmmndi:CMMNShape>' +
         '<cmmndi:CMMNShape id="PlanItem_1_di" cmmnElementRef="PlanItem_1">' +
           '<dc:Bounds x="150" y="96" width="100" height="80" />' +
@@ -195,26 +196,29 @@ Modeler.prototype._collectIds = function(definitions, context) {
 
 Modeler.prototype._interactionModules = [
   // non-modeling components
-  _dereq_(200),
-  _dereq_(203),
-  _dereq_(16),
-  _dereq_(40)
+  _dereq_(114),
+  _dereq_(217),
+  _dereq_(220),
+  _dereq_(18),
+  _dereq_(46),
+  _dereq_(59)
 ];
 
 Modeler.prototype._modelingModules = [
   // modeling components
-  _dereq_(110),
-  _dereq_(127),
-  _dereq_(135),
-  _dereq_(162),
-  _dereq_(178),
+  _dereq_(120),
+  _dereq_(141),
+  _dereq_(149),
+  _dereq_(176),
   _dereq_(192),
+  _dereq_(208),
   _dereq_(10),
   _dereq_(12),
-  _dereq_(34),
-  _dereq_(42),
-  _dereq_(54),
-  _dereq_(46)
+  _dereq_(14),
+  _dereq_(40),
+  _dereq_(48),
+  _dereq_(62),
+  _dereq_(52)
 ];
 
 
@@ -228,10 +232,10 @@ Modeler.prototype._modules = [].concat(
   Modeler.prototype._modules,
   Modeler.prototype._interactionModules,
   Modeler.prototype._modelingModules);
-},{"10":10,"110":110,"12":12,"127":127,"135":135,"16":16,"162":162,"178":178,"192":192,"2":2,"200":200,"203":203,"229":229,"231":231,"3":3,"34":34,"40":40,"42":42,"46":46,"54":54}],2:[function(_dereq_,module,exports){
+},{"10":10,"114":114,"12":12,"120":120,"14":14,"141":141,"149":149,"176":176,"18":18,"192":192,"2":2,"208":208,"217":217,"220":220,"246":246,"248":248,"3":3,"40":40,"46":46,"48":48,"52":52,"59":59,"62":62}],2:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
 var Viewer = _dereq_(3);
 
@@ -250,14 +254,14 @@ inherits(NavigatedViewer, Viewer);
 module.exports = NavigatedViewer;
 
 NavigatedViewer.prototype._navigationModules = [
-  _dereq_(203),
-  _dereq_(200)
+  _dereq_(220),
+  _dereq_(217)
 ];
 
 NavigatedViewer.prototype._modules = [].concat(
   NavigatedViewer.prototype._modules,
   NavigatedViewer.prototype._navigationModules);
-},{"200":200,"203":203,"231":231,"3":3}],3:[function(_dereq_,module,exports){
+},{"217":217,"220":220,"248":248,"3":3}],3:[function(_dereq_,module,exports){
 /**
  * The code in the <project-logo></project-logo> area
  * must not be changed.
@@ -266,21 +270,21 @@ NavigatedViewer.prototype._modules = [].concat(
  */
 'use strict';
 
-var assign = _dereq_(372),
-    omit = _dereq_(376),
-    isString = _dereq_(369),
-    isNumber = _dereq_(366);
+var assign = _dereq_(389),
+    omit = _dereq_(393),
+    isString = _dereq_(386),
+    isNumber = _dereq_(383);
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var domify = _dereq_(389),
-    domQuery = _dereq_(392),
-    domRemove = _dereq_(393);
+var domify = _dereq_(406),
+    domQuery = _dereq_(409),
+    domRemove = _dereq_(410);
 
-var Diagram = _dereq_(88),
-    CmmnModdle = _dereq_(64);
+var Diagram = _dereq_(96),
+    CmmnModdle = _dereq_(72);
 
-var Importer = _dereq_(57);
+var Importer = _dereq_(65);
 
 
 function checkValidationError(err) {
@@ -617,7 +621,7 @@ Viewer.prototype._createContainer = function(options) {
     parent = domQuery(parent);
   }
 
-  container = domify('<div class="bjs-container"></div>');
+  container = domify('<div class="cjs-container"></div>');
 
   assign(container.style, {
     width: ensureUnit(options.width),
@@ -640,15 +644,15 @@ Viewer.prototype._createModdle = function(options) {
 // modules the viewer is composed of
 Viewer.prototype._modules = [
   _dereq_(5),
-  _dereq_(185),
-  _dereq_(167)
+  _dereq_(201),
+  _dereq_(181)
 ];
 
 
 /* <project-logo> */
 
-var PoweredBy = _dereq_(63),
-    domEvent = _dereq_(390);
+var PoweredBy = _dereq_(71),
+    domEvent = _dereq_(407);
 
 /**
  * Adds the project logo to the diagram container as
@@ -664,7 +668,7 @@ function addProjectLogo(container) {
   var linkMarkup =
     '<a href="http://bpmn.io" ' +
        'target="_blank" ' +
-       'class="bio-powered-by" ' +
+       'class="cjs-powered-by" ' +
        'title="Powered by bpmn.io" ' +
        'style="position: absolute; bottom: 15px; right: 15px; z-index: 100">' +
         '<img src="data:image/png;base64,' + logoData + '">' +
@@ -683,17 +687,17 @@ function addProjectLogo(container) {
 
 /* </project-logo> */
 
-},{"167":167,"185":185,"231":231,"366":366,"369":369,"372":372,"376":376,"389":389,"390":390,"392":392,"393":393,"5":5,"57":57,"63":63,"64":64,"88":88}],4:[function(_dereq_,module,exports){
+},{"181":181,"201":201,"248":248,"383":383,"386":386,"389":389,"393":393,"406":406,"407":407,"409":409,"410":410,"5":5,"65":65,"71":71,"72":72,"96":96}],4:[function(_dereq_,module,exports){
 'use strict';
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     getDefinition = ModelUtil.getDefinition,
     getSentry = ModelUtil.getSentry;
 
-var isAny = _dereq_(35).isAny;
+var isAny = _dereq_(41).isAny;
 
-var forEach = _dereq_(245),
-    isArray = _dereq_(363);
+var forEach = _dereq_(262),
+    isArray = _dereq_(380);
 
 
 /**
@@ -984,26 +988,26 @@ function isDefinition(item) {
     'cmmn:CaseFileItemDefinition'
   ]);
 }
-},{"245":245,"35":35,"363":363,"62":62}],5:[function(_dereq_,module,exports){
+},{"262":262,"380":380,"41":41,"70":70}],5:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
     _dereq_(8),
-    _dereq_(59)
+    _dereq_(67)
   ],
   itemRegistry: [ 'type', _dereq_(4) ]
 };
-},{"4":4,"59":59,"8":8}],6:[function(_dereq_,module,exports){
+},{"4":4,"67":67,"8":8}],6:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231),
-    isArray = _dereq_(363),
-    isObject = _dereq_(367),
-    assign = _dereq_(372);
+var inherits = _dereq_(248),
+    isArray = _dereq_(380),
+    isObject = _dereq_(384),
+    assign = _dereq_(389);
 
-var BaseRenderer = _dereq_(99),
-    TextUtil = _dereq_(221),
-    DiUtil = _dereq_(60),
-    ModelUtil = _dereq_(62);
+var BaseRenderer = _dereq_(107),
+    TextUtil = _dereq_(238),
+    DiUtil = _dereq_(68),
+    ModelUtil = _dereq_(70);
 
 var isStandardEventVisible = DiUtil.isStandardEventVisible;
 var isPlanningTableCollapsed = DiUtil.isPlanningTableCollapsed;
@@ -1021,7 +1025,7 @@ var getName = ModelUtil.getName;
 var is = ModelUtil.is;
 var getStandardEvent = ModelUtil.getStandardEvent;
 
-var createLine = _dereq_(220).createLine;
+var createLine = _dereq_(237).createLine;
 
 function CmmnRenderer(eventBus, styles, pathMap) {
 
@@ -1302,6 +1306,7 @@ function CmmnRenderer(eventBus, styles, pathMap) {
       fill: 'white',
       stroke: 'black',
       strokeWidth: 2,
+      fillOpacity: 0.95,
       'pointer-events': 'all'
     });
 
@@ -1319,20 +1324,21 @@ function CmmnRenderer(eventBus, styles, pathMap) {
   function renderExternalLabel(p, element, align) {
     var name = getName(element);
 
-    if (isStandardEventVisible(element)) {
+    var standardEvent = getStandardEvent(element);
 
-      var standardEvent = getStandardEvent(element);
+    if (standardEvent) {
 
-      if (standardEvent) {
-        standardEvent = '[' + standardEvent + ']';
+      var standardEventVisible = isStandardEventVisible(element);
+      standardEvent = '[' + standardEvent + ']';
 
-        if (name) {
+      if (!name) {
+        name = standardEvent;
+        element.hidden = !standardEventVisible;
+      }
+      else {
+        if (standardEventVisible) {
           name = name + ' ' + standardEvent;
         }
-        else {
-          name = standardEvent;
-        }
-
       }
 
     }
@@ -1375,6 +1381,9 @@ function CmmnRenderer(eventBus, styles, pathMap) {
 
     // STAGE
     'cmmn:Stage': function(p, element, attrs) {
+
+      attrs = assign({ fillOpacity: 0.95 }, attrs);
+
       var rect;
       if (isCasePlanModel(element)) {
         return handlers['cmmn:CasePlanModel'](p, element);
@@ -1396,8 +1405,10 @@ function CmmnRenderer(eventBus, styles, pathMap) {
 
     // STAGE
     'cmmn:PlanFragment': function(p, element, attrs) {
+
       var rect = drawRect(p, element.width, element.height, TASK_BORDER_RADIUS, {
-        strokeDasharray: '10, 12'
+        strokeDasharray: '10, 12',
+        fillOpacity: 0.95
       });
 
       renderEmbeddedLabel(p, element, isCollapsed(element) ? 'center-middle' : 'left-top');
@@ -1407,7 +1418,9 @@ function CmmnRenderer(eventBus, styles, pathMap) {
     },
 
     'cmmn:CasePlanModel': function (p, element) {
-      var rect = drawRect(p, element.width, element.height);
+      var rect = drawRect(p, element.width, element.height, null, {
+        fillOpacity: 0.95
+      });
       renderCasePlanModelLabel(p, element);
       attachPlanningTableMarker(p, element);
       attachCasePlanModelMarkers(p, element);
@@ -2074,10 +2087,10 @@ CmmnRenderer.$inject = [ 'eventBus', 'styles', 'pathMap' ];
 
 module.exports = CmmnRenderer;
 
-},{"220":220,"221":221,"231":231,"363":363,"367":367,"372":372,"60":60,"62":62,"99":99}],7:[function(_dereq_,module,exports){
+},{"107":107,"237":237,"238":238,"248":248,"380":380,"384":384,"389":389,"68":68,"70":70}],7:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 /**
  * Map containing SVG paths needed by CmmnRenderer.
@@ -2385,7 +2398,7 @@ function PathMap() {
 
 module.exports = PathMap;
 
-},{"228":228}],8:[function(_dereq_,module,exports){
+},{"245":245}],8:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'cmmnRenderer' ],
   cmmnRenderer: [ 'type', _dereq_(6) ],
@@ -2394,18 +2407,35 @@ module.exports = {
 },{"6":6,"7":7}],9:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    isArray = _dereq_(363);
+var assign = _dereq_(389),
+    isArray = _dereq_(380);
 
+var isAny = _dereq_(41).isAny;
+
+var ModelUtil = _dereq_(70),
+    is = ModelUtil.is,
+    getDefinition = ModelUtil.getDefinition;
 
 /**
  * A provider for CMMN 1.1 elements context pad
  */
-function ContextPadProvider(contextPad, modeling, rules, popupMenu, canvas) {
+function ContextPadProvider(
+  contextPad,
+  connect,
+  create,
+  elementFactory,
+  modeling,
+  rules,
+  popupMenu,
+  canvas
+) {
 
   contextPad.registerProvider(this);
 
   this._contextPad = contextPad;
+  this._connect = connect;
+  this._create = create;
+  this._elementFactory = elementFactory;
   this._modeling = modeling;
   this._rules = rules;
   this._popupMenu = popupMenu;
@@ -2414,17 +2444,24 @@ function ContextPadProvider(contextPad, modeling, rules, popupMenu, canvas) {
 
 ContextPadProvider.$inject = [
   'contextPad',
+  'connect',
+  'create',
+  'elementFactory',
   'modeling',
   'rules',
   'popupMenu',
   'canvas'
 ];
+
 module.exports = ContextPadProvider;
 
 
 ContextPadProvider.prototype.getContextPadEntries = function(element) {
 
   var contextPad = this._contextPad,
+      connect = this._connect,
+      create = this._create,
+      elementFactory = this._elementFactory,
       modeling = this._modeling,
       canvas = this._canvas,
       rules = this._rules,
@@ -2462,9 +2499,72 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
     return pos;
   }
 
+  function startConnect(event, element, autoActivate) {
+    connect.start(event, element, autoActivate);
+  }
+
+
+  function appendCriterionAction(className, title, options) {
+
+    function appendListener(event, element) {
+      var shape = elementFactory.createCriterionShape('cmmn:EntryCriterion');
+      create.start(event, shape, element);
+    }
+
+    return appendAction('cmmn:EntryCriterion', className, title, options, appendListener);
+  }
+
+  function appendDiscretionaryItemAction(className, title, options) {
+
+    function appendListener(event, element) {
+      var shape = elementFactory.createDiscretionaryItemShape('cmmn:Task');
+      create.start(event, shape, element);
+    }
+
+    return appendAction('cmmn:DiscretionaryItem', className, title, options, appendListener);
+  }
+
+  function appendAction(type, className, title, options, listener) {
+
+    if (typeof title !== 'string') {
+      options = title;
+      title = 'Append ' + type.replace(/^cmmn\:/, '');
+    }
+
+    function appendListener(event, element) {
+      var shape = elementFactory.createShape(assign({ type: type }, options));
+      create.start(event, shape, element);
+    }
+
+    return {
+      group: 'model',
+      className: className,
+      title: title,
+      action: {
+        dragstart: listener || appendListener,
+        click: listener || appendListener
+      }
+    };
+  }
+
+
+  if (isAny(element, [ 'cmmn:PlanItem', 'cmmn:CaseFileItem' ])) {
+    assign(actions, {
+      'append.entryCriterion': appendCriterionAction('cmmn-icon-entry-criterion', 'Append Criterion')
+    });
+  }
+
+  if (isBlockingHumanTask(element)) {
+    assign(actions, {
+      'append.discretionaryItem': appendDiscretionaryItemAction(
+        'cmmn-icon-task-discretionary',
+        'Append DiscretionaryItem'
+      )
+    });
+  }
+
 
   var replaceMenu;
-
   if (popupMenu._providers['cmmn-replace']) {
     replaceMenu = popupMenu.create('cmmn-replace', element);
   }
@@ -2483,6 +2583,35 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
               cursor: { x: event.x, y: event.y }
             }), element);
           }
+        }
+      }
+    });
+  }
+
+
+  if (!isAny(element, [ 'cmmndi:CMMNEdge', 'cmmn:TextAnnotation' ]) ) {
+    assign(actions, {
+      'append.text-annotation': appendAction('cmmn:TextAnnotation', 'cmmn-icon-text-annotation')
+    });
+  }
+
+
+  if (isAny(element, [
+    'cmmn:PlanItem',
+    'cmmn:DiscretionaryItem',
+    'cmmn:CaseFileItem',
+    'cmmn:Criterion'
+  ]) ) {
+
+    assign(actions, {
+
+      'connect': {
+        group: 'connect',
+        className: 'cmmn-icon-connection',
+        title: 'Connect using Discretionary/OnPart or Association',
+        action: {
+          click: startConnect,
+          dragstart: startConnect
         }
       }
     });
@@ -2514,22 +2643,112 @@ ContextPadProvider.prototype.getContextPadEntries = function(element) {
   return actions;
 };
 
-},{"363":363,"372":372}],10:[function(_dereq_,module,exports){
+
+function isBlockingHumanTask(element) {
+  var definition = getDefinition(element);
+  return is(definition, 'cmmn:HumanTask') && definition.isBlocking;
+}
+},{"380":380,"389":389,"41":41,"70":70}],10:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(116),
-    _dereq_(185),
-    _dereq_(44)
+    _dereq_(126),
+    _dereq_(128),
+    _dereq_(132),
+    _dereq_(201),
+    _dereq_(50)
   ],
   __init__: [ 'contextPadProvider' ],
   contextPadProvider: [ 'type', _dereq_(9) ]
 };
-},{"116":116,"185":185,"44":44,"9":9}],11:[function(_dereq_,module,exports){
+},{"126":126,"128":128,"132":132,"201":201,"50":50,"9":9}],11:[function(_dereq_,module,exports){
 'use strict';
 
-function CmmnKeyBindings(keyboard, spaceTool, lassoTool, handTool, editorActions, directEditing, selection) {
+var isAny = _dereq_(41).isAny;
+
+/**
+ * Extention of GlobalConnect tool that implements CMMN specific rules about
+ * connection start elements.
+ */
+function CmmnGlobalConnect(globalConnect) {
+  globalConnect.registerProvider(this);
+}
+
+CmmnGlobalConnect.$inject = [ 'globalConnect' ];
+
+module.exports = CmmnGlobalConnect;
+
+
+/**
+ * Checks if given element can be used for starting connection.
+ *
+ * @param  {Element} source
+ * @return {Boolean}
+ */
+CmmnGlobalConnect.prototype.canStartConnect = function(source) {
+
+  if (nonExistantOrLabel(source)) {
+    return null;
+  }
+
+  var businessObject = source.businessObject;
+
+  return isAny(businessObject, [
+    'cmmn:CaseFileItem',
+    'cmmn:Criterion',
+    'cmmn:DiscretionaryItem',
+    'cmmn:PlanItem'
+  ]);
+};
+
+
+function nonExistantOrLabel(element) {
+  return !element || isLabel(element);
+}
+
+function isLabel(element) {
+  return element.labelTarget;
+}
+
+
+
+},{"41":41}],12:[function(_dereq_,module,exports){
+module.exports = {
+  __depends__: [
+    _dereq_(139)
+  ],
+  __init__: [ 'cmmnGlobalConnect' ],
+  cmmnGlobalConnect: [ 'type', _dereq_(11) ]
+};
+
+},{"11":11,"139":139}],13:[function(_dereq_,module,exports){
+'use strict';
+
+function CmmnKeyBindings(
+  canvas,
+  directEditing,
+  editorActions,
+  elementRegistry,
+  globalConnect,
+  handTool,
+  keyboard,
+  lassoTool,
+  selection,
+  searchPad,
+  spaceTool
+) {
 
   var actions = {
+    selectElements: function() {
+      // select all elements except for the invisible
+      // root element
+      var rootElement = canvas.getRootElement();
+
+      var elements = elementRegistry.filter(function(element) {
+        return element != rootElement;
+      });
+
+      selection.select(elements);
+    },
     spaceTool: function() {
       spaceTool.toggle();
     },
@@ -2539,18 +2758,38 @@ function CmmnKeyBindings(keyboard, spaceTool, lassoTool, handTool, editorActions
     handTool: function() {
       handTool.toggle();
     },
+    globalConnectTool: function() {
+      globalConnect.toggle();
+    },
     directEditing: function() {
       var currentSelection = selection.get();
 
       if (currentSelection.length) {
         directEditing.activate(currentSelection[0]);
       }
+    },
+    find: function() {
+      searchPad.toggle();
     }
   };
 
   editorActions.register(actions);
 
   keyboard.addListener(function(key, modifiers) {
+
+    // ctrl + a -> select all elements
+    if (key === 65 && keyboard.isCmd(modifiers)) {
+      editorActions.trigger('selectElements');
+
+      return true;
+    }
+
+    // ctrl + f -> search labels
+    if (key === 70 && keyboard.isCmd(modifiers)) {
+      editorActions.trigger('find');
+
+      return true;
+    }
 
     if (keyboard.hasModifier(modifiers)) {
       return;
@@ -2577,6 +2816,13 @@ function CmmnKeyBindings(keyboard, spaceTool, lassoTool, handTool, editorActions
       return true;
     }
 
+    // c -> activate global connect tool
+    if (key === 67) {
+      editorActions.trigger('globalConnectTool');
+
+      return true;
+    }
+
     // e -> activate direct editing
     if (key === 69) {
       editorActions.trigger('directEditing');
@@ -2587,36 +2833,41 @@ function CmmnKeyBindings(keyboard, spaceTool, lassoTool, handTool, editorActions
 }
 
 CmmnKeyBindings.$inject = [
-  'keyboard',
-  'spaceTool',
-  'lassoTool',
-  'handTool',
-  'editorActions',
+  'canvas',
   'directEditing',
-  'selection'
+  'editorActions',
+  'elementRegistry',
+  'globalConnect',
+  'handTool',
+  'keyboard',
+  'lassoTool',
+  'selection',
+  'searchPad',
+  'spaceTool'
 ];
 
 module.exports = CmmnKeyBindings;
 
-},{}],12:[function(_dereq_,module,exports){
+},{}],14:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(131)
+    _dereq_(145),
+    _dereq_(12)
   ],
   __init__: [ 'cmmnKeyBindings' ],
-  cmmnKeyBindings: [ 'type', _dereq_(11) ]
+  cmmnKeyBindings: [ 'type', _dereq_(13) ]
 };
 
-},{"11":11,"131":131}],13:[function(_dereq_,module,exports){
+},{"12":12,"13":13,"145":145}],15:[function(_dereq_,module,exports){
 'use strict';
 
-var UpdateLabelHandler = _dereq_(15);
+var UpdateLabelHandler = _dereq_(17);
 
-var LabelUtil = _dereq_(14);
+var LabelUtil = _dereq_(16);
 
-var isCasePlanModel = _dereq_(62).isCasePlanModel,
-    is = _dereq_(62).is,
-    getDefinition = _dereq_(62).getDefinition;
+var isCasePlanModel = _dereq_(70).isCasePlanModel,
+    is = _dereq_(70).is,
+    getDefinition = _dereq_(70).getDefinition;
 
 
 // default mininum bounds
@@ -2744,13 +2995,13 @@ LabelEditingProvider.prototype.update = function(element, newLabel) {
   });
 };
 
-},{"14":14,"15":15,"62":62}],14:[function(_dereq_,module,exports){
+},{"16":16,"17":17,"70":70}],16:[function(_dereq_,module,exports){
 'use strict';
 
-var is = _dereq_(62).is;
-var isAny = _dereq_(35).isAny;
+var is = _dereq_(70).is;
+var isAny = _dereq_(41).isAny;
 
-var getBusinessObject = _dereq_(62).getBusinessObject;
+var getBusinessObject = _dereq_(70).getBusinessObject;
 
 function getLabelAttr(element) {
   if (is(element, 'cmmn:TextAnnotation')) {
@@ -2841,12 +3092,12 @@ var setLabel = function(element, text, isExternal, isExclusiveRef) {
 
 module.exports.setLabel = setLabel;
 
-},{"35":35,"62":62}],15:[function(_dereq_,module,exports){
+},{"41":41,"70":70}],17:[function(_dereq_,module,exports){
 'use strict';
 
-var LabelUtil = _dereq_(14);
+var LabelUtil = _dereq_(16);
 
-var getDefinition = _dereq_(62).getDefinition;
+var getDefinition = _dereq_(70).getDefinition;
 
 /**
  * A handler that updates the text of a CMMN element.
@@ -2906,25 +3157,25 @@ UpdateLabelHandler.$inject = [ 'itemRegistry' ];
 
 module.exports = UpdateLabelHandler;
 
-},{"14":14,"62":62}],16:[function(_dereq_,module,exports){
+},{"16":16,"70":70}],18:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(92),
-    _dereq_(112),
-    _dereq_(85)
+    _dereq_(100),
+    _dereq_(122),
+    _dereq_(93)
   ],
   __init__: [ 'labelEditingProvider' ],
-  labelEditingProvider: [ 'type', _dereq_(13) ]
+  labelEditingProvider: [ 'type', _dereq_(15) ]
 };
 
-},{"112":112,"13":13,"85":85,"92":92}],17:[function(_dereq_,module,exports){
+},{"100":100,"122":122,"15":15,"93":93}],19:[function(_dereq_,module,exports){
 'use strict';
 
-var map = _dereq_(247),
-    assign = _dereq_(372),
-    pick = _dereq_(378);
+var map = _dereq_(264),
+    assign = _dereq_(389),
+    pick = _dereq_(395);
 
-var isAny = _dereq_(35).isAny;
+var isAny = _dereq_(41).isAny;
 
 function CmmnFactory(moddle) {
   this._model = moddle;
@@ -3082,15 +3333,15 @@ CmmnFactory.prototype.createCaseFileItem = function(attrs) {
 
 module.exports = CmmnFactory;
 
-},{"247":247,"35":35,"372":372,"378":378}],18:[function(_dereq_,module,exports){
+},{"264":264,"389":389,"395":395,"41":41}],20:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var BaseLayouter = _dereq_(195),
-    ManhattanLayout = _dereq_(197);
+var BaseLayouter = _dereq_(211),
+    ManhattanLayout = _dereq_(214);
 
-var getMid = _dereq_(196).getMid;
+var getMid = _dereq_(213).getMid;
 
 function CmmnLayouter() {}
 
@@ -3124,30 +3375,30 @@ function getConnectionDocking(waypoints, idx, shape) {
   return point ? (point.original || point) : getMid(shape);
 }
 
-},{"195":195,"196":196,"197":197,"231":231}],19:[function(_dereq_,module,exports){
+},{"211":211,"213":213,"214":214,"248":248}],21:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    inherits = _dereq_(231);
+var assign = _dereq_(389),
+    inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
-var getBusinessObject = _dereq_(62).getBusinessObject,
-    is = _dereq_(62).is,
-    isCasePlanModel = _dereq_(62).isCasePlanModel;
+var getBusinessObject = _dereq_(70).getBusinessObject,
+    is = _dereq_(70).is,
+    isCasePlanModel = _dereq_(70).isCasePlanModel;
 
-var getParent = _dereq_(35).getParent,
-    isLabel = _dereq_(35).isLabel;
+var getParent = _dereq_(41).getParent,
+    isLabel = _dereq_(41).isLabel;
 
-var isAny = _dereq_(35).isAny;
+var isAny = _dereq_(41).isAny;
 
 /**
  * A handler responsible for updating the underlying CMMN 1.1 XML + DI
  * once changes on the diagram happen
  */
-function CmmnUpdater(eventBus, cmmnFactory, itemRegistry) {
+function CmmnUpdater(eventBus, cmmnFactory, itemRegistry, connectionDocking) {
 
   CommandInterceptor.call(this, eventBus);
 
@@ -3155,6 +3406,37 @@ function CmmnUpdater(eventBus, cmmnFactory, itemRegistry) {
   this._itemRegistry = itemRegistry;
 
   var self = this;
+
+
+  ////// connection cropping /////////////////////////
+
+  // crop connection ends during create/update
+  function cropConnection(e) {
+    var context = e.context,
+        connection;
+
+    if (!context.cropped) {
+      connection = context.connection;
+      connection.waypoints = connectionDocking.getCroppedWaypoints(connection);
+      context.cropped = true;
+    }
+  }
+
+  this.executed([
+    'connection.layout',
+    'connection.create',
+    'connection.reconnectEnd',
+    'connection.reconnectStart'
+  ], cropConnection);
+
+  this.reverted([
+    'connection.layout',
+    'connection.create',
+    'connection.reconnectEnd',
+    'connection.reconnectStart'
+  ], function(e) {
+    delete e.context.cropped;
+  });
 
   ////// CMMN + DI update /////////////////////////
 
@@ -3297,7 +3579,7 @@ inherits(CmmnUpdater, CommandInterceptor);
 
 module.exports = CmmnUpdater;
 
-CmmnUpdater.$inject = [ 'eventBus', 'cmmnFactory', 'itemRegistry' ];
+CmmnUpdater.$inject = [ 'eventBus', 'cmmnFactory', 'itemRegistry', 'connectionDocking' ];
 
 
 /////// implementation //////////////////////////////////
@@ -3581,19 +3863,20 @@ function isAssociation(connection) {
   return !!(connection.cmmnElementRef && is(connection.cmmnElementRef, 'cmmn:Association'));
 }
 
-},{"206":206,"231":231,"35":35,"372":372,"62":62,"90":90}],20:[function(_dereq_,module,exports){
+},{"223":223,"248":248,"389":389,"41":41,"70":70,"98":98}],22:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    inherits = _dereq_(231);
+var assign = _dereq_(389),
+    inherits = _dereq_(248);
 
-var BaseElementFactory = _dereq_(94),
-    LabelUtil = _dereq_(61);
+var BaseElementFactory = _dereq_(102),
+    LabelUtil = _dereq_(69);
 
-var is = _dereq_(62).is,
-    getDefinition = _dereq_(62).getDefinition,
-    isCasePlanModel = _dereq_(62).isCasePlanModel;
+var is = _dereq_(70).is,
+    getDefinition = _dereq_(70).getDefinition,
+    isCasePlanModel = _dereq_(70).isCasePlanModel;
 
+var isCollapsed = _dereq_(68).isCollapsed;
 
 /**
  * A cmmn-aware factory for diagram-js shapes
@@ -3657,6 +3940,15 @@ ElementFactory.prototype.createCmmnElement = function(elementType, attrs) {
     }
   }
 
+  if (attrs.definitionType) {
+    var definition = this._cmmnFactory.create(attrs.definitionType);
+    businessObject.definitionRef = definition;
+  }
+
+  if (attrs.sentryRef) {
+    businessObject.sentryRef = attrs.sentryRef;
+  }
+
   if (elementType === 'shape' && !businessObject.di) {
     businessObject.di = this._cmmnFactory.createDiShape(businessObject, {}, {
       id: businessObject.id + '_di'
@@ -3675,8 +3967,12 @@ ElementFactory.prototype.createCmmnElement = function(elementType, attrs) {
     businessObject.isStandardEventVisible = attrs.isStandardEventVisible;
   }
 
-  if (attrs.isBlocking === false) {
-    businessObject.isBlocking = false;
+  if (attrs.isBlocking !== undefined) {
+    businessObject.definitionRef.isBlocking = attrs.isBlocking;
+  }
+
+  if (attrs.autoComplete) {
+    businessObject.definitionRef.autoComplete = true;
   }
 
   size = this._getDefaultSize(businessObject);
@@ -3700,7 +3996,12 @@ ElementFactory.prototype._getDefaultSize = function(semantic) {
   }
 
   if (is(definition, 'cmmn:PlanFragment')) {
-    return { width: 350, height: 200 };
+    if (isCollapsed(semantic)) {
+      return { width: 100, height: 80 };
+    }
+    else {
+      return { width: 350, height: 200 };
+    }
   }
 
   if (is(definition, 'cmmn:Milestone')) {
@@ -3766,16 +4067,22 @@ ElementFactory.prototype.createCaseFileItemShape = function() {
   });
 };
 
-},{"231":231,"372":372,"61":61,"62":62,"94":94}],21:[function(_dereq_,module,exports){
+},{"102":102,"248":248,"389":389,"68":68,"69":69,"70":70}],23:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var BaseModeling = _dereq_(136);
+var assign = _dereq_(389);
 
-var UpdatePropertiesHandler = _dereq_(32);
-var UpdateSemanticParentHandler = _dereq_(33);
-var UpdateControlsHandler = _dereq_(31);
+var BaseModeling = _dereq_(150);
+
+var AppendShapeHandler = _dereq_(34);
+var ReconnectConnectionHandler = _dereq_(35);
+var ReplaceShapeHandler = _dereq_(36);
+
+var UpdatePropertiesHandler = _dereq_(38);
+var UpdateSemanticParentHandler = _dereq_(39);
+var UpdateControlsHandler = _dereq_(37);
 
 /**
  * CMMN 1.1 modeling features activator
@@ -3784,21 +4091,27 @@ var UpdateControlsHandler = _dereq_(31);
  * @param {ElementFactory} elementFactory
  * @param {CommandStack} commandStack
  */
-function Modeling(eventBus, elementFactory, commandStack, cmmnRules) {
+function Modeling(eventBus, elementFactory, commandStack, cmmnRules, rules) {
   BaseModeling.call(this, eventBus, elementFactory, commandStack);
 
   this._cmmnRules = cmmnRules;
+  this._rules = rules;
 }
 
 inherits(Modeling, BaseModeling);
 
-Modeling.$inject = [ 'eventBus', 'elementFactory', 'commandStack', 'cmmnRules' ];
+Modeling.$inject = [ 'eventBus', 'elementFactory', 'commandStack', 'cmmnRules', 'rules' ];
 
 module.exports = Modeling;
 
 
 Modeling.prototype.getHandlers = function() {
   var handlers = BaseModeling.prototype.getHandlers.call(this);
+
+  handlers['shape.append'] = AppendShapeHandler;
+  handlers['shape.replace'] = ReplaceShapeHandler;
+  handlers['connection.reconnectStart'] = ReconnectConnectionHandler;
+  handlers['connection.reconnectEnd'] = ReconnectConnectionHandler;
 
   handlers['element.updateProperties'] = UpdatePropertiesHandler;
   handlers['element.updateSemanticParent'] = UpdateSemanticParentHandler;
@@ -3811,13 +4124,76 @@ Modeling.prototype.getHandlers = function() {
 
 Modeling.prototype.connect = function(source, target, attrs) {
 
-  var cmmnRules = this._cmmnRules;
+  var rules = this._rules;
 
   if (!attrs) {
-    attrs = cmmnRules.canConnect(source, target);
+    attrs = rules.allowed('connection.create', {
+      source: source,
+      target: target
+    }) || { type: 'cmmn:Association' };
+  }
+
+  if (attrs.reverse) {
+    return this.createConnection(target, source, attrs, target.parent);
   }
 
   return this.createConnection(source, target, attrs, source.parent);
+};
+
+
+Modeling.prototype.createConnection = function(source, target, targetIndex, connection, parent) {
+
+  // Overwrite existing createConnection() method to provide additional
+  // information in the context. This must be done to enable the replacement
+  // of the target element, if necessary.
+
+  if (typeof targetIndex === 'object') {
+    parent = connection;
+    connection = targetIndex;
+    targetIndex = undefined;
+  }
+
+  var context = {
+    source: source,
+    target: target,
+    parent: parent,
+    parentIndex: targetIndex,
+    canExecute: connection
+  };
+
+  connection = this._create('connection', connection);
+
+  assign(context, {
+    connection: connection
+  });
+
+  this._commandStack.execute('connection.create', context);
+
+  return context.connection;
+};
+
+
+Modeling.prototype.reconnectStart = function(connection, newSource, dockingOrPoints, hints) {
+  var context = {
+    connection: connection,
+    newSource: newSource,
+    dockingOrPoints: dockingOrPoints,
+    hints: hints || {}
+  };
+
+  this._commandStack.execute('connection.reconnectStart', context);
+};
+
+
+Modeling.prototype.reconnectEnd = function(connection, newTarget, dockingOrPoints, hints) {
+  var context = {
+    connection: connection,
+    newTarget: newTarget,
+    dockingOrPoints: dockingOrPoints,
+    hints: hints || {}
+  };
+
+  this._commandStack.execute('connection.reconnectEnd', context);
 };
 
 
@@ -3846,23 +4222,83 @@ Modeling.prototype.updateControls = function(element, values) {
     values: values
   });
 };
-},{"136":136,"231":231,"31":31,"32":32,"33":33}],22:[function(_dereq_,module,exports){
+},{"150":150,"248":248,"34":34,"35":35,"36":36,"37":37,"38":38,"389":389,"39":39}],24:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var forEach = _dereq_(245);
-var filter = _dereq_(243);
-var reduce = _dereq_(248);
+var ModelUtil = _dereq_(70),
+    is = ModelUtil.is,
+    isCasePlanModel = ModelUtil.isCasePlanModel;
 
-var ModelUtil = _dereq_(62),
+/*
+ * If a criterion is (re-)attached to a case plan model,
+ * then the (visual) parent must be the case plan model itself,
+ * and not the root element.
+ */
+function AttachCriterionBehavior(eventBus) {
+
+  CommandInterceptor.call(this, eventBus);
+
+  this.preExecute([ 'shape.create', 'elements.move' ], function(context) {
+
+    var shape = context.shape,
+        shapes = context.shapes,
+        parent = context.parent || context.newParent,
+        host = context.host || context.newHost;
+
+    if (!parent) {
+      return;
+    }
+
+    if (!host || !isCasePlanModel(host)) {
+      return;
+    }
+
+    if (shapes && shapes.length > 1) {
+      return;
+    }
+
+    shape = shape || shapes[0];
+
+    if (!is(shape, 'cmmn:Criterion')) {
+      return;
+    }
+
+    context.parent = context.parent && host;
+    context.newParent = context.newParent && host;
+
+  }, true);
+
+
+
+}
+
+AttachCriterionBehavior.$inject = [ 'eventBus' ];
+
+inherits(AttachCriterionBehavior, CommandInterceptor);
+
+module.exports = AttachCriterionBehavior;
+
+},{"248":248,"70":70,"98":98}],25:[function(_dereq_,module,exports){
+'use strict';
+
+var inherits = _dereq_(248);
+
+var CommandInterceptor = _dereq_(98);
+
+var forEach = _dereq_(262);
+var filter = _dereq_(260);
+var reduce = _dereq_(265);
+
+var ModelUtil = _dereq_(70),
     getDefinition = ModelUtil.getDefinition,
     getBusinessObject = ModelUtil.getBusinessObject,
     is = ModelUtil.is;
 
-var ModelingUtil = _dereq_(35),
+var ModelingUtil = _dereq_(41),
     getCase = ModelingUtil.getCase,
     getParent = ModelingUtil.getParent,
     isSameCase = ModelingUtil.isSameCase,
@@ -4128,7 +4564,7 @@ function CaseFileItemUpdater(
 
   function isExlusiveRef(element) {
     var definition = getDefinition(element);
-    return itemRegistry.getReferences(definition).length === 1;
+    return definition && itemRegistry.getReferences(definition).length === 1;
   }
 
 }
@@ -4171,16 +4607,16 @@ function toMap(elements) {
 function getParentCaseFile(element) {
   return getParent(getBusinessObject(element), 'cmmn:CaseFile');
 }
-},{"231":231,"243":243,"245":245,"248":248,"35":35,"62":62,"90":90}],23:[function(_dereq_,module,exports){
+},{"248":248,"260":260,"262":262,"265":265,"41":41,"70":70,"98":98}],26:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    inherits = _dereq_(231);
+var assign = _dereq_(389),
+    inherits = _dereq_(248);
 
-var LabelUtil = _dereq_(61),
-    ModelUtil = _dereq_(62),
-    DiUtil = _dereq_(60),
-    ModelingUtil = _dereq_(35);
+var LabelUtil = _dereq_(69),
+    ModelUtil = _dereq_(70),
+    DiUtil = _dereq_(68),
+    ModelingUtil = _dereq_(41);
 
 var getBusinessObject = ModelUtil.getBusinessObject,
     getName = ModelUtil.getName;
@@ -4192,7 +4628,7 @@ var isStandardEventVisible = DiUtil.isStandardEventVisible;
 
 var isAny = ModelingUtil.isAny;
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
 
 /**
@@ -4312,30 +4748,30 @@ LabelBehavior.$inject = [ 'eventBus', 'modeling', 'cmmnFactory' ];
 
 module.exports = LabelBehavior;
 
-},{"231":231,"35":35,"372":372,"60":60,"61":61,"62":62,"90":90}],24:[function(_dereq_,module,exports){
+},{"248":248,"389":389,"41":41,"68":68,"69":69,"70":70,"98":98}],27:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var forEach = _dereq_(245),
-    intersection = _dereq_(234),
-    union = _dereq_(236),
-    filter = _dereq_(243);
+var forEach = _dereq_(262),
+    intersection = _dereq_(251),
+    union = _dereq_(253),
+    filter = _dereq_(260);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     is = ModelUtil.is,
     getDefinition = ModelUtil.getDefinition,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var ModelingUtil = _dereq_(35),
+var ModelingUtil = _dereq_(41),
     getParents = ModelingUtil.getParents,
     getParent = ModelingUtil.getParent,
     getCase = ModelingUtil.getCase,
     isLabel = ModelingUtil.isLabel;
 
-var PlanItemDefinitionUtil = _dereq_(36),
+var PlanItemDefinitionUtil = _dereq_(42),
     getAllDiscretionaryItems = PlanItemDefinitionUtil.getAllDiscretionaryItems,
     getDirectItemCapables = PlanItemDefinitionUtil.getDirectItemCapables,
     isItemCapable = PlanItemDefinitionUtil.isItemCapable,
@@ -4377,7 +4813,7 @@ function PlanItemDefinitionUpdater(
 
     var item = getBusinessObject(shape),
         definition = getDefinition(item),
-        parent = getParent(item, 'cmmn:Stage');
+        parent = getParentStage(item);
 
     if (!getParent(definition)) {
       modeling.updateSemanticParent(definition, parent, containment);
@@ -4386,23 +4822,15 @@ function PlanItemDefinitionUpdater(
   }, true);
 
 
-  this.preExecuted('shape.replace', function(context) {
+  this.postExecuted('shape.replace', function(context) {
 
-    var oldShape = context.oldShape,
-        newShape = context.newShape;
+    var newShape = context.newShape;
 
-    if (!isItemCapable(oldShape) && !isItemCapable(newShape)) {
+    if (!isItemCapable(newShape)) {
       return;
     }
 
-    var oldItem = getBusinessObject(oldShape),
-        oldDefinition = getDefinition(oldItem),
-        newItem = getBusinessObject(newShape),
-        newDefinition = getDefinition(newItem);
-
-    if (oldDefinition !== newDefinition) {
-      modeling.updateSemanticParent(newDefinition, getParent(oldDefinition), containment);
-    }
+    self.updatePlanItemDefinitions([ newShape ]);
 
   }, true);
 
@@ -4761,27 +5189,27 @@ function getCasePlanModel(element) {
 function isDiscretionaryConnection(connection, source, target) {
   return !connection.businessObject.cmmnElementRef;
 }
-},{"231":231,"234":234,"236":236,"243":243,"245":245,"35":35,"36":36,"62":62,"90":90}],25:[function(_dereq_,module,exports){
+},{"248":248,"251":251,"253":253,"260":260,"262":262,"41":41,"42":42,"70":70,"98":98}],28:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var any = _dereq_(241);
-var forEach = _dereq_(245);
+var any = _dereq_(258);
+var forEach = _dereq_(262);
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     is = ModelUtil.is,
     isCasePlanModel = ModelUtil.isCasePlanModel,
     getDefinition = ModelUtil.getDefinition,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var getParent = _dereq_(35).getParent,
-    isLabel = _dereq_(35).isLabel,
-    getParents = _dereq_(35).getParents;
+var getParent = _dereq_(41).getParent,
+    isLabel = _dereq_(41).isLabel,
+    getParents = _dereq_(41).getParents;
 
-var PlanItemDefinitionUtil = _dereq_(36),
+var PlanItemDefinitionUtil = _dereq_(42),
     isDiscretionaryToHumanTask = PlanItemDefinitionUtil.isDiscretionaryToHumanTask,
     isDiscretionaryItem = PlanItemDefinitionUtil.isDiscretionaryItem,
     isPlanFragment = PlanItemDefinitionUtil.isPlanFragment,
@@ -4812,13 +5240,27 @@ function PlanningTableUpdater(eventBus, cmmnFactory, modeling, itemRegistry) {
   // delete + reconnectEnd //////////////////////////////////
 
 
-  this.preExecuted([ 'connection.delete', 'connection.reconnectEnd' ], function(context) {
+  this.preExecuted([ 'connection.delete', 'connection.reconnectEnd', 'connection.reconnectStart' ], function(event) {
 
-    var connection = context.connection,
+    var context = event.context,
+        isReconnectStart = (event.command === 'connection.reconnectStart'),
+        connection = context.connection,
         target = connection.target;
 
     if (!isDiscretionaryConnection(connection)) {
       return;
+    }
+
+    if (isReconnectStart) {
+
+      if (context.newSource && context.newTarget) {
+        target = context.newSource;
+        context.oldPlanningTable = getParentPlanningTable(target);
+      }
+      else {
+        return;
+      }
+
     }
 
     // (1) remember current 
@@ -4850,15 +5292,12 @@ function PlanningTableUpdater(eventBus, cmmnFactory, modeling, itemRegistry) {
     // to the new planning table
     modeling.updateSemanticParent(target, planningTable, containment);
 
-  }, true);
+  });
 
 
   this.postExecuted('connection.delete', function(context) {
 
-    var source = context.source,
-        target = context.target;
-
-    if (!isDiscretionaryConnection(context.connection, source, target)) {
+    if (!isDiscretionaryConnection(context.connection)) {
       return;
     }
 
@@ -4889,15 +5328,31 @@ function PlanningTableUpdater(eventBus, cmmnFactory, modeling, itemRegistry) {
   }, true);
 
 
+  this.postExecuted('connection.reconnectStart', function(context) {
+
+    var connection = context.connection;
+
+    if (!isDiscretionaryConnection(connection)) {
+      return;
+    }
+
+    if (!context.newSource || !context.newTarget) {
+      return;
+    }
+
+    self.deletePlanningTable(context.oldPlanningTable);
+
+  }, true);
+
   // create + reconnectStart ////////////////////////////////////////
 
   this.preExecuted([ 'connection.create', 'connection.reconnectStart' ], function(context) {
 
     var connection = context.connection,
         source = context.newSource || context.source,
-        target = context.target || connection.target;
+        target = context.target || context.newTarget || connection.target;
 
-    if (!isDiscretionaryConnection(connection, source, target)) {
+    if (!isDiscretionaryConnection(connection)) {
       return;
     }
 
@@ -5356,21 +5811,23 @@ function getParentPlanningTable(element) {
   return getParent(element, 'cmmn:PlanningTable');
 }
 
-},{"231":231,"241":241,"245":245,"35":35,"36":36,"62":62,"90":90}],26:[function(_dereq_,module,exports){
+},{"248":248,"258":258,"262":262,"41":41,"42":42,"70":70,"98":98}],29:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    inherits = _dereq_(231),
-    assign = _dereq_(372);
+var forEach = _dereq_(262),
+    inherits = _dereq_(248),
+    assign = _dereq_(389);
 
-var CommandInterceptor = _dereq_(90);
+var isArray = _dereq_(380);
 
-var is = _dereq_(62).is;
+var CommandInterceptor = _dereq_(98);
+
+var is = _dereq_(70).is;
 
 var LOW_PRIORITY = 200,
     HIGH_PRIORITY = 5000;
 
-function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
+function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules, selection, rules) {
 
   CommandInterceptor.call(this, eventBus);
 
@@ -5395,10 +5852,15 @@ function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
   }
 
 
-  function fixConnection(connection, source, target) {
+  function canReconnect(type, attrs) {
+    return rules.allowed(type, attrs);
+  }
+
+  function fixConnection(connection, source, target, hints) {
 
     var parent = connection.parent;
-    
+
+    hints = hints || {};
     source = source || connection.source;
     target = target || connection.target;
 
@@ -5476,6 +5938,14 @@ function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
     }
 
     if (remove) {
+
+      if (!replacement && (isTextAnnotation(source) || isTextAnnotation(target))) {
+
+        replacement = {
+          type: 'cmmn:Association'
+        };
+      }
+
       modeling.removeConnection(connection);
     }
 
@@ -5485,7 +5955,13 @@ function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
         waypoints: connection.waypoints.slice()
       }, replacement);
 
-      return modeling.connect(source, target, attrs);
+      var newConnection = modeling.connect(source, target, attrs);
+
+      if (hints.select !== false) {
+        selection.select(newConnection);
+      }
+
+      return newConnection;
 
     }
 
@@ -5498,10 +5974,60 @@ function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
         allConnections = closure.allConnections;
 
     forEach(allConnections, function(connection) {
-      fixConnection(connection);
+      fixConnection(connection, null, null, {
+        select: false
+      });
     });
 
   }, true);
+
+
+  this.preExecute([
+    'connection.reconnectEnd',
+    'connection.reconnectStart'
+  ], HIGH_PRIORITY + LOW_PRIORITY, function(event) {
+
+    var type = event.command,
+        isReconnectStart = (type === 'connection.reconnectStart'),
+        context = event.context,
+        connection = context.connection,
+        source = context.newSource || connection.source,
+        target = context.newTarget || connection.target,
+        dockingOrPoints = context.dockingOrPoints,
+        canExecute = context.canExecute;
+
+    if (context.hints && context.hints.nested) {
+      return;
+    }
+
+    if (canExecute === undefined) {
+
+      var attrs = {
+        connection: connection
+      };
+
+      attrs[ isReconnectStart ? 'hover' : 'source' ] = source;
+      attrs[ !isReconnectStart ? 'hover' : 'target' ] = target;
+
+      canExecute = canReconnect(type, attrs);
+
+    }
+
+    if (canExecute && canExecute.reverse) {
+
+      if (!isArray(dockingOrPoints)) {
+        var waypoints = connection.waypoints.slice();
+        waypoints.splice(isReconnectStart ? 0 : -1, 1, dockingOrPoints);
+        dockingOrPoints = waypoints;
+      }
+
+      context.newSource = target;
+      context.newTarget = source;
+      context.dockingOrPoints = dockingOrPoints.reverse();
+
+    }
+
+  });
 
 
   this.preExecute([
@@ -5511,9 +6037,12 @@ function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
 
     var connection = context.connection,
         source = context.newSource || connection.source,
-        target = context.newTarget || connection.target;
+        target = context.newTarget || connection.target,
+        hints = context.hints || {};
 
-    context.connection = fixConnection(connection, source, target) || connection;
+    context.connection = fixConnection(connection, source, target, {
+      select: !hints.nested
+    }) || connection;
 
   }, true);
 
@@ -5545,11 +6074,35 @@ function ReplaceConnectionBehavior(eventBus, modeling, cmmnRules) {
 
   }, true);
 
+
+  this.postExecuted('element.updateProperties', function(context) {
+
+    var properties = context.properties,
+        changed = context.changed;
+
+    if (properties && properties.isBlocking === false) {
+
+      forEach(changed, function(shape) {
+
+        var connections = shape.outgoing;
+
+        forEach(connections, function(connection) {
+          fixConnection(connection, null, null, {
+            select: false
+          });
+        });
+
+      });
+
+    }
+
+  }, true);
+
 }
 
 inherits(ReplaceConnectionBehavior, CommandInterceptor);
 
-ReplaceConnectionBehavior.$inject = [ 'eventBus', 'modeling', 'cmmnRules' ];
+ReplaceConnectionBehavior.$inject = [ 'eventBus', 'modeling', 'cmmnRules', 'selection', 'rules' ];
 
 module.exports = ReplaceConnectionBehavior;
 
@@ -5575,63 +6128,130 @@ function getAttachersOutgoingConnections(shape) {
 
   return connections;
 }
-},{"231":231,"245":245,"372":372,"62":62,"90":90}],27:[function(_dereq_,module,exports){
+
+function isTextAnnotation(element) {
+  return is(element, 'cmmn:TextAnnotation');
+}
+},{"248":248,"262":262,"380":380,"389":389,"70":70,"98":98}],30:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var is = _dereq_(62).is;
-var forEach = _dereq_(245);
-var filter = _dereq_(243);
+var saveClear = _dereq_(236).saveClear;
+
+var ModelUtil = _dereq_(70),
+    is = ModelUtil.is,
+    getDefinition = ModelUtil.getDefinition,
+    getSentry = ModelUtil.getSentry;
+
+var forEach = _dereq_(262),
+    filter = _dereq_(260),
+    assign = _dereq_(389);
+
+var HIGH_PRIORITY = 6000,
+    LOW_PRIORITY = 500,
+    VERY_LOW_PRIORITY = 100;
+
 
 function ReplaceElementBehavior(
-  cmmnFactory,
   cmmnReplace,
   cmmnRules,
   elementFactory,
   elementRegistry,
   eventBus,
   modeling,
-  selection
+  selection,
+  rules
 ) {
 
   CommandInterceptor.call(this, eventBus);
 
   this._cmmnReplace = cmmnReplace;
+  this._cmmnRules = cmmnRules;
+  this._elementFactory = elementFactory;
   this._elementRegistry = elementRegistry;
-  this._selection = selection;
   this._modeling = modeling;
+  this._selection = selection;
+  this._rules = rules;
 
   var self = this;
 
 
-  this.preExecute('shape.create', function(context) {
+  function canConnect(source, target) {
+
+    return rules.allowed('connection.create', {
+      source: source,
+      target: target
+    });
+
+  }
+
+  function canReconnect(type, attrs) {
+    return rules.allowed(type, attrs);
+  }
+
+
+  // SHAPES //////////////////////////////////////////////////////////////////
+
+  this.preExecute([ 'shape.create', 'shape.append' ], HIGH_PRIORITY, function(context) {
+
     var shape = context.shape,
-        host = context.host;
+        source = context.source,
+        target = context.parent || (source && source.parent),
+        host = context.host,
+        position = context.position,
+        hints = context.hints || {};
 
-    if (host && is(shape, 'cmmn:Criterion')) {
+    if (hints.nested) {
+      return;
+    }
 
-      var canReplace = cmmnRules.canReplace([ shape ], host, context.position);
+    if (host && isCriterion(shape)) {
+      target = host;
+    }
+
+    if (!cmmnRules.canCreate(shape, target, source, position)) {
+
+      var canReplace = cmmnRules.canReplace([ shape ], target, position, source);
 
       if (canReplace && canReplace.replacements) {
 
         var replacement = canReplace.replacements[0],
-            newElementType = replacement.newElementType;
-        
-        context.shape = elementFactory.createCriterionShape(newElementType);
+            definition = getDefinition(shape),
+            sentry = getSentry(shape),
+            elementType = replacement.newElementType,
+            definitionType = replacement.newDefinitionType || (definition && definition.$type);
+
+        var attrs = assign({}, {
+          type: elementType
+        });
+
+        if (definitionType) {
+          assign(attrs, {
+            definitionType: definitionType
+          });
+        }
+
+        if (sentry) {
+          assign(attrs, {
+            sentryRef: sentry
+          });
+        }
+
+        context.shape = elementFactory.createShape(attrs);
 
       }
+
     }
 
   }, true);
 
 
-  this.postExecuted([ 'elements.move' ], 500, function(event) {
+  this.postExecuted('elements.move', LOW_PRIORITY, function(context) {
 
-    var context = event.context,
-        target = context.newParent,
+    var target = context.newParent,
         newHost = context.newHost,
         elements = context.shapes.slice();
 
@@ -5640,44 +6260,159 @@ function ReplaceElementBehavior(
     }
     else {
       elements = filter(elements, function(elem) {
-        return !is(elem, 'cmmn:Criterion');
+        return !isCriterion(elem);
       });
     }
 
-    var canReplace = cmmnRules.canReplace(elements, target);
+    if (target && !cmmnRules.canMove(elements, target)) {
 
-    if (canReplace) {
-      self.replaceElements(elements, canReplace.replacements, newHost);
+      var canReplace = cmmnRules.canReplace(elements, target);
+
+      if (canReplace && canReplace.replacements) {
+        self.replaceElements(elements, canReplace.replacements);
+      }
+
     }
-  }, this);
+
+  }, true);
 
 
-  // update attachments if the host is replaced
-  this.postExecute([ 'shape.replace' ], 1500, function(e) {
+  // CONNECTIONS /////////////////////////////////////////////////////////////////////
 
-    var context = e.context,
-        oldShape = context.oldShape,
-        newShape = context.newShape,
-        attachers = oldShape.attachers,
+  this.preExecute('connection.create', HIGH_PRIORITY, function(context) {
+
+    var source = context.source,
+        target = context.target,
+        canReplace = context.canExecute || canConnect(source, target);
+
+    if (canReplace && canReplace.replacements) {
+
+      var replacements = self.replaceElements([ source, target ], canReplace.replacements, {
+        select: false
+      });
+
+      context.source = replacements[source.id] || context.source;
+      context.target = replacements[target.id] || context.target;
+
+      // remember replaced by element in canReplace object (see 'connect.end')
+      assign(canReplace, {
+        replacedBy: !canReplace.reverse ? context.target : context.source
+      });
+
+    }
+
+  }, true);
+
+
+  eventBus.on('connect.end', LOW_PRIORITY + VERY_LOW_PRIORITY, function(e) {
+
+    var canExecute = e.context.canExecute,
+        replacedBy = canExecute && canExecute.replacedBy;
+
+    // if target shape has been replaced, then select the
+    // new element and not the old target.
+    if (replacedBy) {
+      e.context.target = replacedBy;
+    }
+
+  });
+
+
+  this.preExecute([
+    'connection.reconnectStart',
+    'connection.reconnectEnd'
+  ], HIGH_PRIORITY, function(event) {
+
+    var type = event.command,
+        isReconnectStart = (type === 'connection.reconnectStart'),
+        context = event.context,
+        connection = context.connection,
+        source = context.newSource || connection.source,
+        target = context.newTarget || connection.target,
+        attrs = { connection: connection },
         canReplace;
 
-    if (attachers && attachers.length) {
-      canReplace = cmmnRules.canReplace(attachers, newShape);
-
-      if (canReplace) {
-        self.replaceElements(attachers, canReplace.replacements);
-      }
+    if (context.hints && context.hints.nested) {
+      return;
     }
 
-  }, this);
+    attrs[ isReconnectStart ? 'hover' : 'source' ] = source;
+    attrs[ !isReconnectStart ? 'hover' : 'target' ] = target;
+
+    canReplace = canReconnect(type, attrs);
+
+    if (canReplace && canReplace.replacements) {
+      var replacements = self.replaceElements([ source, target ], canReplace.replacements, {
+        select: false
+      });
+
+      context.newSource = replacements[source.id] || context.newSource;
+      context.newTarget = replacements[target.id] || context.newTarget;
+    }
+
+    // remember result in context, so that this can be re-used
+    context.canExecute = canReplace;
+
+  });
 
 
-  this.postExecuted([ 'element.updateProperties' ], function(context) {
+  this.preExecute('shape.delete', HIGH_PRIORITY, function(context) {
 
-    var newProperties = context.properties,
+    var shape = context.shape,
+        parent = isCriterion(shape) ? shape.host : shape.parent,
+        definition = getDefinition(parent);
+
+    // if the shape to delete is contained by a plan fragment (and not stage)
+    // then remove incoming connections. Thereby an additional hint is provided
+    // to the context, so that shape delete is not replaced when the connection
+    // is deleted.
+
+    if (is(definition, 'cmmn:Stage')) {
+      return;
+    }
+
+    saveClear(shape.incoming, function(connection) {
+      modeling.removeConnection(connection, { nested: true, endChanged: true });
+    });
+
+  }, true);
+
+
+  this.postExecuted([
+    'connection.delete',
+    'connection.reconnectEnd'
+  ], LOW_PRIORITY, function(context) {
+
+    var shape = context.target || context.oldTarget,
+        elements = [ shape ],
+        target = isCriterion(shape) ? shape.host : shape.parent,
+        hints = context.hints || {};
+
+    if (hints.endChanged) {
+      return;
+    }
+
+    if (target && !cmmnRules.canMove(elements, target)) {
+
+      var canReplace = cmmnRules.canReplace(elements, target);
+
+      if (canReplace && canReplace.replacements) {
+        self.replaceElements(elements, canReplace.replacements, { select: false });
+      }
+
+    }
+
+  }, true);
+
+
+  // PROPERTIES /////////////////////////////////////////////////////////////////////
+
+  this.postExecuted('element.updateProperties', function(context) {
+
+    var properties = context.properties,
         changed = context.changed;
 
-    if (newProperties.isBlocking === false) {
+    if (properties && properties.isBlocking === false) {
 
       forEach(changed, function(shape) {
 
@@ -5685,79 +6420,117 @@ function ReplaceElementBehavior(
             canReplace = cmmnRules.canReplace(attachers, shape);
 
         if (canReplace) {
-          self.replaceElements(attachers, canReplace.replacements);
+          self.replaceElements(attachers, canReplace.replacements, { select: false });
         }
       });
 
     }
 
-
   }, true);
 
 
-  this.replaceElements = function(elements, newElements, newHost) {
+  // API ///////////////////////////////////////////////////////////////////////////
+
+  this.replaceElements = function(elements, newElements, hints) {
+
+    var self = this;
 
     var elementRegistry = this._elementRegistry,
-        cmmnReplace = this._cmmnReplace,
-        selection = this._selection,
-        modeling = this._modeling;
+        selection = this._selection;
+
+    var executedReplacements = {};
+
+    hints = hints || {};
 
     forEach(newElements, function(replacement) {
 
-      var newElement = {
-        type: replacement.newElementType
-      };
+      var oldElement = elementRegistry.get(replacement.oldElementId),
+          idx = elements.indexOf(oldElement),
+          replacedBy;
 
-      var oldElement = elementRegistry.get(replacement.oldElementId);
-
-      if (newHost && is(oldElement, 'cmmn:Criterion')) {
-        modeling.updateAttachment(oldElement, null);
+      if (!oldElement) {
+        return;
       }
 
-      var idx = elements.indexOf(oldElement);
+      replacedBy = self.replaceElement(oldElement, replacement);
 
-      elements[idx] = cmmnReplace.replaceElement(oldElement, newElement, { select: false });
-
-      if (newHost && is(elements[idx], 'cmmn:Criterion')) {
-        modeling.updateAttachment(elements[idx], newHost);
+      if (idx !== -1) {
+        elements[idx] = replacedBy;
       }
+
+      executedReplacements[oldElement.id] = replacedBy;
+
     });
 
-    if (newElements) {
+    if (newElements && hints.select !== false) {
       selection.select(elements);
     }
+
+    return executedReplacements;
+
+  };
+
+
+  this.replaceElement = function(element, replacement) {
+
+    var cmmnReplace = this._cmmnReplace;
+
+    var definition = getDefinition(element),
+        definitionType = replacement.newDefinitionType || (definition && definition.$type);
+
+    if (!element) {
+      return;
+    }
+
+    var newElement = {
+      type: replacement.newElementType
+    };
+
+    if (definitionType) {
+      assign(newElement, {
+        definitionType: definitionType
+      });
+    }
+
+    return cmmnReplace.replaceElement(element, newElement, { select: false });
+
   };
 
 }
 
 
 ReplaceElementBehavior.$inject = [
-  'cmmnFactory',
   'cmmnReplace',
   'cmmnRules',
   'elementFactory',
   'elementRegistry',
   'eventBus',
   'modeling',
-  'selection'
+  'selection',
+  'rules'
 ];
 
 inherits(ReplaceElementBehavior, CommandInterceptor);
 
 module.exports = ReplaceElementBehavior;
 
-},{"231":231,"243":243,"245":245,"62":62,"90":90}],28:[function(_dereq_,module,exports){
+
+function isCriterion(element) {
+  return is(element, 'cmmn:Criterion');
+}
+
+},{"236":236,"248":248,"260":260,"262":262,"389":389,"70":70,"98":98}],31:[function(_dereq_,module,exports){
 'use strict';
 
-var ModelUtil = _dereq_(62);
+var ModelUtil = _dereq_(70);
 
 var is = ModelUtil.is,
     getBusinessObject = ModelUtil.getBusinessObject,
     isCasePlanModel = ModelUtil.isCasePlanModel;
 
-var filter = _dereq_(243);
-var ResizeUtil = _dereq_(176);
-var getBBox = _dereq_(209).getBBox;
+var filter = _dereq_(260);
+var ResizeUtil = _dereq_(190);
+var getBBox = _dereq_(226).getBBox;
 
 var SLIGHTLY_HIGHER_PRIORITY = 1001;
 
@@ -5856,30 +6629,31 @@ ResizeCasePlanModelBehavior.$inject = [ 'eventBus', 'modeling' ];
 
 module.exports = ResizeCasePlanModelBehavior;
 
-},{"176":176,"209":209,"243":243,"62":62}],29:[function(_dereq_,module,exports){
+},{"190":190,"226":226,"260":260,"70":70}],32:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var forEach = _dereq_(245),
-    flatten = _dereq_(233),
-    groupBy = _dereq_(246),
-    map = _dereq_(247);
+var forEach = _dereq_(262),
+    flatten = _dereq_(250),
+    groupBy = _dereq_(263),
+    map = _dereq_(264);
 
-var any = _dereq_(241);
+var any = _dereq_(258);
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     is = ModelUtil.is,
     isCasePlanModel = ModelUtil.isCasePlanModel,
     getSentry = ModelUtil.getSentry,
     getBusinessObject = ModelUtil.getBusinessObject,
-    getDefinition = ModelUtil.getDefinition;
+    getDefinition = ModelUtil.getDefinition,
+    getStandardEvents = ModelUtil.getStandardEvents;
 
-var getParent = _dereq_(35).getParent;
+var getParent = _dereq_(41).getParent;
 
-var PlanItemDefinitionUtil = _dereq_(36),
+var PlanItemDefinitionUtil = _dereq_(42),
     isItemCapable = PlanItemDefinitionUtil.isItemCapable,
     getAllDiscretionaryItems = PlanItemDefinitionUtil.getAllDiscretionaryItems,
     getDirectItemCapables = PlanItemDefinitionUtil.getDirectItemCapables,
@@ -5917,7 +6691,7 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
 
     if (!sentry) {
       sentry = createSentry(criterion);
-      modeling.updateSemanticParent(sentry, getSentryParent(host));
+      modeling.updateSemanticParent(sentry, getSentryParent(host), 'sentries');
     }
 
     modeling.updateSemanticParent(onPart, sentry, 'onParts', connection);
@@ -5948,14 +6722,14 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
 
   this.preExecuted('connection.reconnectStart', function(context) {
 
-    var connection = context.connection;
+    var connection = context.connection,
+        source = connection.source;
 
     if (!isOnPartConnection(connection)) {
       return;
     }
 
-    var source = connection.source,
-        onPart = getOnPart(connection),
+    var onPart = getOnPart(connection),
         criterion = connection.target,
         sentry = getSentry(criterion);
 
@@ -5970,14 +6744,14 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
 
   this.preExecuted('connection.reconnectEnd', function(context) {
 
-    var connection = context.connection;
+    var connection = context.connection,
+        source = connection.source;
 
     if (!isOnPartConnection(connection)) {
       return;
     }
 
-    var source = connection.source,
-        onPart = getOnPart(connection),
+    var onPart = getOnPart(connection),
         oldCriterion = connection.target,
         oldSentry = getSentry(oldCriterion),
         newCriterion = context.newTarget,
@@ -5989,7 +6763,7 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
 
     if (!newSentry) {
       newSentry = createSentry(newCriterion);
-      modeling.updateSemanticParent(newSentry, getSentryParent(newCriterion));
+      modeling.updateSemanticParent(newSentry, getSentryParent(newCriterion.host), 'sentries');
     }
 
     if (existsAnotherConnection(source, connection)) {
@@ -6013,19 +6787,8 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
     var onPart = getOnPart(connection),
         standardEvent;
 
-    if (is(onPart, 'cmmn:PlanItemOnPart')) {
-      standardEvent = onPart.standardEvent || 'complete';
-    }
-
-    if (is(connection.source, 'cmmn:ExitCriterion')) {
-      standardEvent = 'exit';
-    }
-
-    if (is(onPart, 'cmmn:CaseFileItemOnPart')) {
-      standardEvent = onPart.standardEvent || 'create';
-    }
-
-    if (standardEvent && onPart.standardEvent !== standardEvent) {
+    if (!isValidStandardEvent(connection)) {
+      standardEvent = getDefaultStandardEvent(connection);
       modeling.updateProperties(onPart, {
         standardEvent: standardEvent
       }, connection);
@@ -6209,10 +6972,26 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
     /**
      * Returns true if the sentry should be replaced.
      */
-    function shouldReplace(sentry) {
-      var referencesLength = itemRegistry.getReferences(sentry).length,
-          groupedCriteriaLength = (groupedCriteria[sentry.id] || []).length;
-      return referencesLength > groupedCriteriaLength;
+    function shouldReplace(sentry, newParent) {
+      var references = itemRegistry.getReferences(sentry),
+          criteria = (groupedCriteria[sentry.id] || []),
+          referencesLength = itemRegistry.getReferences(sentry).length,
+          criteriaLength = criteria.length;
+
+      if (referencesLength > criteriaLength) {
+
+        if (!newParent) {
+          return true;
+        }
+
+        return any(references, function(criterion) {
+          var criterionShape = itemRegistry.getShape(criterion);
+          return criterionShape && newParent !== getSentryParent(criterionShape.host);
+        });
+
+      }
+
+      return false;
     }
 
 
@@ -6233,14 +7012,10 @@ function SentryUpdater(eventBus, modeling, itemRegistry, cmmnReplace, cmmnFactor
           return;
         }
 
-        if (!isReplaced(sentry) && shouldReplace(sentry)) {
+        if (!isReplaced(sentry) && shouldReplace(sentry, newParent)) {
           var newSentry = cmmnReplace.replaceSentry(sentry);
           replace(sentry, newSentry);
 
-
-        }
-
-        if (shouldReplace(sentry)) {
           forEach(criterion.incoming, function(con) {
 
             var cmmnElement = con.businessObject.cmmnElementRef;
@@ -6498,9 +7273,47 @@ function getOnPart(connection) {
   connection = getBusinessObject(connection);
   return connection.cmmnElementRef;
 }
-},{"231":231,"233":233,"241":241,"245":245,"246":246,"247":247,"35":35,"36":36,"62":62,"90":90}],30:[function(_dereq_,module,exports){
+
+function isValidStandardEvent(connection) {
+
+  var onPart = getOnPart(connection),
+      standardEvent = onPart.standardEvent,
+      possibleStandardEvents = getStandardEvents(onPart);
+
+  return standardEvent && possibleStandardEvents.indexOf(standardEvent) !== -1;
+
+}
+
+function getDefaultStandardEvent(element) {
+
+  element = getOnPart(element);
+
+  if (is(element.sourceRef, 'cmmn:CaseFileItem')) {
+    return 'update';
+  }
+
+  if (is(element.exitCriterionRef, 'cmmn:ExitCriterion')) {
+    return 'exit';
+  }
+
+  if (is(element.sourceRef, 'cmmn:PlanItem')) {
+
+    var definition = getDefinition(element.sourceRef);
+    if (is(definition, 'cmmn:EventListener') || is(definition, 'cmmn:Milestone')) {
+      return 'occur';
+    }
+    else {
+      return 'complete';
+    }
+
+  }
+
+}
+
+},{"248":248,"250":250,"258":258,"262":262,"263":263,"264":264,"41":41,"42":42,"70":70,"98":98}],33:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [
+    'attachCriterionBehavior',
     'caseFileItemUpdater',
     'labelBehavior',
     'planItemDefinitionUpdater',
@@ -6510,29 +7323,185 @@ module.exports = {
     'resizeCasePlanModelBehavior',
     'sentryUpdater'
   ],
-  caseFileItemUpdater: [ 'type', _dereq_(22) ],
-  labelBehavior: [ 'type', _dereq_(23) ],
-  planItemDefinitionUpdater: [ 'type', _dereq_(24) ],
-  planningTableUpdater: [ 'type', _dereq_(25) ],
-  replaceConnectionBehavior: [ 'type', _dereq_(26) ],
-  replaceElementBehavior: [ 'type', _dereq_(27) ],
-  resizeCasePlanModelBehavior: [ 'type', _dereq_(28) ],
-  sentryUpdater: [ 'type', _dereq_(29) ]
+  attachCriterionBehavior: [ 'type', _dereq_(24) ],
+  caseFileItemUpdater: [ 'type', _dereq_(25) ],
+  labelBehavior: [ 'type', _dereq_(26) ],
+  planItemDefinitionUpdater: [ 'type', _dereq_(27) ],
+  planningTableUpdater: [ 'type', _dereq_(28) ],
+  replaceConnectionBehavior: [ 'type', _dereq_(29) ],
+  replaceElementBehavior: [ 'type', _dereq_(30) ],
+  resizeCasePlanModelBehavior: [ 'type', _dereq_(31) ],
+  sentryUpdater: [ 'type', _dereq_(32) ]
 };
 
-},{"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29}],31:[function(_dereq_,module,exports){
+},{"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30,"31":31,"32":32}],34:[function(_dereq_,module,exports){
 'use strict';
 
-var filter = _dereq_(243),
-    forEach = _dereq_(245);
+var inherits = _dereq_(248);
 
-var getBusinessObject = _dereq_(62).getBusinessObject,
-    getItemControl = _dereq_(62).getItemControl,
-    getDefaultControl = _dereq_(62).getDefaultControl,
-    getDefinition = _dereq_(62).getDefinition,
-    hasPlanningTable = _dereq_(62).hasPlanningTable;
+var is = _dereq_(70).is;
 
-var isPlanningTableCapable = _dereq_(36).isPlanningTableCapable;
+
+function AppendShapeHandler(modeling, cmmnRules) {
+  this._modeling = modeling;
+  this._cmmnRules = cmmnRules;
+}
+
+inherits(AppendShapeHandler, _dereq_(151));
+
+
+AppendShapeHandler.$inject = [ 'modeling', 'cmmnRules' ];
+
+module.exports = AppendShapeHandler;
+
+
+////// api /////////////////////////////////////////////
+
+AppendShapeHandler.prototype.preExecute = function(context) {
+
+  if (!context.source) {
+    throw new Error('source required');
+  }
+
+  var cmmnRules = this._cmmnRules;
+
+  var shape = context.shape,
+      source = context.source,
+      parent = context.parent || context.source.parent,
+      position = context.position,
+      isAttach = false;
+
+  if (isCriterion(shape)) {
+    isAttach = cmmnRules.canAttach(shape, parent, source, position) === 'attach';
+  }
+
+  context.shape = this._modeling.createShape(shape, position, parent, isAttach, {
+    nested: true
+  });
+
+};
+
+function isCriterion(element) {
+  return is(element, 'cmmn:Criterion');
+}
+},{"151":151,"248":248,"70":70}],35:[function(_dereq_,module,exports){
+'use strict';
+
+var inherits = _dereq_(248);
+
+var isArray = _dereq_(380);
+
+/**
+ * Overwrites the behavior of diagram-js/ReconnectConnectionHandler to enable
+ * a switch between source and target of a connection on reconnect.
+ */
+function ReconnectConnectionHandler(rules) {
+  this._rules = rules;
+}
+
+inherits(ReconnectConnectionHandler, _dereq_(164));
+
+ReconnectConnectionHandler.$inject = [ 'rules' ];
+
+module.exports = ReconnectConnectionHandler;
+
+
+ReconnectConnectionHandler.prototype.execute = function(context) {
+
+  var newSource = context.newSource,
+      newTarget = context.newTarget,
+      connection = context.connection,
+      dockingOrPoints = context.dockingOrPoints,
+      oldWaypoints = connection.waypoints,
+      newWaypoints;
+
+  if (!newSource && !newTarget) {
+    throw new Error('newSource or newTarget are required');
+  }
+
+  context.oldWaypoints = oldWaypoints;
+
+  if (isArray(dockingOrPoints)) {
+    newWaypoints = dockingOrPoints;
+  } else {
+    newWaypoints = oldWaypoints.slice();
+
+    newWaypoints.splice(newSource ? 0 : -1, 1, dockingOrPoints);
+  }
+
+  if (newSource) {
+    context.oldSource = connection.source;
+    connection.source = newSource;
+  }
+
+  if (newTarget) {
+    context.oldTarget = connection.target;
+    connection.target = newTarget;
+  }
+
+  connection.waypoints = newWaypoints;
+
+  return connection;
+};
+
+},{"164":164,"248":248,"380":380}],36:[function(_dereq_,module,exports){
+'use strict';
+
+var inherits = _dereq_(248);
+
+function ReplaceShapeHandler(modeling, rules) {
+  this._modeling = modeling;
+  this._rules = rules;
+}
+
+inherits(ReplaceShapeHandler, _dereq_(165));
+
+ReplaceShapeHandler.$inject = [ 'modeling', 'rules' ];
+
+module.exports = ReplaceShapeHandler;
+
+
+////// api /////////////////////////////////////////////
+
+
+ReplaceShapeHandler.prototype.createShape = function(shape, position, target) {
+  var modeling = this._modeling;
+  return modeling.createShape(shape, position, target, {
+    nested: true
+  });
+};
+
+
+ReplaceShapeHandler.prototype.reconnectStart = function(connection, newSource, dockingPoint) {
+  var modeling = this._modeling;
+  modeling.reconnectStart(connection, newSource, dockingPoint, {
+    nested: true,
+    startChanged: true
+  });
+};
+
+
+ReplaceShapeHandler.prototype.reconnectEnd = function(connection, newTarget, dockingPoint) {
+  var modeling = this._modeling;
+  modeling.reconnectEnd(connection, newTarget, dockingPoint, {
+    nested: true,
+    endChanged: true
+  });
+};
+
+},{"165":165,"248":248}],37:[function(_dereq_,module,exports){
+'use strict';
+
+var filter = _dereq_(260),
+    forEach = _dereq_(262);
+
+var getBusinessObject = _dereq_(70).getBusinessObject,
+    getItemControl = _dereq_(70).getItemControl,
+    getDefaultControl = _dereq_(70).getDefaultControl,
+    getDefinition = _dereq_(70).getDefinition,
+    hasPlanningTable = _dereq_(70).hasPlanningTable;
+
+var isPlanningTableCapable = _dereq_(42).isPlanningTableCapable;
 
 
 function UpdateControlsHandler(itemRegistry, modeling, cmmnReplace, cmmnFactory) {
@@ -6742,22 +7711,23 @@ UpdateControlsHandler.prototype._getReferencingShapes = function(definition) {
 function canReplaceDefinition(definition) {
   return !(isPlanningTableCapable(definition) && hasPlanningTable(definition));
 }
-},{"243":243,"245":245,"36":36,"62":62}],32:[function(_dereq_,module,exports){
+},{"260":260,"262":262,"42":42,"70":70}],38:[function(_dereq_,module,exports){
 'use strict';
 
-var reduce = _dereq_(379),
-    keys = _dereq_(373),
-    forEach = _dereq_(245),
-    assign = _dereq_(372);
+var reduce = _dereq_(396),
+    keys = _dereq_(390),
+    forEach = _dereq_(262),
+    assign = _dereq_(389);
 
-var getBusinessObject = _dereq_(62).getBusinessObject;
+var getBusinessObject = _dereq_(70).getBusinessObject;
 
 var NAME = 'name',
+    STANDARD_EVENT = 'standardEvent',
     ID = 'id',
     DEFINITION_REF = 'definitionRef',
     SENTRY_REF = 'sentryRef';
 
-var flatten = _dereq_(233);
+var flatten = _dereq_(250);
 
 /**
  * A handler that implements a CMMN 1.1 property update.
@@ -6856,6 +7826,16 @@ UpdatePropertiesHandler.prototype.execute = function(context) {
 
     // show the label
     element.label.hidden = !properties[NAME];
+  }
+
+  if (STANDARD_EVENT in properties) {
+
+    forEach(changed, function(changedShape) {
+      if (changedShape.label) {
+        changed.push(changedShape.label);
+      }
+    });
+
   }
 
   // update properties
@@ -6965,12 +7945,12 @@ function unwrapBusinessObjects(properties) {
 
   return unwrappedProps;
 }
-},{"233":233,"245":245,"372":372,"373":373,"379":379,"62":62}],33:[function(_dereq_,module,exports){
+},{"250":250,"262":262,"389":389,"390":390,"396":396,"70":70}],39:[function(_dereq_,module,exports){
 'use strict';
 
-var flatten = _dereq_(233);
+var flatten = _dereq_(250);
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
 
 function UpdateSemanticParentHandler() {
@@ -7061,36 +8041,37 @@ UpdateSemanticParentHandler.prototype.updateSemanticParent = function(element, n
 
 };
 
-},{"206":206,"233":233}],34:[function(_dereq_,module,exports){
+},{"223":223,"250":250}],40:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'modeling', 'cmmnUpdater' ],
   __depends__: [
-    _dereq_(30),
-    _dereq_(38),
-    _dereq_(49),
-    _dereq_(51),
-    _dereq_(92),
-    _dereq_(185),
-    _dereq_(104),
-    _dereq_(112)
+    _dereq_(33),
+    _dereq_(44),
+    _dereq_(55),
+    _dereq_(57),
+    _dereq_(100),
+    _dereq_(201),
+    _dereq_(112),
+    _dereq_(122)
   ],
-  cmmnFactory: [ 'type', _dereq_(17) ],
-  cmmnUpdater: [ 'type', _dereq_(19) ],
-  elementFactory: [ 'type', _dereq_(20) ],
-  modeling: [ 'type', _dereq_(21) ],
-  layouter: [ 'type', _dereq_(18) ]
+  cmmnFactory: [ 'type', _dereq_(19) ],
+  cmmnUpdater: [ 'type', _dereq_(21) ],
+  elementFactory: [ 'type', _dereq_(22) ],
+  modeling: [ 'type', _dereq_(23) ],
+  layouter: [ 'type', _dereq_(20) ],
+  connectionDocking: [ 'type', _dereq_(212) ]
 };
 
-},{"104":104,"112":112,"17":17,"18":18,"185":185,"19":19,"20":20,"21":21,"30":30,"38":38,"49":49,"51":51,"92":92}],35:[function(_dereq_,module,exports){
+},{"100":100,"112":112,"122":122,"19":19,"20":20,"201":201,"21":21,"212":212,"22":22,"23":23,"33":33,"44":44,"55":55,"57":57}],41:[function(_dereq_,module,exports){
 'use strict';
 
-var any = _dereq_(241);
+var any = _dereq_(258);
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     is = ModelUtil.is,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var Model = _dereq_(198);
+var Model = _dereq_(215);
 
 /**
  * Return true if given elements are the same.
@@ -7220,18 +8201,18 @@ function isLabel(element) {
 }
 
 module.exports.isLabel = isLabel;
-},{"198":198,"241":241,"62":62}],36:[function(_dereq_,module,exports){
+},{"215":215,"258":258,"70":70}],42:[function(_dereq_,module,exports){
 'use strict';
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     is = ModelUtil.is,
     getDefinition = ModelUtil.getDefinition,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var isAny = _dereq_(35).isAny,
-    getParent = _dereq_(35).getParent;
+var isAny = _dereq_(41).isAny,
+    getParent = _dereq_(41).getParent;
 
-var eachElement = _dereq_(209).eachElement;
+var eachElement = _dereq_(226).eachElement;
 
 
 /**
@@ -7405,16 +8386,16 @@ function isPlanFragment(element) {
 
 module.exports.isPlanFragment = isPlanFragment;
 
-},{"209":209,"35":35,"62":62}],37:[function(_dereq_,module,exports){
+},{"226":226,"41":41,"70":70}],43:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var OrderingProvider = _dereq_(163);
-var findIndex = _dereq_(232);
-var find = _dereq_(244);
-var is = _dereq_(62).is;
-var isAny = _dereq_(35).isAny;
+var OrderingProvider = _dereq_(177);
+var findIndex = _dereq_(249);
+var find = _dereq_(261);
+var is = _dereq_(70).is;
+var isAny = _dereq_(41).isAny;
 
 function CmmnOrderingProvider(eventBus) {
 
@@ -7422,11 +8403,11 @@ function CmmnOrderingProvider(eventBus) {
 
   var orders = [
     { type: 'label', order: { level: 10 } },
-    { type: 'cmmn:Criterion', order: { level: 9 } },
+    { type: 'cmmn:Criterion', order: { level: 6 } },
     {
       type: 'cmmn:OnPart',
       order: {
-        level: 1,
+        level: 9,
         containers: [
           'cmmn:Stage'
         ]
@@ -7435,11 +8416,8 @@ function CmmnOrderingProvider(eventBus) {
     {
       type: 'cmmn:Association',
       order: {
-        level: 1,
+        level: 9,
         containers: [
-          'cmmn:PlanItem',
-          'cmmn:DiscretionaryItem',
-          'cmmn:Stage',
           'cmmndi:CMMNDiagram'
         ]
       }
@@ -7447,7 +8425,7 @@ function CmmnOrderingProvider(eventBus) {
     {
       type: 'cmmndi:CMMNEdge',
       order: {
-        level: 1,
+        level: 9,
         containers: [
           'cmmn:PlanItem',
           'cmmn:DiscretionaryItem',
@@ -7459,7 +8437,7 @@ function CmmnOrderingProvider(eventBus) {
 
   function computeOrder(element) {
 
-    if (element.waypoints) {
+    if (isCMMNEdge(element)) {
       element = element.businessObject.cmmnElementRef || element;
     }
 
@@ -7485,7 +8463,7 @@ function CmmnOrderingProvider(eventBus) {
 
     var actualParent = newParent;
 
-    if (element.waypoints && element.source) {
+    if (isCMMNEdge(element) && element.source) {
       actualParent = element.source.parent;
     }
 
@@ -7529,7 +8507,7 @@ function CmmnOrderingProvider(eventBus) {
 
 
     // if the element is already in the child list at
-    // a smaller index, we need to adjust the inser index.
+    // a smaller index, we need to adjust the insert index.
     // this takes into account that the element is being removed
     // before being re-inserted
     if (insertIndex !== -1) {
@@ -7551,19 +8529,23 @@ CmmnOrderingProvider.$inject = [ 'eventBus' ];
 inherits(CmmnOrderingProvider, OrderingProvider);
 
 module.exports = CmmnOrderingProvider;
-},{"163":163,"231":231,"232":232,"244":244,"35":35,"62":62}],38:[function(_dereq_,module,exports){
+
+function isCMMNEdge(element) {
+  return is(element, 'cmmndi:CMMNEdge');
+}
+},{"177":177,"248":248,"249":249,"261":261,"41":41,"70":70}],44:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'cmmnOrderingProvider' ],
-  cmmnOrderingProvider: [ 'type', _dereq_(37) ]
+  cmmnOrderingProvider: [ 'type', _dereq_(43) ]
 };
-},{"37":37}],39:[function(_dereq_,module,exports){
+},{"43":43}],45:[function(_dereq_,module,exports){
 'use strict';
 
-var BaseOutline = _dereq_(164);
+var BaseOutline = _dereq_(178);
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var isCasePlanModel = _dereq_(62).isCasePlanModel;
+var isCasePlanModel = _dereq_(70).isCasePlanModel;
 
 /**
  * This is a subclass of the Outline module from diagram-js.
@@ -7601,30 +8583,39 @@ Outline.prototype.updateShapeOutline = function(outline, element) {
 };
 
 module.exports = Outline;
-},{"164":164,"231":231,"62":62}],40:[function(_dereq_,module,exports){
+},{"178":178,"248":248,"70":70}],46:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'outline' ],
-  outline: [ 'type', _dereq_(39) ],
+  outline: [ 'type', _dereq_(45) ],
 };
 
-},{"39":39}],41:[function(_dereq_,module,exports){
+},{"45":45}],47:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372);
+var assign = _dereq_(389);
 
 /**
  * A palette provider for CMMN 1.1 elements.
  */
-function PaletteProvider(palette, create, elementFactory, spaceTool, lassoTool, handTool) {
+function PaletteProvider(
+  create,
+  elementFactory,
+  globalConnect,
+  handTool,
+  lassoTool,
+  palette,
+  spaceTool
+) {
 
-  this._palette = palette;
   this._create = create;
   this._elementFactory = elementFactory;
-  this._spaceTool = spaceTool;
-  this._lassoTool = lassoTool;
+  this._globalConnect = globalConnect;
   this._handTool = handTool;
+  this._palette = palette;
+  this._lassoTool = lassoTool;
+  this._spaceTool = spaceTool;
 
   palette.registerProvider(this);
 }
@@ -7632,12 +8623,13 @@ function PaletteProvider(palette, create, elementFactory, spaceTool, lassoTool, 
 module.exports = PaletteProvider;
 
 PaletteProvider.$inject = [
-  'palette',
   'create',
   'elementFactory',
-  'spaceTool',
+  'globalConnect',
+  'handTool',
   'lassoTool',
-  'handTool'
+  'palette',
+  'spaceTool'
 ];
 
 
@@ -7648,6 +8640,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       elementFactory = this._elementFactory,
       spaceTool = this._spaceTool,
       lassoTool = this._lassoTool,
+      globalConnect = this._globalConnect,
       handTool = this._handTool;
 
   function createPlanItem(type, group, className, title) {
@@ -7675,6 +8668,10 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
 
   function createCriterion(event) {
     create.start(event, elementFactory.createCriterionShape('cmmn:EntryCriterion'));
+  }
+
+  function createCaseFileItem(event) {
+    create.start(event, elementFactory.createCaseFileItemShape());
   }
 
   assign(actions, {
@@ -7708,6 +8705,16 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
         }
       }
     },
+    'global-connect-tool': {
+      group: 'tools',
+      className: 'cmmn-icon-connection',
+      title: 'Activate the global connect tool',
+      action: {
+        click: function(event) {
+          globalConnect.toggle(event);
+        }
+      }
+    },
     'tool-separator': {
       group: 'tools',
       separator: true
@@ -7716,7 +8723,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       'cmmn:Task', 'planItem', 'cmmn-icon-task'
     ),
     'create.stage': createPlanItem(
-      'cmmn:Stage', 'planItem', 'cmmn-icon-stage', 'Create expanded Stage'
+      'cmmn:Stage', 'planItem', 'cmmn-icon-stage-expanded', 'Create expanded Stage'
     ),
     'create.milestone': createPlanItem(
       'cmmn:Milestone', 'planItem', 'cmmn-icon-milestone'
@@ -7741,44 +8748,57 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
         dragstart: createCasePlanModel,
         click: createCasePlanModel
       }
+    },
+    'create.caseFileItem': {
+      group: 'caseFileItem',
+      className: 'cmmn-icon-case-file-item',
+      title: 'Create Case File Item',
+      action: {
+        dragstart: createCaseFileItem,
+        click: createCaseFileItem
+      }
     }
 
   });
 
   return actions;
 };
-},{"372":372}],42:[function(_dereq_,module,exports){
+},{"389":389}],48:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(169),
-    _dereq_(120),
-    _dereq_(192),
-    _dereq_(135),
-    _dereq_(127)
+    _dereq_(183),
+    _dereq_(132),
+    _dereq_(208),
+    _dereq_(149),
+    _dereq_(141),
+    _dereq_(12)
   ],
   __init__: [ 'paletteProvider' ],
-  paletteProvider: [ 'type', _dereq_(41) ]
+  paletteProvider: [ 'type', _dereq_(47) ]
 };
 
-},{"120":120,"127":127,"135":135,"169":169,"192":192,"41":41}],43:[function(_dereq_,module,exports){
+},{"12":12,"132":132,"141":141,"149":149,"183":183,"208":208,"47":47}],49:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    filter = _dereq_(243);
+var forEach = _dereq_(262),
+    filter = _dereq_(260);
 
-var replaceOptions = _dereq_(48);
+var replaceOptions = _dereq_(54);
 
-var isItemCapable = _dereq_(36).isItemCapable;
-var isAny = _dereq_(35).isAny;
+var isItemCapable = _dereq_(42).isItemCapable;
 
-var getBusinessObject = _dereq_(62).getBusinessObject,
-    getDefinition = _dereq_(62).getDefinition,
-    isCasePlanModel = _dereq_(62).isCasePlanModel,
-    isRequired = _dereq_(62).isRequired,
-    isRepeatable = _dereq_(62).isRepeatable,
-    isManualActivation = _dereq_(62).isManualActivation,
-    is = _dereq_(62).is;
+var isAny = _dereq_(41).isAny;
 
+var ModelUtil = _dereq_(70),
+    getBusinessObject = ModelUtil.getBusinessObject,
+    getDefinition = ModelUtil.getDefinition,
+    isCasePlanModel = ModelUtil.isCasePlanModel,
+    isRequired = ModelUtil.isRequired,
+    isRepeatable = ModelUtil.isRepeatable,
+    isManualActivation = ModelUtil.isManualActivation,
+    is = ModelUtil.is;
+
+var isCollapsed = _dereq_(68).isCollapsed;
 
 /**
  * Returns true, if an element is from a different type
@@ -7801,11 +8821,55 @@ function isDifferentType(element) {
     }
 
     if (isItemCapable(element)) {
-      return businessObject.get('definitionRef').$type !== target.definitionType;
+      return getDefinition(element).$type !== target.definitionType;
     }
 
     return false;
   };
+}
+
+
+function filterItemCapableOptions(options, element) {
+
+  var differentType = isDifferentType(element);
+
+  return filter(options, function(entry) {
+
+    var target = entry.target;
+
+    return canReplaceElementByTarget(element, target) && differentType(entry);
+
+  });
+
+}
+
+function canReplaceElementByTarget(element, target) {
+
+  var type = target.type,
+      definitionType = target.definitionType,
+      parent = element.parent,
+      definition = getDefinition(element);
+
+  if (isPlanItem(element)) {
+    if (type === 'cmmn:DiscretionaryItem' && !isStage(parent)) {
+      return false;
+    }
+  }
+
+  if (definitionType === 'cmmn:HumanTask') {
+
+    if (isPlanFragment(element) && !target.isBlocking) {
+      return false;
+    }
+
+    if (isTask(element) && definition.isBlocking !== target.isBlocking) {
+      return false;
+    }
+
+  }
+
+  return true;
+
 }
 
 
@@ -7849,53 +8913,68 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
   var entries,
       differentType = isDifferentType(element),
       definition = getDefinition(element);
-  
+
 
   if (!rules.allowed('shape.replace', { element: element })) {
     return [];
   }
 
-  if (is(definition, 'cmmn:Task')) {
 
-    var parent = element.parent;
+  if (isItemCapable(element)) {
 
-    entries = filter(replaceOptions.TASK, function(entry) {
 
-      var target = entry.target,
-          type = target.type,
-          definitionType = target.definitionType;
+    if (isTask(element)) {
 
-      if (is(element, 'cmmn:PlanItem')) {
-        if (type === 'cmmn:DiscretionaryItem' && !is(getDefinition(parent), 'cmmn:Stage')) {
-          return false;
-        }
+      entries = filterItemCapableOptions(replaceOptions.TASK, element);
+      return this._createEntries(element, entries);
+
+    }
+
+    if (isPlanFragment(element)) {
+
+      if (!isCollapsed(element)) {
+
+        entries = filterItemCapableOptions(replaceOptions.PLAN_FRAGMENT_EXPANDED, element);
+        return this._createEntries(element, entries);
+
       }
 
-      if (definitionType === 'cmmn:HumanTask') {
-        var isBlocking = target.isBlocking;
-        if (definition.isBlocking !== isBlocking) {
-          return false;
-        }
+      if (isCollapsed(element)) {
+
+        entries = filter(replaceOptions.TASK, function(entry) {
+
+          var target = entry.target,
+              definitionType = target.definitionType;
+
+          if (!canReplaceElementByTarget(element, target)) {
+            return false;
+          }
+
+          if (definitionType === definition.$type && !target.isCollapsed) {
+            return true;
+          }
+
+          return differentType(entry);
+
+        });
+
+        return this._createEntries(element, entries);
+
       }
 
-      return differentType(entry);
+    }
 
-    });
+    if (isEventListener(element)) {
 
-    return this._createEntries(element, entries);
+      entries = filter(replaceOptions.EVENT_LISTENER, differentType);
+      return this._createEntries(element, entries);
+
+    }
 
   }
 
 
-  if (is(definition, 'cmmn:EventListener')) {
-
-    entries = filter(replaceOptions.EVENT_LISTENER, differentType);
-    return this._createEntries(element, entries);
-
-  }
-
-
-  if (is(element, 'cmmn:Criterion')) {
+  if (isCriterion(element)) {
 
     entries = filter(replaceOptions.CRITERION, differentType);
     return this._createEntries(element, entries);
@@ -7910,14 +8989,13 @@ ReplaceMenuProvider.prototype.getEntries = function(element) {
 
 ReplaceMenuProvider.prototype.getHeaderEntries = function(element) {
 
-  var headerEntries = [],
-      definition = getDefinition(element);
+  var headerEntries = [];
 
-  if (is(definition, 'cmmn:Task')) {
+  if (isTask(element)) {
     headerEntries = headerEntries.concat(this._getBlockingEntry(element));
   }
 
-  if (is(definition, 'cmmn:Stage')) {
+  if (isStage(element)) {
     headerEntries = headerEntries.concat(this._getAutoCompleteEntry(element));
   }
 
@@ -8040,8 +9118,6 @@ ReplaceMenuProvider.prototype._getRuleEntries = function(element) {
 
   var self = this;
 
-  var definition = getDefinition(element);
-
   function toggleControlEntry(control, type) {
 
     return function(event, entry) {
@@ -8074,7 +9150,7 @@ ReplaceMenuProvider.prototype._getRuleEntries = function(element) {
     }
   ];
 
-  if (!is(definition, 'cmmn:Milestone')) {
+  if (!isMilestone(element)) {
 
     entries.push({
       id: 'toggle-manual-activation-rule',
@@ -8102,66 +9178,110 @@ module.exports = ReplaceMenuProvider;
 
 function ensureSupportRules(element) {
 
-  if (isCasePlanModel(element)) {
-    return false;
-  }
-
-  if (isAny(element, ['cmmn:Criterion', 'cmmn:CaseFileItem' ])) {
-    return false;
-  }
-
   var definition = getDefinition(element);
 
-  if (is(definition, 'cmmn:EventListener')) {
-    return false;
-  }
-
-  if (!is(definition, 'cmmn:Stage') && is(definition, 'cmmn:PlanFragment')) {
-    return false;
-  }
-
-  return true;
-
+  return !isCasePlanModel(element) && isAny(definition, [
+    'cmmn:Stage',
+    'cmmn:Milestone',
+    'cmmn:Task'
+  ]);
 }
 
-},{"243":243,"245":245,"35":35,"36":36,"48":48,"62":62}],44:[function(_dereq_,module,exports){
+function isPlanFragment(element) {
+  return is(getDefinition(element), 'cmmn:PlanFragment');
+}
+
+function isStage(element) {
+  return is(getDefinition(element), 'cmmn:Stage');
+}
+
+function isEventListener(element) {
+  return is(getDefinition(element), 'cmmn:EventListener');
+}
+
+function isMilestone(element) {
+  return is(getDefinition(element), 'cmmn:Milestone');
+}
+
+function isTask(element) {
+  return is(getDefinition(element), 'cmmn:Task');
+}
+
+function isCriterion(element) {
+  return is(element, 'cmmn:Criterion');
+}
+
+function isPlanItem(element) {
+  return is(element, 'cmmn:PlanItem');
+}
+
+},{"260":260,"262":262,"41":41,"42":42,"54":54,"68":68,"70":70}],50:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'replaceMenuProvider' ],
-  replaceMenuProvider: [ 'type', _dereq_(43) ]
+  replaceMenuProvider: [ 'type', _dereq_(49) ]
 };
-},{"43":43}],45:[function(_dereq_,module,exports){
+},{"49":49}],51:[function(_dereq_,module,exports){
 'use strict';
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var assign = _dereq_(372),
-    forEach = _dereq_(245);
+var assign = _dereq_(389),
+    forEach = _dereq_(262);
 
-var getVisual = _dereq_(212).getVisual;
+var getVisual = _dereq_(229).getVisual;
+
+var isItemCapable = _dereq_(42).isItemCapable;
+
+var ModelUtil = _dereq_(70),
+    getBusinessObject = ModelUtil.getBusinessObject,
+    getDefinition = ModelUtil.getDefinition;
 
 var LOW_PRIORITY = 250;
 
 function CmmnReplacePreview(
-  eventBus,
-  elementRegistry,
-  elementFactory,
-  canvas,
-  moveVisuals,
+  cmmnReplace,
   cmmnRules,
+  elementFactory,
+  elementRegistry,
+  eventBus,
   graphicsFactory
 ) {
-
-  this._cmmnRules = cmmnRules;
-
-  var self = this;
 
   CommandInterceptor.call(this, eventBus);
 
 
-  function createShape(element) {
-    return elementFactory.createShape(element);
+  function createShape(element, replacement) {
+
+    var newElement = {
+      type: replacement.newElementType,
+      x: element.x,
+      y: element.y,
+      width: element.width,
+      height: element.height
+    };
+
+    if (isItemCapable(element)) {
+
+      var bo = getBusinessObject(element),
+          definition = getDefinition(element),
+          newElementType = replacement.newElementType,
+          newDefinitionType = replacement.newDefinitionType,
+          replaceCandidate;
+
+      if (newDefinitionType) {
+        definition = cmmnReplace.replacePlanItemDefinition(definition, newDefinitionType);
+      }
+
+      replaceCandidate = cmmnReplace.replaceItemCapable(bo, newElementType, definition);
+
+      assign(newElement, {
+        businessObject: replaceCandidate
+      });
+    }
+
+    return elementFactory.createShape(newElement);
   }
 
 
@@ -8175,14 +9295,14 @@ function CmmnReplacePreview(
 
   function canReplace(event) {
     var context = event.context,
-        canExecute = context.canExecute;
+        canExecute = context.canExecute || context.allowed;
 
     if (canExecute === 'attach') {
       var position = context.position || { x: event.x, y: event.y },
           shapes = context.shapes || [ context.shape ],
           target = context.target;
 
-      canExecute = self._cmmnRules.canReplace(shapes, target, position);
+      canExecute = cmmnRules.canReplace(shapes, target, position, context.source);
     }
 
 
@@ -8195,188 +9315,165 @@ function CmmnReplacePreview(
    */
   function replaceVisualGraphics(gfx, shape) {
 
-    var dragger = gfx.select('.djs-dragger'),
-        visual = getVisual(gfx);
+    var visual = gfx && getVisual(gfx);
 
     if (visual) {
       visual.remove();
-      visual = dragger.group().addClass('djs-visual');    
+      visual = gfx.group().addClass('djs-visual');
       graphicsFactory.drawShape(visual, shape);
     }
 
   }
 
 
-  /**
-   * Replace the visuals of the element in the context which can be replaced
-   *
-   * @param  {Object} context
-   */
-  function replaceVisualOnCreate(context, replacements) {
-
-    var id = context.shape.id;
-
-    context.visualReplacements[id] = true;
-
-    var replacement = replacements[0],
-        newShape;
-
-    var newElement = {
-      type: replacement.newElementType
-    };
-
-    newShape = createShape(newElement);
-
-    replaceVisualGraphics(context.visual, newShape);
-
-  }
-
-  /**
-   * Restore the original visuals of the previously replaced element
-   *
-   * @param  {Object} context
-   */
-  function restoreVisualOnCreate(context) {
-
-    var shape = context.shape,
-        id = shape.id;
-
-    delete context.visualReplacements[id];
-
-    replaceVisualGraphics(context.visual, shape);
-  }
-
-
-  /**
-   * Replace the visuals of all elements in the context which can be replaced
-   *
-   * @param  {Object} context
-   */
-  function replaceVisualOnMove(context, replacements) {
+  function replaceVisual(context, replacements, gfxSelector) {
 
     forEach(replacements, function(replacement) {
 
-      var id = replacement.oldElementId;
-
-      var newElement = {
-        type: replacement.newElementType
-      };
+      var id = replacement.oldElementId,
+          shape = elementRegistry.get(id) || context.shape;
 
       // if the visual of the element is already replaced
       if (context.visualReplacements[id]) {
         return;
       }
 
-      var element = elementRegistry.get(id);
-
-      assign(newElement, { x: element.x, y: element.y });
-
       // create a temporary shape
-      var tempShape = createShape(newElement);
-
-      canvas.addShape(tempShape, element.parent);
+      var tempShape = createShape(shape, replacement);
 
       // select the original SVG element related to the element and hide it
-      var gfx = context.dragGroup.select('[data-element-id=' + element.id + ']');
+      var gfx = gfxSelector(shape);
 
-      if (gfx) {
-        gfx.attr({ display: 'none' });
-      }
+      replaceVisualGraphics(gfx, tempShape);
+      context.visualReplacements[id] = shape;
 
-      // clone the gfx of the temporary shape and add it to the drag group
-      var dragger = moveVisuals.addDragger(context, tempShape);
-
-      context.visualReplacements[id] = dragger;
-
-      canvas.removeShape(tempShape);
     });
+
   }
 
-
-  /**
-   * Restore the original visuals of the previously replaced elements
-   *
-   * @param  {Object} context
-   */
-  function restoreVisualOnMove(context) {
+  function restoreVisual(context, gfxSelector) {
 
     var visualReplacements = context.visualReplacements;
 
-    forEach(visualReplacements, function(dragger, id) {
+    forEach(visualReplacements, function(shape, id) {
 
-      var originalGfx = context.dragGroup.select('[data-element-id=' + id + ']');
+      var gfx = gfxSelector(shape);
+      replaceVisualGraphics(gfx, shape);
 
-      if (originalGfx) {
-        originalGfx.attr({ display: 'inline' });
-      }
+      delete visualReplacements[id];
 
-      dragger.remove();
-
-      if (visualReplacements[id]) {
-        delete visualReplacements[id];
-      }
     });
   }
 
 
-  var handler = {
-    replace: {
-      'create.move': replaceVisualOnCreate,
-      'shape.move.move': replaceVisualOnMove
-    },
-    restore: {
-      'create.move': restoreVisualOnCreate,
-      'shape.move.move': restoreVisualOnMove
-    }
-  };
+  eventBus.on([ 'shape.move.move', 'create.move' ], LOW_PRIORITY, function(event) {
 
-
-  eventBus.on([ 'create.move', 'shape.move.move' ], LOW_PRIORITY, function(event) {
-
-    var type = event.type,
-        context = event.context,
-        canExecute = canReplace(event);
+    var context = event.context,
+        dragGroup = context.dragGroup,
+        visual = context.visual,
+        canExecute = canReplace(event),
+        replacements = canExecute && canExecute.replacements;
 
     initVisualReplacements(context);
 
-    if (canExecute && canExecute.replacements) {
-      handler.replace[type](context, canExecute.replacements);
-    } else {
-      handler.restore[type](context);
+    var getGfx = function(shape) {
+      var selector,
+          gfx;
+
+      if (dragGroup) {
+        selector = '[data-element-id=' + shape.id + ']';
+        gfx = dragGroup;
+      }
+      else if (visual) {
+        selector = '.djs-dragger';
+        gfx = visual;
+      }
+
+      return gfx && gfx.select(selector);
+    };
+
+    if (replacements && replacements.length) {
+      replaceVisual(context, replacements, getGfx);
+    }
+    else {
+      restoreVisual(context, getGfx);
     }
 
   });
+
+
+  eventBus.on([
+    'bendpoint.move.move',
+    'connect.move'
+  ], LOW_PRIORITY, function(event) {
+
+    var context = event.context,
+        canExecute = canReplace(event),
+        replacements = canExecute && canExecute.replacements;
+
+    initVisualReplacements(context);
+
+    if (replacements && replacements.length) {
+      replaceVisual(context, replacements, function(shape) {
+        return elementRegistry.getGraphics(shape);
+      });
+    }
+
+  });
+
+
+  eventBus.on([
+    'bendpoint.move.cancel',
+    'bendpoint.move.cleanup',
+    'bendpoint.move.end',
+    'bendpoint.move.out',
+    'connect.cleanup',
+    'connect.end',
+    'connect.out'
+  ], LOW_PRIORITY, function(event) {
+
+    var context = event.context;
+
+    restoreVisual(context, function(shape) {
+      return elementRegistry.getGraphics(shape);
+    });
+
+  });
+
 }
 
 CmmnReplacePreview.$inject = [
-  'eventBus',
-  'elementRegistry',
-  'elementFactory',
-  'canvas',
-  'moveVisuals',
+  'cmmnReplace',
   'cmmnRules',
+  'elementFactory',
+  'elementRegistry',
+  'eventBus',
   'graphicsFactory'
 ];
 
 inherits(CmmnReplacePreview, CommandInterceptor);
 
 module.exports = CmmnReplacePreview;
-
-},{"212":212,"231":231,"245":245,"372":372,"90":90}],46:[function(_dereq_,module,exports){
+},{"229":229,"248":248,"262":262,"389":389,"42":42,"70":70,"98":98}],52:[function(_dereq_,module,exports){
 module.exports = {
-  __depends__: [ _dereq_(162) ],
+  __depends__: [ _dereq_(176) ],
   __init__: ['cmmnReplacePreview'],
-  cmmnReplacePreview: [ 'type', _dereq_(45) ]
+  cmmnReplacePreview: [ 'type', _dereq_(51) ]
 };
 
-},{"162":162,"45":45}],47:[function(_dereq_,module,exports){
+},{"176":176,"51":51}],53:[function(_dereq_,module,exports){
 'use strict';
 
-var is = _dereq_(62).is,
-    getDefinition = _dereq_(62).getDefinition;
+var ModelUtil = _dereq_(70),
+    is = ModelUtil.is,
+    getDefinition = ModelUtil.getDefinition,
+    isAutoComplete = ModelUtil.isAutoComplete;
 
-var isCollapsed = _dereq_(60).isCollapsed,
-    isPlanningTableCollapsed = _dereq_(60).isPlanningTableCollapsed;
+var isCollapsed = _dereq_(68).isCollapsed,
+    isPlanningTableCollapsed = _dereq_(68).isPlanningTableCollapsed;
+
+var isPlanningTableCapable = _dereq_(42).isPlanningTableCapable;
+var isItemCapable = _dereq_(42).isItemCapable;
 
 /**
  * This module takes care of replacing CMMN elements
@@ -8404,47 +9501,74 @@ function CmmnReplace(cmmnFactory, replace, selection, cmmnRules) {
 
     // TODO: need also to respect min/max Size
     var newElement = {
-      type: type,
-      width: element.width,
-      height: element.height
+      type: type
     };
 
-    if (is(oldBusinessObject, 'cmmn:Criterion')) {
+    if (isCriterion(oldBusinessObject)) {
       newBusinessObject = replaceCriterion(oldBusinessObject, type);
     }
 
-    if (is(oldBusinessObject, 'cmmn:PlanItem') || is(oldBusinessObject, 'cmmn:DiscretionaryItem')) {
+
+    if (isItemCapable(oldBusinessObject)) {
 
       var oldDefinition = getDefinition(oldBusinessObject),
           definitionType = target.definitionType,
-          newDefinition;
+          newDefinition = oldDefinition;
 
-      if (oldDefinition.$type === definitionType) {
-        newDefinition = oldDefinition;
-      }
-      else {
+
+      // replace plan item definition if necessary
+      if (oldDefinition.$type !== definitionType) {
         newDefinition = replacePlanItemDefinition(oldDefinition, definitionType);
       }
       
+
+      // replace plan/discretionary item
       newBusinessObject = replaceItemCapable(oldBusinessObject, type, newDefinition);
 
-      if (is(newDefinition, 'cmmn:PlanFragment')) {
+
+      // handle isCollapsed property
+      if (isPlanFragment(oldDefinition) && isPlanFragment(newDefinition) && target.isCollapsed !== false) {
         newElement.isCollapsed = isCollapsed(oldBusinessObject);
       }
 
-      if (is(newDefinition, 'cmmn:HumanTask') || is(newDefinition, 'cmmn:Stage')) {
+
+      // switch collapsed/expanded plan fragment
+      if (isTask(oldDefinition) && target.isCollapsed === true) {
+        newElement.isCollapsed = true;
+      }
+
+      if (isTask(newDefinition) && target.isBlocking === false) {
+        newElement.isBlocking = false;
+      }
+
+
+      // handle isPlanningTableCollapsed property
+      if (isPlanningTableCapable(oldDefinition) && isPlanningTableCapable(newDefinition)) {
         newElement.isPlanningTableCollapsed = isPlanningTableCollapsed(oldBusinessObject);
       }
 
+
+      // handle autoComplete property
+      if (isStage(oldDefinition) && isStage(newDefinition)) {
+        newElement.autoComplete = isAutoComplete(oldBusinessObject);
+      }
+
+
+      // TODO: need also to respect min/max Size
+      // copy size, from an expanded plan fragment to an expanded alternative plan fragment
+      // except cmmn:Task, because Task is always expanded
+      if (!isCollapsed(oldBusinessObject) && !target.isCollapsed &&  !isTask(oldDefinition)) {
+        newElement.width = element.width;
+        newElement.height = element.height;
+      }
     }
 
-    if (!newBusinessObject) {
-      newBusinessObject = cmmnFactory.create(type);
-    }
+    // create new business object if necessary
+    newElement.businessObject = newBusinessObject || cmmnFactory.create(type);
 
-    newElement.businessObject = newBusinessObject;
-
+    // trigger replacement
     newElement = replace.replaceElement(element, newElement, hints);
+
 
     if (hints.select !== false) {
       selection.select(newElement);
@@ -8516,7 +9640,7 @@ function CmmnReplace(cmmnFactory, replace, selection, cmmnRules) {
       name: definition.name
     });
 
-    if (!is(newDefinition, 'cmmn:EventListener')) {
+    if (isPlanItemControlCapable(newDefinition) && definition.defaultControl) {
       
       var defaultControl = replacePlanItemControl(definition.defaultControl, newDefinition);
 
@@ -8525,7 +9649,11 @@ function CmmnReplace(cmmnFactory, replace, selection, cmmnRules) {
 
     }
 
-    if (is(newDefinition, 'cmmn:Task')) {
+    if (isStage(newDefinition) && definition.autoComplete) {
+      newDefinition.autoComplete = definition.autoComplete;
+    }
+
+    if (isTask(definition) && isTask(newDefinition)) {
       newDefinition.isBlocking = definition.isBlocking;
     }
 
@@ -8546,7 +9674,7 @@ function CmmnReplace(cmmnFactory, replace, selection, cmmnRules) {
       definitionRef: definition
     });
 
-    if (!is(getDefinition(newItem), 'cmmn:EventListener')) {
+    if (isPlanItemControlCapable(newItem) && item.itemControl) {
       
       var itemControl = replacePlanItemControl(item.itemControl, newItem);
 
@@ -8661,7 +9789,35 @@ CmmnReplace.$inject = [ 'cmmnFactory', 'replace', 'selection', 'cmmnRules' ];
 
 module.exports = CmmnReplace;
 
-},{"60":60,"62":62}],48:[function(_dereq_,module,exports){
+function isInstanceOf(element, type) {
+  element = getDefinition(element);
+  return is(element, type);
+}
+
+function isTask(element) {
+  return isInstanceOf(element, 'cmmn:Task');
+}
+
+function isMilestone(element) {
+  return isInstanceOf(element, 'cmmn:Milestone');
+}
+
+function isPlanFragment(element) {
+  return isInstanceOf(element, 'cmmn:PlanFragment');
+}
+
+function isStage(element) {
+  return isInstanceOf(element, 'cmmn:Stage');
+}
+
+function isCriterion(element) {
+  return is(element, 'cmmn:Criterion');
+}
+
+function isPlanItemControlCapable(element) {
+  return isTask(element) || isStage(element) || isMilestone(element);
+}
+},{"42":42,"68":68,"70":70}],54:[function(_dereq_,module,exports){
 'use strict';
 
 
@@ -8723,6 +9879,26 @@ module.exports.TASK = [
     }
   },
   {
+    label: 'Stage (collapsed)',
+    actionName: 'replace-with-collapsed-stage-plan-item',
+    className: 'cmmn-icon-stage-collapsed',
+    target: {
+      definitionType: 'cmmn:Stage',
+      type: 'cmmn:PlanItem',
+      isCollapsed: true
+    }
+  },
+  {
+    label: 'Stage (expanded)',
+    actionName: 'replace-with-expanded-stage-plan-item',
+    className: 'cmmn-icon-stage-expanded',
+    target: {
+      definitionType: 'cmmn:Stage',
+      type: 'cmmn:PlanItem',
+      isCollapsed: false
+    }
+  },
+  {
     label: 'Discretionary Task',
     actionName: 'replace-with-task-discretionary-item',
     className: 'cmmn-icon-task-discretionary',
@@ -8777,9 +9953,84 @@ module.exports.TASK = [
       definitionType: 'cmmn:CaseTask',
       type: 'cmmn:DiscretionaryItem'
     }
+  },
+  {
+    label: 'Discretionary Stage (collapsed)',
+    actionName: 'replace-with-collapsed-stage-discretionary-item',
+    className: 'cmmn-icon-stage-collapsed-discretionary',
+    target: {
+      definitionType: 'cmmn:Stage',
+      type: 'cmmn:DiscretionaryItem',
+      isCollapsed: true
+    }
+  },
+  {
+    label: 'Discretionary Stage (expanded)',
+    actionName: 'replace-with-expanded-stage-discretionary-item',
+    className: 'cmmn-icon-stage-expanded-discretionary',
+    target: {
+      definitionType: 'cmmn:Stage',
+      type: 'cmmn:DiscretionaryItem',
+      isCollapsed: false
+    }
+  },
+  {
+    label: 'Discretionary Plan Fragment (collapsed)',
+    actionName: 'replace-with-collapsed-plan-fragment-discretionary-item',
+    className: 'cmmn-icon-plan-fragment-collapsed-discretionary',
+    target: {
+      definitionType: 'cmmn:PlanFragment',
+      type: 'cmmn:DiscretionaryItem',
+      isCollapsed: true
+    }
+  },
+  {
+    label: 'Discretionary Plan Fragment (expanded)',
+    actionName: 'replace-with-expanded-plan-fragment-discretionary-item',
+    className: 'cmmn-icon-plan-fragment-expanded-discretionary',
+    target: {
+      definitionType: 'cmmn:PlanFragment',
+      type: 'cmmn:DiscretionaryItem',
+      isCollapsed: false
+    }
   }
 ];
 
+
+module.exports.PLAN_FRAGMENT_EXPANDED = [
+  {
+    label: 'Stage',
+    actionName: 'replace-with-stage-plan-item',
+    className: 'cmmn-icon-stage-expanded',
+    target: {
+      definitionType: 'cmmn:Stage',
+      type: 'cmmn:PlanItem',
+      isCollapsed: false
+    }
+  },
+  {
+    label: 'Discretionary Stage',
+    actionName: 'replace-with-stage-discretionary-item',
+    className: 'cmmn-icon-stage-expanded-discretionary',
+    target: {
+      definitionType: 'cmmn:Stage',
+      type: 'cmmn:DiscretionaryItem',
+      isCollapsed: false
+    }
+  },
+  {
+    label: 'Discretionary Plan Fragment',
+    actionName: 'replace-with-plan-fragment-discretionary-item',
+    className: 'cmmn-icon-plan-fragment-expanded-discretionary',
+    target: {
+      definitionType: 'cmmn:PlanFragment',
+      type: 'cmmn:DiscretionaryItem',
+      isCollapsed: false
+    }
+  },
+
+
+];
 
 module.exports.EVENT_LISTENER = [
   {
@@ -8830,46 +10081,47 @@ module.exports.CRITERION = [
     }
   }
 ];
-},{}],49:[function(_dereq_,module,exports){
+},{}],55:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(171),
-    _dereq_(173),
-    _dereq_(185)
+    _dereq_(185),
+    _dereq_(187),
+    _dereq_(201)
   ],
-  cmmnReplace: [ 'type', _dereq_(47) ]
+  cmmnReplace: [ 'type', _dereq_(53) ]
 };
-},{"171":171,"173":173,"185":185,"47":47}],50:[function(_dereq_,module,exports){
+},{"185":185,"187":187,"201":201,"53":53}],56:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var any = _dereq_(241);
-var forEach = _dereq_(245);
+var any = _dereq_(258);
+var forEach = _dereq_(262);
+var assign = _dereq_(389);
 
-var ModelUtil = _dereq_(62),
+var ModelUtil = _dereq_(70),
     is = ModelUtil.is,
     isCasePlanModel = ModelUtil.isCasePlanModel,
     getDefinition = ModelUtil.getDefinition,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var isCollapsed = _dereq_(60).isCollapsed;
+var isCollapsed = _dereq_(68).isCollapsed;
 
-var getParents = _dereq_(35).getParents;
+var getParents = _dereq_(41).getParents;
 
-var ModelingUtil = _dereq_(35),
+var ModelingUtil = _dereq_(41),
     isSame = ModelingUtil.isSame,
     isSameCase = ModelingUtil.isSameCase,
     getParent = ModelingUtil.getParent;
 
-var PlanItemDefinitionUtil = _dereq_(36),
+var PlanItemDefinitionUtil = _dereq_(42),
     isDiscretionaryToHumanTask = PlanItemDefinitionUtil.isDiscretionaryToHumanTask,
     isHumanTask = PlanItemDefinitionUtil.isHumanTask,
     isDiscretionaryItem = PlanItemDefinitionUtil.isDiscretionaryItem;
 
-var isCriterionAttachment = _dereq_(53).getCriterionAttachment;
+var isCriterionAttachment = _dereq_(61).getCriterionAttachment;
 
-var RuleProvider = _dereq_(179);
+var RuleProvider = _dereq_(193);
 
 
 /**
@@ -8890,39 +10142,108 @@ CmmnRules.prototype.init = function() {
   var self = this;
 
   this.addRule('connection.create', function(context) {
-    var source = context.source,
-        target = context.target;
 
-    return self.canConnect(source, target);
+    var source = context.source,
+        target = context.target,
+        allowed = false;
+
+    allowed = self.canConnect(source, target) ||
+              self.canReplaceConnectionEnd(source, target, 'target');
+
+    if (!allowed) {
+
+      allowed = self.canConnect(target, source) ||
+                   self.canReplaceConnectionEnd(target, source, 'source');
+
+      if (allowed) {
+        assign(allowed, {
+          reverse: true
+        });
+      }
+
+    }
+
+    return allowed;
+
   });
 
   this.addRule('connection.reconnectStart', function(context) {
 
     var connection = context.connection,
-        source = context.hover || context.source,
-        target = connection.target;
+        hover = context.hover,
+        source = hover || context.source,
+        target = connection.target,
+        allowed = false;
 
-    return self.canConnect(source, target, connection);
+    allowed = self.canConnect(source, target, connection);
+
+    if (!allowed && hover) {
+
+      allowed = self.canReplaceConnectionEnd(hover, target, 'source');
+
+      if (!allowed) {
+
+        allowed = self.canConnect(target, hover, connection) ||
+                  self.canReplaceConnectionEnd(target, hover, 'target');
+
+        if (allowed) {
+          assign(allowed, {
+            reverse: true
+          });
+        }
+
+      }
+
+    }
+
+    return allowed;
+
   });
 
   this.addRule('connection.reconnectEnd', function(context) {
 
     var connection = context.connection,
         source = connection.source,
-        target = context.hover || context.target;
+        hover = context.hover,
+        target = hover || context.target,
+        allowed = false;
 
-    return self.canConnect(source, target, connection);
+    allowed = self.canConnect(source, target, connection);
+
+    if (!allowed && hover) {
+
+      allowed = self.canReplaceConnectionEnd(source, hover, 'target');
+
+      if (!allowed) {
+
+        allowed = self.canConnect(hover, source, connection) ||
+                  self.canReplaceConnectionEnd(hover, source, 'source');
+
+        if (allowed) {
+          assign(allowed, {
+            reverse: true
+          });
+        }
+
+      }
+
+    }
+
+    return allowed;
+
   });
 
-  this.addRule('shape.create', function(context) {
+  this.addRule([ 'shape.create', 'shape.append' ], function(context) {
 
     var target = context.target,
         shape = context.shape,
         source = context.source,
-        position = context.position;
+        position = context.position,
+        shapes = [ shape ];
 
-    return self.canAttach([ shape ], target, source, position) ||
-           self.canDrop(shape, target);
+    return self.canAttach(shapes, target, source, position) ||
+           self.canCreate(shape, target, source, position) ||
+           self.canReplace(shapes, target, position, source);
 
   });
 
@@ -8940,15 +10261,14 @@ CmmnRules.prototype.init = function() {
         position = context.position;
 
     return self.canAttach(shapes, target, null, position) ||
-           self.canReplace(shapes, target, position) ||
-           self.canMove(shapes, target, position);
+           self.canMove(shapes, target, position) ||
+           self.canReplace(shapes, target, position);
   });
 
   this.addRule('shape.replace', function(context) {
 
     var element = context.element,
-        host,
-        definition;
+        host;
 
     if (isCriterion(element)) {
 
@@ -8958,8 +10278,11 @@ CmmnRules.prototype.init = function() {
         return false;
       }
 
-      definition = getDefinition(host);
-      if (is(definition, 'cmmn:Task') && !definition.isBlocking) {
+      if (isTask(host) && !isBlocking(host)) {
+        return false;
+      }
+
+      if (isMilestone(host) || isEventListener(host)) {
         return false;
       }
 
@@ -8979,15 +10302,75 @@ CmmnRules.prototype.canMove = function(elements, target) {
   }
 
   return elements.every(function(element) {
+
+    if (isDiscretionaryItem(element)) {
+      if (!self.canMoveDiscretionaryItem(element, elements, target)) {
+        return false;
+      }
+    }
+
     return self.canDrop(element, target);
   });
 
 };
 
 
+CmmnRules.prototype.canMoveDiscretionaryItem = function(element, elements, target) {
+
+  return !isPlanFragment(target) || any(element.incoming, function(connection) {
+    var source = connection.source;
+    if (isDiscretionaryConnection(connection)) {
+      return isParent(target, source) || elements.indexOf(source) !== -1;
+    }
+  });
+
+};
+
+CmmnRules.prototype.canCreate = function(shape, target, source, position) {
+
+  var self = this;
+
+  if (!target) {
+    return false;
+  }
+
+  if (isLabel(target)) {
+    return null;
+  }
+
+  if (isSame(source, target)) {
+    return false;
+  }
+
+  // ensure we do not drop the element
+  // into source
+  if (source && isParent(source, target)) {
+    return false;
+  }
+
+  if (isDiscretionaryItem(shape)) {
+    if (!self.canCreateDiscretionaryItem(shape, target, source)) {
+      return false;
+    }
+  }
+
+  return self.canDrop(shape, target, position);
+
+};
+
+CmmnRules.prototype.canCreateDiscretionaryItem = function(shape, target, source) {
+  return !isPlanFragment(target) || isParent(target, source);
+};
+
+
 CmmnRules.prototype.canDrop = function(element, target) {
 
-  if (isTextAnnotation(element)) {
+  // can move labels everywhere
+  if (isLabel(element) && !isConnection(target)) {
+    return true;
+  }
+
+  if (isArtifact(element)) {
 
     return is(target, 'cmmndi:CMMNDiagram') ||
            isPlanFragment(target, true);
@@ -9057,7 +10440,9 @@ CmmnRules.prototype.canConnect = function(source, target, connection) {
     };
   }
 
-  if (is(connection, 'cmmn:Association') && this.canConnectAssociation(source, target)) {
+  if (connection &&
+      is(connection.businessObject.cmmnElementRef, 'cmmn:Association') &&
+      this.canConnectAssociation(source, target)) {
 
     return {
       type: 'cmmn:Association'
@@ -9078,6 +10463,10 @@ CmmnRules.prototype.canConnect = function(source, target, connection) {
 CmmnRules.prototype.canConnectDiscretionaryConnection = function(source, target, connection) {
 
   if (!isHumanTask(getDefinition(source))) {
+    return false;
+  }
+
+  if (!isBlocking(source)) {
     return false;
   }
 
@@ -9134,7 +10523,19 @@ CmmnRules.prototype.canConnectPlanItemOnPartConnection = function(source, target
     source = source.host;
   }
 
-  return is(source, 'cmmn:PlanItem') && isCriterion(target);
+  if (isSame(source, target.host)) {
+    return false;
+  }
+
+  if (isParent(source, target.host)) {
+    return false;
+  }
+
+  if (isEntryCriterion(target) && isParent(target.host, source)) {
+    return false;
+  }
+
+  return isPlanItem(source) && isCriterion(target);
 };
 
 
@@ -9159,12 +10560,13 @@ CmmnRules.prototype.canConnectAssociation = function(source, target) {
 
 CmmnRules.prototype.canAttach = function(elements, target, source, position) {
 
-  if (!Array.isArray(elements)) {
-    elements = [ elements ];
+  if (isSame(source, target)) {
+    return false;
   }
 
-  if (source) {
-    return false;
+
+  if (!Array.isArray(elements)) {
+    elements = [ elements ];
   }
 
   // only (re-)attach one element at a time
@@ -9189,11 +10591,85 @@ CmmnRules.prototype.canAttach = function(elements, target, source, position) {
     return true;
   }
 
-  // disallow drop criterion on another criterion
+  if (!this.canAttachCriterion(element, target, position, source)) {
+    return false;
+  }
+
+  return 'attach';
+
+};
+
+
+CmmnRules.prototype.canAttachEntryCriterion = function(element, target, position, source) {
+
+  if (!this.canAttachCriterion(element, target, position, source)) {
+    return false;
+  }
+
+  if (source && isParent(target, source)) {
+    return false;
+  }
+
+  // disallow drop entry criterion...
+
+  // ... on case plan model
+  if (isCasePlanModel(target)) {
+    return false;
+  }
+
+  if (isPlanFragment(target, true)) {
+
+    // ... when element has an incoming connection which source
+    // is a child of the target
+    return !any(element.incoming, function(connection) {
+      if (is(connection.businessObject.cmmnElementRef, 'cmmn:PlanItemOnPart')) {
+        return isParent(target, connection.source);
+      }
+    });
+
+  }
+
+  return true;
+};
+
+
+CmmnRules.prototype.canAttachExitCriterion = function(element, target, position, source) {
+
+  if (!this.canAttachCriterion(element, target, position, source)) {
+    return false;
+  }
+
+  // disallow drop exit criterion...
+
+  // ... on milestone
+  if (isMilestone(target)) {
+    return false;
+  }
+
+  // ... on non blocking task
+  if (isTask(target) && !isBlocking(target)) {
+    return false;
+  }
+
+  return true;
+
+};
+
+
+CmmnRules.prototype.canAttachCriterion = function(element, target, position, source) {
+
+  if (source && isParent(source, target)) {
+    return false;
+  }
+
+  // disallow drop criterion...
+
+  // ... on another criterion
   if (isCriterion(target)) {
     return false;
   }
 
+  // ... on event listener
   if (isEventListener(target)) {
     return false;
   }
@@ -9204,30 +10680,13 @@ CmmnRules.prototype.canAttach = function(elements, target, source, position) {
     return false;
   }
 
-  // only attach to border
-  if (position && !isCriterionAttachment(position, target)) {
+  // ... on a text annotation
+  if (isTextAnnotation(target)) {
     return false;
   }
 
-  return 'attach';
-};
-
-
-CmmnRules.prototype.canAttachEntryCriterion = function(target, position) {
-  // disallow drop entry criterion...
-
-  // ... on case plan model
-  if (isCasePlanModel(target)) {
-    return false;
-  }
-
-  // ... on event listener
-  if (isEventListener(target)) {
-    return false;
-  }
-
-  // ... plan fragment
-  if (isPlanFragment(target)) {
+  // ... on a case file item
+  if (isCaseFileItem(target)) {
     return false;
   }
 
@@ -9241,42 +10700,13 @@ CmmnRules.prototype.canAttachEntryCriterion = function(target, position) {
 };
 
 
-CmmnRules.prototype.canAttachExitCriterion = function(target, position) {
-  // disallow drop exit criterion...
-
-  // ... on event listener
-  if (isEventListener(target)) {
-    return false;
-  }
-
-  // ... on milestone
-  if (isMilestone(target)) {
-    return false;
-  }
-
-  // ... on non blocking task
-  if (isTask(target) && !getDefinition(target).isBlocking) {
-    return false;
-  }
-
-  // ... plan fragment
-  if (isPlanFragment(target)) {
-    return false;
-  }
-
-  // only attach to border
-  if (position && !isCriterionAttachment(position, target)) {
-    return false;
-  }
-
-  return true;
-
-};
-
-
-CmmnRules.prototype.canReplace = function(elements, target, position) {
+CmmnRules.prototype.canReplace = function(elements, target, position, source) {
 
   if (!target) {
+    return false;
+  }
+
+  if (isSame(source, target)) {
     return false;
   }
 
@@ -9288,8 +10718,8 @@ CmmnRules.prototype.canReplace = function(elements, target, position) {
 
   forEach(elements, function(element) {
 
-    if (isEntryCriterion(element) && !self.canAttachEntryCriterion(target, position)) {
-      if (self.canAttachExitCriterion(target, position)) {
+    if (isEntryCriterion(element) && !self.canAttachEntryCriterion(element, target, position, source)) {
+      if (self.canAttachExitCriterion(element, target, position, source)) {
         canExecute.replacements.push({
           oldElementId: element.id,
           newElementType: 'cmmn:ExitCriterion'
@@ -9297,13 +10727,33 @@ CmmnRules.prototype.canReplace = function(elements, target, position) {
       }
     }
 
-    if (isExitCriterion(element) && !self.canAttachExitCriterion(target, position)) {
-      if (self.canAttachEntryCriterion(target, position)) {
+    if (isExitCriterion(element) && !self.canAttachExitCriterion(element, target, position, source)) {
+      if (self.canAttachEntryCriterion(element, target, position, source)) {
         canExecute.replacements.push({
           oldElementId: element.id,
           newElementType: 'cmmn:EntryCriterion'
         });
       }
+    }
+
+    if (isPlanFragment(target) &&
+        isDiscretionaryItem(element) &&
+        self.canDrop(element, target) &&
+        !self.canMoveDiscretionaryItem(element, elements, target)) {
+
+      var replacement = {
+        oldElementId: element.id,
+        newElementType: 'cmmn:PlanItem',
+      };
+
+      if (isPlanFragment(element)) {
+        assign(replacement, {
+          newDefinitionType: 'cmmn:Stage'
+        });
+      }
+
+      canExecute.replacements.push(replacement);
+
     }
 
   });
@@ -9312,36 +10762,171 @@ CmmnRules.prototype.canReplace = function(elements, target, position) {
 };
 
 
+CmmnRules.prototype.canReplaceConnectionEnd = function(source, target, side) {
+
+  if (!source || !target) {
+    return false;
+  }
+
+  if (isSame(source, target)) {
+    return false;
+  }
+
+  if (!isSameCase(source, target)) {
+    return false;
+  }
+
+  return side === 'source' ? this.canReplaceSource(source, target) : this.canReplaceTarget(source, target);
+
+};
+
+
+CmmnRules.prototype.canReplaceSource = function(source, target) {
+
+  if (isDiscretionaryItem(source) && isCriterion(target)) {
+
+    if (isSame(source, target.host)) {
+      return false;
+    }
+
+    if (isPlanFragment(source)) {
+      return false;
+    }
+
+    if (isParent(source, target.host)) {
+      return false;
+    }
+
+    if (isEntryCriterion(target) && isParent(target.host, source)) {
+      return false;
+    }
+
+    return {
+      type: 'cmmn:PlanItemOnPart',
+      isStandardEventVisible: true,
+      replacements: [{
+        oldElementId: source.id,
+        newElementType: 'cmmn:PlanItem'
+      }]
+    };
+
+  }
+
+
+  if (isEntryCriterion(source) && isEntryCriterion(target)) {
+
+    if (isSame(source.host, target.host)) {
+      return false;
+    }
+
+    if (isParent(target.host, source.host) ||
+        isParent(source.host, target.host)) {
+      return false;
+    }
+
+    if (hasIncomingOnPartConnections(source)) {
+      return false;
+    }
+
+    if (!this.canAttachExitCriterion(source, source.host)) {
+      return false;
+    }
+
+    return {
+      type: 'cmmn:PlanItemOnPart',
+      isStandardEventVisible: true,
+      replacements: [{
+        oldElementId: source.id,
+        newElementType: 'cmmn:ExitCriterion'
+      }]
+    };
+
+  }
+
+  return false;
+
+};
+
+
+CmmnRules.prototype.canReplaceTarget = function(source, target) {
+
+  if (isHumanTask(getDefinition(source)) && isPlanItem(target)) {
+
+    if (!isBlocking(source)) {
+      return false;
+    }
+
+    if (isEventListener(target) || isMilestone(target)) {
+      return false;
+    }
+
+    if (isSameDefinition(source, target)) {
+      return false;
+    }
+
+    if (!isSameParent(source, target)) {
+      return false;
+    }
+
+    return {
+      type: 'cmmndi:CMMNEdge',
+      replacements: [{
+        oldElementId: target.id,
+        newElementType: 'cmmn:DiscretionaryItem'
+      }]
+    };
+
+  }
+
+  if ((isPlanItem(source) || isExitCriterion(source)) && isEntryCriterion(target)) {
+
+    if (isSame(source.host || source, target.host)) {
+      return false;
+    }
+
+    if (!isParent(target.host, source.host || source)) {
+      return false;
+    }
+
+    if (hasIncomingOnPartConnections(target)) {
+      return false;
+    }
+
+    if (!this.canAttachExitCriterion(target, target.host)) {
+      return false;
+    }
+
+    return {
+      type: 'cmmn:PlanItemOnPart',
+      isStandardEventVisible: true,
+      replacements: [{
+        oldElementId: target.id,
+        newElementType: 'cmmn:ExitCriterion'
+      }]
+    };
+
+  }
+
+  return false;
+
+};
+
+
 CmmnRules.prototype.canSetRepetitionRule = function(element) {
-
-  element = getDefinition(element) || element;
-  return canSetDefaultControls(element);
-
+  return isPlanItemControlCapable(element);
 };
 
 
 CmmnRules.prototype.canSetRequiredRule = function(element) {
-
-  element = getDefinition(element) || element;
-  return canSetDefaultControls(element);
-
+  return isPlanItemControlCapable(element);
 };
 
 
 CmmnRules.prototype.canSetManualActivationRuleRule = function(element) {
-
-  element = getDefinition(element) || element;
-
-  if (canSetDefaultControls(element)) {
-
-    if (isMilestone(element)) {
-      return false;
-    }
-
+  if (isMilestone(element)) {
+    return false;
   }
-
-  return true;
-
+  return isPlanItemControlCapable(element);
 };
 
 
@@ -9354,8 +10939,8 @@ function isParent(possibleParent, element) {
   return allParents.indexOf(possibleParent) !== -1;
 }
 
-function canSetDefaultControls(definition) {
-  return !is(definition, 'cmmn:EventListener');
+function isPlanItemControlCapable(element) {
+  return isTask(element) || isMilestone(element) || is(getDefinition(element), 'cmmn:Stage');
 }
 
 function nonExistantOrLabel(element) {
@@ -9389,6 +10974,16 @@ function isDiscretionaryConnection(connection) {
   return !connection.businessObject.cmmnElementRef;
 }
 
+function hasIncomingOnPartConnections(target) {
+  return any(target.incoming, function(con) {
+    return isOnPartConnection(con);
+  });
+}
+
+function isOnPartConnection(connection) {
+  return is(connection.businessObject.cmmnElementRef, 'cmmn:OnPart');
+}
+
 function isPlanFragment(element, isStage) {
   var definition = getDefinition(element) || element;
 
@@ -9415,6 +11010,11 @@ function isTask(element) {
   return is(getDefinition(element), 'cmmn:Task');
 }
 
+function isBlocking(element) {
+  element = getDefinition(element);
+  return !!(element && element.isBlocking);
+}
+
 function isCriterion(element) {
   return is(element, 'cmmn:Criterion');
 }
@@ -9427,6 +11027,13 @@ function isExitCriterion(element) {
   return is(element, 'cmmn:ExitCriterion');
 }
 
+function isArtifact(element) {
+  if (isConnection(element)) {
+    element = element.businessObject.cmmnElementRef;
+  }
+  return is(element, 'cmmn:Artifact');
+}
+
 function isTextAnnotation(element) {
   return is(element, 'cmmn:TextAnnotation');
 }
@@ -9434,30 +11041,181 @@ function isTextAnnotation(element) {
 function isCaseFileItem(element) {
   return is(element, 'cmmn:CaseFileItem');
 }
-},{"179":179,"231":231,"241":241,"245":245,"35":35,"36":36,"53":53,"60":60,"62":62}],51:[function(_dereq_,module,exports){
+
+function isPlanItem(element) {
+  return is(element, 'cmmn:PlanItem');
+}
+
+function isSameParent(a, b) {
+  return isSame(getParent(a), getParent(b));
+}
+
+function isSameDefinition(a, b) {
+  return isSame(getDefinition(a), getDefinition(b));
+}
+
+},{"193":193,"248":248,"258":258,"262":262,"389":389,"41":41,"42":42,"61":61,"68":68,"70":70}],57:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(181)
+    _dereq_(195)
   ],
   __init__: [ 'cmmnRules' ],
-  cmmnRules: [ 'type', _dereq_(50) ]
+  cmmnRules: [ 'type', _dereq_(56) ]
 };
-},{"181":181,"50":50}],52:[function(_dereq_,module,exports){
+},{"195":195,"56":56}],58:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var map = _dereq_(264),
+    filter = _dereq_(260),
+    sortBy = _dereq_(268);
 
-var is = _dereq_(62).is,
-    isCasePlanModel = _dereq_(62).isCasePlanModel,
-    getDefinition = _dereq_(62).getDefinition,
-    isCollapsed = _dereq_(60).isCollapsed;
+var labelUtil = _dereq_(16);
 
-var Snapping = _dereq_(188);
+
+/**
+ * Provides ability to search through CMMN elements
+ */
+function CmmnSearchProvider(elementRegistry, searchPad, canvas) {
+
+  this._elementRegistry = elementRegistry;
+  this._canvas = canvas;
+
+  searchPad.registerProvider(this);
+}
+
+module.exports = CmmnSearchProvider;
+
+CmmnSearchProvider.$inject = [
+  'elementRegistry',
+  'searchPad',
+  'canvas'
+];
+
+
+/**
+ * Finds all elements that match given pattern
+ *
+ * <Result> :
+ *  {
+ *    primaryTokens: <Array<Token>>,
+ *    secondaryTokens: <Array<Token>>,
+ *    element: <Element>
+ *  }
+ *
+ * <Token> :
+ *  {
+ *    normal|matched: <String>
+ *  }
+ *
+ * @param  {String} pattern
+ * @return {Array<Result>}
+ */
+CmmnSearchProvider.prototype.find = function(pattern) {
+  var rootElement = this._canvas.getRootElement();
+
+  var elements = this._elementRegistry.filter(function(element) {
+    if (element.labelTarget) {
+      return false;
+    }
+    return true;
+  });
+
+  // do not include root element
+  elements = filter(elements, function(element) {
+    return element !== rootElement;
+  });
+
+  elements = map(elements, function(element) {
+    return {
+      primaryTokens: matchAndSplit(labelUtil.getLabel(element), pattern),
+      secondaryTokens: matchAndSplit(element.id, pattern),
+      element: element
+    };
+  });
+
+  // exclude non-matched elements
+  elements = filter(elements, function(element) {
+    return hasMatched(element.primaryTokens) || hasMatched(element.secondaryTokens);
+  });
+
+  elements = sortBy(elements, function(element) {
+    return labelUtil.getLabel(element.element) + element.element.id;
+  });
+
+  return elements;
+};
+
+
+function hasMatched(tokens) {
+  var matched = filter(tokens, function(t){
+    return !!t.matched;
+  });
+
+  return matched.length > 0;
+}
+
+
+function matchAndSplit(text, pattern) {
+  var tokens = [],
+      originalText = text;
+
+  if (!text) {
+    return tokens;
+  }
+
+  text = text.toLowerCase();
+  pattern = pattern.toLowerCase();
+
+  var i = text.indexOf(pattern);
+
+  if (i > -1) {
+    if (i !== 0) {
+      tokens.push({
+        normal: originalText.substr(0, i)
+      });
+    }
+
+    tokens.push({
+      matched: originalText.substr(i, pattern.length)
+    });
+
+    if (pattern.length + i < text.length) {
+      tokens.push({
+        normal: originalText.substr(pattern.length + i, text.length)
+      });
+    }
+  } else {
+    tokens.push({
+      normal: originalText
+    });
+  }
+
+  return tokens;
+}
+},{"16":16,"260":260,"264":264,"268":268}],59:[function(_dereq_,module,exports){
+module.exports = {
+  __depends__: [
+    _dereq_(197)
+  ],
+  __init__: [ 'cmmnSearch'],
+  cmmnSearch: [ 'type', _dereq_(58) ]
+};
+
+},{"197":197,"58":58}],60:[function(_dereq_,module,exports){
+'use strict';
+
+var inherits = _dereq_(248);
+
+var is = _dereq_(70).is,
+    getDefinition = _dereq_(70).getDefinition,
+    isCollapsed = _dereq_(68).isCollapsed;
+
+var Snapping = _dereq_(204);
 
 var SLIGHTLY_HIGHER_PRIORITY = 1001;
 
 function isStage(element) {
-  return !!(isCasePlanModel(element) || is(getDefinition(element), 'cmmn:Stage'));
+  return is(getDefinition(element), 'cmmn:PlanFragment');
 }
 
 
@@ -9494,11 +11252,11 @@ CmmnSnapping.$inject = [ 'eventBus', 'canvas' ];
 
 module.exports = CmmnSnapping;
 
-},{"188":188,"231":231,"60":60,"62":62}],53:[function(_dereq_,module,exports){
+},{"204":204,"248":248,"68":68,"70":70}],61:[function(_dereq_,module,exports){
 
 'use strict';
 
-var getOrientation = _dereq_(196).getOrientation;
+var getOrientation = _dereq_(213).getOrientation;
 
 
 function getCriterionAttachment(position, targetBounds) {
@@ -9513,25 +11271,25 @@ function getCriterionAttachment(position, targetBounds) {
 }
 
 module.exports.getCriterionAttachment = getCriterionAttachment;
-},{"196":196}],54:[function(_dereq_,module,exports){
+},{"213":213}],62:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'snapping' ],
-  snapping: [ 'type', _dereq_(52) ]
+  snapping: [ 'type', _dereq_(60) ]
 };
-},{"52":52}],55:[function(_dereq_,module,exports){
+},{"60":60}],63:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    map = _dereq_(247);
+var assign = _dereq_(389),
+    map = _dereq_(264);
 
-var LabelUtil = _dereq_(61);
+var LabelUtil = _dereq_(69);
 
-var is = _dereq_(62).is;
+var is = _dereq_(70).is;
 
 var hasExternalLabel = LabelUtil.hasExternalLabel,
     getExternalLabelBounds = LabelUtil.getExternalLabelBounds,
-    isCollapsed = _dereq_(60).isCollapsed,
-    elementToString = _dereq_(58).elementToString;
+    isCollapsed = _dereq_(68).isCollapsed,
+    elementToString = _dereq_(66).elementToString;
 
 
 function elementData(semantic, attrs) {
@@ -9582,6 +11340,8 @@ CmmnImporter.prototype.root = function(diagram) {
   var element = this._elementFactory.createRoot(elementData(diagram));
 
   this._canvas.setRootElement(element);
+
+  return element;
 };
 
 
@@ -9768,18 +11528,18 @@ CmmnImporter.prototype._getEnd = function(semantic, side) {
 CmmnImporter.prototype._getElement = function(semantic) {
   return this._elementRegistry.get(semantic.id);
 };
-},{"247":247,"372":372,"58":58,"60":60,"61":61,"62":62}],56:[function(_dereq_,module,exports){
+},{"264":264,"389":389,"66":66,"68":68,"69":69,"70":70}],64:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    filter = _dereq_(243);
+var forEach = _dereq_(262),
+    filter = _dereq_(260);
 
-var Refs = _dereq_(402);
+var Refs = _dereq_(419);
 
-var elementToString = _dereq_(58).elementToString;
-var is = _dereq_(62).is;
+var elementToString = _dereq_(66).elementToString;
+var is = _dereq_(70).is;
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
 var diRefs = new Refs({ name: 'cmmnElement', enumerable: true }, { name: 'di' });
 
@@ -9796,6 +11556,8 @@ function CmmnTreeWalker(handler) {
   // - it is a connection between a human (plan item) task and a
   //   discretionary item
   var connections = [];
+
+  var discretionaryConnections = {};
 
   // list of cases to draw
   var cases = [];
@@ -9910,6 +11672,11 @@ function CmmnTreeWalker(handler) {
         if (is(cmmnElement, 'cmmn:Association')) {
           associations.push(di);
         }
+        else if (!cmmnElement) {
+          var source = di.sourceCMMNElementRef;
+          discretionaryConnections[source.id] = discretionaryConnections[source.id] || [];
+          discretionaryConnections[source.id].push(di);
+        }
         else {
           connections.push(function (ctx) {
             handleConnection(di, ctx);
@@ -10013,6 +11780,7 @@ function CmmnTreeWalker(handler) {
     handleDeferred(deferred);
 
     forEach(connections, function(d) { d(casePlanModelContext); });
+
   }
 
   function handleCasePlanModel(casePlanModel, context) {
@@ -10081,6 +11849,11 @@ function CmmnTreeWalker(handler) {
     }
     else if (is(definitionRef, 'cmmn:HumanTask')) {
       handlePlanningTable(definitionRef.planningTable, context);
+
+      var edges = discretionaryConnections[item.id];
+      forEach(edges, contextual(handleDiscretionaryConnection, context));
+      delete discretionaryConnections[item.id];
+
     }
   }
 
@@ -10124,6 +11897,12 @@ function CmmnTreeWalker(handler) {
     visit(association, context);
   }
 
+  function handleDiscretionaryConnection(connection, context) {
+    deferred.push(function() {
+      visit(connection, context);
+    });
+  }
+
   function getEnclosedElements(elements, container) {
     var bounds = container.di.bounds;
     return filter(elements, function(e) {
@@ -10142,10 +11921,10 @@ function CmmnTreeWalker(handler) {
 }
 
 module.exports = CmmnTreeWalker;
-},{"206":206,"243":243,"245":245,"402":402,"58":58,"62":62}],57:[function(_dereq_,module,exports){
+},{"223":223,"260":260,"262":262,"419":419,"66":66,"70":70}],65:[function(_dereq_,module,exports){
 'use strict';
 
-var CmmnTreeWalker = _dereq_(56);
+var CmmnTreeWalker = _dereq_(64);
 
 
 /**
@@ -10216,7 +11995,7 @@ function importCmmnDiagram(diagram, definitions, done) {
 }
 
 module.exports.importCmmnDiagram = importCmmnDiagram;
-},{"56":56}],58:[function(_dereq_,module,exports){
+},{"64":64}],66:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports.elementToString = function(e) {
@@ -10226,16 +12005,16 @@ module.exports.elementToString = function(e) {
 
   return '<' + e.$type + (e.id ? ' id="' + e.id : '') + '" />';
 };
-},{}],59:[function(_dereq_,module,exports){
+},{}],67:[function(_dereq_,module,exports){
 module.exports = {
-  cmmnImporter: [ 'type', _dereq_(55) ]
+  cmmnImporter: [ 'type', _dereq_(63) ]
 };
-},{"55":55}],60:[function(_dereq_,module,exports){
+},{"63":63}],68:[function(_dereq_,module,exports){
 'use strict';
 
-var is = _dereq_(62).is,
-    getBusinessObject = _dereq_(62).getBusinessObject,
-    isCasePlanModel = _dereq_(62).isCasePlanModel;
+var is = _dereq_(70).is,
+    getBusinessObject = _dereq_(70).getBusinessObject,
+    isCasePlanModel = _dereq_(70).isCasePlanModel;
 
 module.exports.isCollapsed = function(element) {
 
@@ -10268,13 +12047,13 @@ module.exports.isPlanningTableCollapsed = function (element) {
 module.exports.isStandardEventVisible = function (element) {
   element = getBusinessObject(element);
   var cmmnElement = element.cmmnElementRef;
-  return is(cmmnElement, 'cmmn:OnPart') && element.isStandardEventVisible;
+  return !!(is(cmmnElement, 'cmmn:OnPart') && element.isStandardEventVisible);
 };
-},{"62":62}],61:[function(_dereq_,module,exports){
+},{"70":70}],69:[function(_dereq_,module,exports){
 'use strict';
 
-var is = _dereq_(62).is;
-var assign = _dereq_(372);
+var is = _dereq_(70).is;
+var assign = _dereq_(389);
 
 var DEFAULT_LABEL_SIZE = module.exports.DEFAULT_LABEL_SIZE = {
   width: 90,
@@ -10395,7 +12174,7 @@ module.exports.getLabelBounds = function(semantic) {
     return semantic.di.label.bounds;
   }
 };
-},{"372":372,"62":62}],62:[function(_dereq_,module,exports){
+},{"389":389,"70":70}],70:[function(_dereq_,module,exports){
 'use strict';
 
 function isInstanceOf(bo, type) {
@@ -10555,7 +12334,79 @@ function getStandardEvent(element) {
 }
 
 module.exports.getStandardEvent = getStandardEvent;
-},{}],63:[function(_dereq_,module,exports){
+
+function getStandardEvents(element) {
+
+  if (is(element, 'cmmndi:CMMNEdge')) {
+    element = getBusinessObject(element).cmmnElementRef;
+  }
+
+  if (is(element, 'cmmn:OnPart')) {
+
+    if (is(element.sourceRef, 'cmmn:CaseFileItem')) {
+
+      return [
+        'addChild',
+        'addReference',
+        'create',
+        'delete',
+        'removeChild',
+        'removeReference',
+        'replace',
+        'update'
+      ];
+
+    }
+
+    if (is(element.exitCriterionRef, 'cmmn:ExitCriterion')) {
+      return [ 'exit' ];
+    }
+
+    if (is(element.sourceRef, 'cmmn:PlanItem')) {
+
+      var definition = getDefinition(element.sourceRef);
+      if (is(definition, 'cmmn:EventListener') || is(definition, 'cmmn:Milestone')) {
+
+
+        return [
+          'create',
+          'suspend',
+          'terminate',
+          'occur',
+          'resume'
+        ];
+
+      }
+
+      return [
+        'create',
+        'enable',
+        'start',
+        'disable',
+        'manualStart',
+        'suspend',
+        'fault',
+        'complete',
+        'terminate',
+        'exit',
+        'resume',
+        'reactivate',
+        'reenable',
+        'parentSuspend',
+        'parentResume'
+      ];
+
+    }
+
+  }
+
+  return [];
+
+}
+
+module.exports.getStandardEvents = getStandardEvents;
+
+},{}],71:[function(_dereq_,module,exports){
 /**
  * This file must not be changed or exchanged.
  *
@@ -10564,9 +12415,9 @@ module.exports.getStandardEvent = getStandardEvent;
 
 'use strict';
 
-var domify = _dereq_(389);
+var domify = _dereq_(406);
 
-var domDelegate = _dereq_(388);
+var domDelegate = _dereq_(405);
 
 /* jshint -W101 */
 
@@ -10639,18 +12490,18 @@ function open() {
 }
 
 module.exports.open = open;
-},{"388":388,"389":389}],64:[function(_dereq_,module,exports){
-module.exports = _dereq_(66);
-},{"66":66}],65:[function(_dereq_,module,exports){
+},{"405":405,"406":406}],72:[function(_dereq_,module,exports){
+module.exports = _dereq_(74);
+},{"74":74}],73:[function(_dereq_,module,exports){
 'use strict';
 
-var isString = _dereq_(369),
-    isFunction = _dereq_(364),
-    assign = _dereq_(372);
+var isString = _dereq_(386),
+    isFunction = _dereq_(381),
+    assign = _dereq_(389);
 
-var Moddle = _dereq_(72),
-    XmlReader = _dereq_(68),
-    XmlWriter = _dereq_(69);
+var Moddle = _dereq_(80),
+    XmlReader = _dereq_(76),
+    XmlWriter = _dereq_(77);
 
 /**
  * A sub class of {@link Moddle} with support for import and export of CMMN 1.1 xml files.
@@ -10722,24 +12573,24 @@ CmmnModdle.prototype.toXML = function(element, options, done) {
   }
 };
 
-},{"364":364,"369":369,"372":372,"68":68,"69":69,"72":72}],66:[function(_dereq_,module,exports){
+},{"381":381,"386":386,"389":389,"76":76,"77":77,"80":80}],74:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372);
+var assign = _dereq_(389);
 
-var CmmnModdle = _dereq_(65);
+var CmmnModdle = _dereq_(73);
 
 var packages = {
-  cmmn: _dereq_(81),
-  cmmndi: _dereq_(82),
-  dc: _dereq_(83),
-  di: _dereq_(84)
+  cmmn: _dereq_(89),
+  cmmndi: _dereq_(90),
+  dc: _dereq_(91),
+  di: _dereq_(92)
 };
 
 module.exports = function(additionalPackages, options) {
   return new CmmnModdle(assign({}, packages, additionalPackages), options);
 };
-},{"372":372,"65":65,"81":81,"82":82,"83":83,"84":84}],67:[function(_dereq_,module,exports){
+},{"389":389,"73":73,"89":89,"90":90,"91":91,"92":92}],75:[function(_dereq_,module,exports){
 'use strict';
 
 function capitalize(string) {
@@ -10788,23 +12639,23 @@ module.exports.serializeAsType = function(element) {
 module.exports.serializeAsProperty = function(element) {
   return serializeFormat(element) === 'property';
 };
-},{}],68:[function(_dereq_,module,exports){
+},{}],76:[function(_dereq_,module,exports){
 'use strict';
 
-var reduce = _dereq_(248),
-    forEach = _dereq_(245),
-    find = _dereq_(244),
-    assign = _dereq_(372),
-    defer = _dereq_(255);
+var reduce = _dereq_(265),
+    forEach = _dereq_(262),
+    find = _dereq_(261),
+    assign = _dereq_(389),
+    defer = _dereq_(272);
 
-var Stack = _dereq_(71),
-    SaxParser = _dereq_(70).parser,
-    Moddle = _dereq_(72),
-    parseNameNs = _dereq_(77).parseName,
-    Types = _dereq_(80),
+var Stack = _dereq_(79),
+    SaxParser = _dereq_(78).parser,
+    Moddle = _dereq_(80),
+    parseNameNs = _dereq_(85).parseName,
+    Types = _dereq_(88),
     coerceType = Types.coerceType,
     isSimpleType = Types.isSimple,
-    common = _dereq_(67),
+    common = _dereq_(75),
     XSI_TYPE = common.XSI_TYPE,
     XSI_URI = common.DEFAULT_NS_MAP.xsi,
     serializeAsType = common.serializeAsType,
@@ -11511,18 +13362,18 @@ XMLReader.prototype.handler = function(name) {
 
 module.exports = XMLReader;
 module.exports.ElementHandler = ElementHandler;
-},{"244":244,"245":245,"248":248,"255":255,"372":372,"67":67,"70":70,"71":71,"72":72,"77":77,"80":80}],69:[function(_dereq_,module,exports){
+},{"261":261,"262":262,"265":265,"272":272,"389":389,"75":75,"78":78,"79":79,"80":80,"85":85,"88":88}],77:[function(_dereq_,module,exports){
 'use strict';
 
-var map = _dereq_(247),
-    forEach = _dereq_(245),
-    isString = _dereq_(369),
-    filter = _dereq_(243),
-    assign = _dereq_(372);
+var map = _dereq_(264),
+    forEach = _dereq_(262),
+    isString = _dereq_(386),
+    filter = _dereq_(260),
+    assign = _dereq_(389);
 
-var Types = _dereq_(80),
-    parseNameNs = _dereq_(77).parseName,
-    common = _dereq_(67),
+var Types = _dereq_(88),
+    parseNameNs = _dereq_(85).parseName,
+    common = _dereq_(75),
     nameToAlias = common.nameToAlias,
     serializeAsType = common.serializeAsType,
     serializeAsProperty = common.serializeAsProperty;
@@ -12190,7 +14041,7 @@ function XMLWriter(options) {
 
 module.exports = XMLWriter;
 
-},{"243":243,"245":245,"247":247,"369":369,"372":372,"67":67,"77":77,"80":80}],70:[function(_dereq_,module,exports){
+},{"260":260,"262":262,"264":264,"386":386,"389":389,"75":75,"85":85,"88":88}],78:[function(_dereq_,module,exports){
 (function (Buffer){
 // wrapper for non-node envs
 ;(function (sax) {
@@ -13605,7 +15456,7 @@ if (!String.fromCodePoint) {
 
 }).call(this,undefined)
 
-},{"undefined":undefined}],71:[function(_dereq_,module,exports){
+},{"undefined":undefined}],79:[function(_dereq_,module,exports){
 /**
  * Tiny stack for browser or server
  *
@@ -13722,9 +15573,9 @@ else {
 }
 } )( this );
 
-},{}],72:[function(_dereq_,module,exports){
-module.exports = _dereq_(76);
-},{"76":76}],73:[function(_dereq_,module,exports){
+},{}],80:[function(_dereq_,module,exports){
+module.exports = _dereq_(84);
+},{"84":84}],81:[function(_dereq_,module,exports){
 'use strict';
 
 function Base() { }
@@ -13739,14 +15590,14 @@ Base.prototype.set = function(name, value) {
 
 
 module.exports = Base;
-},{}],74:[function(_dereq_,module,exports){
+},{}],82:[function(_dereq_,module,exports){
 'use strict';
 
-var pick = _dereq_(378),
-    assign = _dereq_(372),
-    forEach = _dereq_(245);
+var pick = _dereq_(395),
+    assign = _dereq_(389),
+    forEach = _dereq_(262);
 
-var parseNameNs = _dereq_(77).parseName;
+var parseNameNs = _dereq_(85).parseName;
 
 
 function DescriptorBuilder(nameNs) {
@@ -13964,12 +15815,12 @@ DescriptorBuilder.prototype.addTrait = function(t, inherited) {
   allTypes.push(t);
 };
 
-},{"245":245,"372":372,"378":378,"77":77}],75:[function(_dereq_,module,exports){
+},{"262":262,"389":389,"395":395,"85":85}],83:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var Base = _dereq_(73);
+var Base = _dereq_(81);
 
 
 function Factory(model, properties) {
@@ -14022,20 +15873,20 @@ Factory.prototype.createType = function(descriptor) {
 
   return ModdleElement;
 };
-},{"245":245,"73":73}],76:[function(_dereq_,module,exports){
+},{"262":262,"81":81}],84:[function(_dereq_,module,exports){
 'use strict';
 
-var isString = _dereq_(369),
-    isObject = _dereq_(367),
-    forEach = _dereq_(245),
-    find = _dereq_(244);
+var isString = _dereq_(386),
+    isObject = _dereq_(384),
+    forEach = _dereq_(262),
+    find = _dereq_(261);
 
 
-var Factory = _dereq_(75),
-    Registry = _dereq_(79),
-    Properties = _dereq_(78);
+var Factory = _dereq_(83),
+    Registry = _dereq_(87),
+    Properties = _dereq_(86);
 
-var parseNameNs = _dereq_(77).parseName;
+var parseNameNs = _dereq_(85).parseName;
 
 
 //// Moddle implementation /////////////////////////////////////////////////
@@ -14241,7 +16092,7 @@ Moddle.prototype.getPropertyDescriptor = function(element, property) {
   return this.getElementDescriptor(element).propertiesByName[property];
 };
 
-},{"244":244,"245":245,"367":367,"369":369,"75":75,"77":77,"78":78,"79":79}],77:[function(_dereq_,module,exports){
+},{"261":261,"262":262,"384":384,"386":386,"83":83,"85":85,"86":86,"87":87}],85:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -14278,7 +16129,7 @@ module.exports.parseName = function(name, defaultPrefix) {
     localName: localName
   };
 };
-},{}],78:[function(_dereq_,module,exports){
+},{}],86:[function(_dereq_,module,exports){
 'use strict';
 
 
@@ -14397,16 +16248,16 @@ function defineProperty(target, property, value) {
     configurable: true
   });
 }
-},{}],79:[function(_dereq_,module,exports){
+},{}],87:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    forEach = _dereq_(245);
+var assign = _dereq_(389),
+    forEach = _dereq_(262);
 
-var Types = _dereq_(80),
-    DescriptorBuilder = _dereq_(74);
+var Types = _dereq_(88),
+    DescriptorBuilder = _dereq_(82);
 
-var parseNameNs = _dereq_(77).parseName,
+var parseNameNs = _dereq_(85).parseName,
     isBuiltInType = Types.isBuiltIn;
 
 
@@ -14582,7 +16433,7 @@ Registry.prototype.getEffectiveDescriptor = function(name) {
 Registry.prototype.definePackage = function(target, pkg) {
   this.properties.define(target, '$pkg', { value: pkg });
 };
-},{"245":245,"372":372,"74":74,"77":77,"80":80}],80:[function(_dereq_,module,exports){
+},{"262":262,"389":389,"82":82,"85":85,"88":88}],88:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -14633,7 +16484,7 @@ module.exports.isBuiltIn = function(type) {
 module.exports.isSimple = function(type) {
   return !!TYPE_CONVERTERS[type];
 };
-},{}],81:[function(_dereq_,module,exports){
+},{}],89:[function(_dereq_,module,exports){
 module.exports={
   "name": "CMMN",
   "uri": "http://www.omg.org/spec/CMMN/20151109/MODEL",
@@ -15306,6 +17157,13 @@ module.exports={
           "isReference": true
         },
         {
+          "name": "itemControl",
+          "type": "PlanItemControl",
+          "xml": {
+            "serialize": "property"
+          }
+        },
+        {
           "name": "entryCriteria",
           "type": "EntryCriterion",
           "isMany": true
@@ -15314,13 +17172,6 @@ module.exports={
           "name": "exitCriteria",
           "type": "ExitCriterion",
           "isMany": true
-        },
-        {
-          "name": "itemControl",
-          "type": "PlanItemControl",
-          "xml": {
-            "serialize": "property"
-          }
         }
       ]
     },
@@ -16117,7 +17968,7 @@ module.exports={
   },
   "prefix": "cmmn"
 }
-},{}],82:[function(_dereq_,module,exports){
+},{}],90:[function(_dereq_,module,exports){
 module.exports={
   "name": "CMMNDI",
   "uri": "http://www.omg.org/spec/CMMN/20151109/CMMNDI",
@@ -16304,7 +18155,7 @@ module.exports={
   "associations": [],
   "prefix": "cmmndi"
 }
-},{}],83:[function(_dereq_,module,exports){
+},{}],91:[function(_dereq_,module,exports){
 module.exports={
   "name": "DC",
   "uri": "http://www.omg.org/spec/CMMN/20151109/DC",
@@ -16397,7 +18248,7 @@ module.exports={
   "prefix": "dc",
   "associations": []
 }
-},{}],84:[function(_dereq_,module,exports){
+},{}],92:[function(_dereq_,module,exports){
 module.exports={
   "name": "DI",
   "uri": "http://www.omg.org/spec/CMMN/20151109/DI",
@@ -16519,19 +18370,19 @@ module.exports={
     "tagAlias": "lowerCase"
   }
 }
-},{}],85:[function(_dereq_,module,exports){
+},{}],93:[function(_dereq_,module,exports){
 module.exports = {
-  __depends__: [ _dereq_(129) ],
+  __depends__: [ _dereq_(143) ],
   __init__: [ 'directEditing' ],
-  directEditing: [ 'type', _dereq_(86) ]
+  directEditing: [ 'type', _dereq_(94) ]
 };
-},{"129":129,"86":86}],86:[function(_dereq_,module,exports){
+},{"143":143,"94":94}],94:[function(_dereq_,module,exports){
 'use strict';
 
-var bind = _dereq_(253),
-    find = _dereq_(244);
+var bind = _dereq_(270),
+    find = _dereq_(261);
 
-var TextBox = _dereq_(87);
+var TextBox = _dereq_(95);
 
 
 /**
@@ -16687,12 +18538,12 @@ DirectEditing.prototype.activate = function(element) {
 
 
 module.exports = DirectEditing;
-},{"244":244,"253":253,"87":87}],87:[function(_dereq_,module,exports){
+},{"261":261,"270":270,"95":95}],95:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    domEvent = _dereq_(390),
-    domRemove = _dereq_(393);
+var assign = _dereq_(389),
+    domEvent = _dereq_(407),
+    domRemove = _dereq_(410);
 
 function stopPropagation(event) {
   event.stopPropagation();
@@ -16755,12 +18606,12 @@ TextBox.prototype.getValue = function() {
   return this.textarea.value;
 };
 
-},{"372":372,"390":390,"393":393}],88:[function(_dereq_,module,exports){
-module.exports = _dereq_(89);
-},{"89":89}],89:[function(_dereq_,module,exports){
+},{"389":389,"407":407,"410":410}],96:[function(_dereq_,module,exports){
+module.exports = _dereq_(97);
+},{"97":97}],97:[function(_dereq_,module,exports){
 'use strict';
 
-var di = _dereq_(223);
+var di = _dereq_(240);
 
 
 /**
@@ -16837,7 +18688,7 @@ function createInjector(options) {
     'config': ['value', options]
   };
 
-  var coreModule = _dereq_(98);
+  var coreModule = _dereq_(106);
 
   var modules = [ configModule, coreModule ].concat(options.modules || []);
 
@@ -16958,13 +18809,13 @@ Diagram.prototype.destroy = function() {
 Diagram.prototype.clear = function() {
   this.get('eventBus').fire('diagram.clear');
 };
-},{"223":223,"98":98}],90:[function(_dereq_,module,exports){
+},{"106":106,"240":240}],98:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    isFunction = _dereq_(364),
-    isArray = _dereq_(363),
-    isNumber = _dereq_(366);
+var forEach = _dereq_(262),
+    isFunction = _dereq_(381),
+    isArray = _dereq_(380),
+    isNumber = _dereq_(383);
 
 
 var DEFAULT_PRIORITY = 1000;
@@ -17109,14 +18960,14 @@ forEach(hooks, function(hook) {
   };
 });
 
-},{"245":245,"363":363,"364":364,"366":366}],91:[function(_dereq_,module,exports){
+},{"262":262,"380":380,"381":381,"383":383}],99:[function(_dereq_,module,exports){
 'use strict';
 
-var unique = _dereq_(238),
-    isArray = _dereq_(363),
-    assign = _dereq_(372);
+var unique = _dereq_(255),
+    isArray = _dereq_(380),
+    assign = _dereq_(389);
 
-var InternalEvent = _dereq_(96).Event;
+var InternalEvent = _dereq_(104).Event;
 
 
 /**
@@ -17609,24 +19460,24 @@ CommandStack.prototype._setHandler = function(command, handler) {
   this._handlerMap[command] = handler;
 };
 
-},{"238":238,"363":363,"372":372,"96":96}],92:[function(_dereq_,module,exports){
+},{"104":104,"255":255,"380":380,"389":389}],100:[function(_dereq_,module,exports){
 module.exports = {
-  commandStack: [ 'type', _dereq_(91) ]
+  commandStack: [ 'type', _dereq_(99) ]
 };
 
-},{"91":91}],93:[function(_dereq_,module,exports){
+},{"99":99}],101:[function(_dereq_,module,exports){
 'use strict';
 
-var isNumber = _dereq_(366),
-    assign = _dereq_(372),
-    forEach = _dereq_(245),
-    every = _dereq_(242),
-    debounce = _dereq_(254);
+var isNumber = _dereq_(383),
+    assign = _dereq_(389),
+    forEach = _dereq_(262),
+    every = _dereq_(259),
+    debounce = _dereq_(271);
 
-var Collections = _dereq_(206),
-    Elements = _dereq_(209);
+var Collections = _dereq_(223),
+    Elements = _dereq_(226);
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 function round(number, resolution) {
   return Math.round(number * resolution) / resolution;
@@ -18576,10 +20427,10 @@ Canvas.prototype.resized = function() {
   this._eventBus.fire('canvas.resized');
 };
 
-},{"206":206,"209":209,"228":228,"242":242,"245":245,"254":254,"366":366,"372":372}],94:[function(_dereq_,module,exports){
+},{"223":223,"226":226,"245":245,"259":259,"262":262,"271":271,"383":383,"389":389}],102:[function(_dereq_,module,exports){
 'use strict';
 
-var Model = _dereq_(198);
+var Model = _dereq_(215);
 
 
 /**
@@ -18626,7 +20477,7 @@ ElementFactory.prototype.create = function(type, attrs) {
 
   return Model.create(type, attrs);
 };
-},{"198":198}],95:[function(_dereq_,module,exports){
+},{"215":215}],103:[function(_dereq_,module,exports){
 'use strict';
 
 var ELEMENT_ID = 'data-element-id';
@@ -18825,14 +20676,14 @@ ElementRegistry.prototype._validateId = function(id) {
     throw new Error('element with id ' + id + ' already added');
   }
 };
-},{}],96:[function(_dereq_,module,exports){
+},{}],104:[function(_dereq_,module,exports){
 'use strict';
 
-var isFunction = _dereq_(364),
-    isArray = _dereq_(363),
-    isNumber = _dereq_(366),
-    bind = _dereq_(253),
-    assign = _dereq_(372);
+var isFunction = _dereq_(381),
+    isArray = _dereq_(380),
+    isNumber = _dereq_(383),
+    bind = _dereq_(270),
+    assign = _dereq_(389);
 
 var FN_REF = '__fn';
 
@@ -19283,14 +21134,14 @@ function invokeFunction(fn, args) {
   return fn.apply(null, args);
 }
 
-},{"253":253,"363":363,"364":364,"366":366,"372":372}],97:[function(_dereq_,module,exports){
+},{"270":270,"380":380,"381":381,"383":383,"389":389}],105:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    reduce = _dereq_(248);
+var forEach = _dereq_(262),
+    reduce = _dereq_(265);
 
-var GraphicsUtil = _dereq_(212),
-    domClear = _dereq_(386);
+var GraphicsUtil = _dereq_(229),
+    domClear = _dereq_(403);
 
 /**
  * A factory that creates graphical elements
@@ -19467,17 +21318,17 @@ GraphicsFactory.prototype.remove = function(element) {
   gfx.parent().remove();
 };
 
-},{"212":212,"245":245,"248":248,"386":386}],98:[function(_dereq_,module,exports){
+},{"229":229,"262":262,"265":265,"403":403}],106:[function(_dereq_,module,exports){
 module.exports = {
-  __depends__: [ _dereq_(102) ],
+  __depends__: [ _dereq_(110) ],
   __init__: [ 'canvas' ],
-  canvas: [ 'type', _dereq_(93) ],
-  elementRegistry: [ 'type', _dereq_(95) ],
-  elementFactory: [ 'type', _dereq_(94) ],
-  eventBus: [ 'type', _dereq_(96) ],
-  graphicsFactory: [ 'type', _dereq_(97) ]
+  canvas: [ 'type', _dereq_(101) ],
+  elementRegistry: [ 'type', _dereq_(103) ],
+  elementFactory: [ 'type', _dereq_(102) ],
+  eventBus: [ 'type', _dereq_(104) ],
+  graphicsFactory: [ 'type', _dereq_(105) ]
 };
-},{"102":102,"93":93,"94":94,"95":95,"96":96,"97":97}],99:[function(_dereq_,module,exports){
+},{"101":101,"102":102,"103":103,"104":104,"105":105,"110":110}],107:[function(_dereq_,module,exports){
 'use strict';
 
 var DEFAULT_RENDER_PRIORITY = 1000;
@@ -19568,14 +21419,14 @@ BaseRenderer.prototype.getConnectionPath = function() {};
 
 module.exports = BaseRenderer;
 
-},{}],100:[function(_dereq_,module,exports){
+},{}],108:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var BaseRenderer = _dereq_(99);
+var BaseRenderer = _dereq_(107);
 
-var renderUtil = _dereq_(220);
+var renderUtil = _dereq_(237);
 
 var componentsToPath = renderUtil.componentsToPath,
     createLine = renderUtil.createLine;
@@ -19653,12 +21504,12 @@ DefaultRenderer.$inject = [ 'eventBus', 'styles' ];
 
 module.exports = DefaultRenderer;
 
-},{"220":220,"231":231,"99":99}],101:[function(_dereq_,module,exports){
+},{"107":107,"237":237,"248":248}],109:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363),
-    assign = _dereq_(372),
-    reduce = _dereq_(248);
+var isArray = _dereq_(380),
+    assign = _dereq_(389),
+    reduce = _dereq_(265);
 
 
 /**
@@ -19730,33 +21581,33 @@ function Styles() {
 
 module.exports = Styles;
 
-},{"248":248,"363":363,"372":372}],102:[function(_dereq_,module,exports){
+},{"265":265,"380":380,"389":389}],110:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'defaultRenderer' ],
-  defaultRenderer: [ 'type', _dereq_(100) ],
-  styles: [ 'type', _dereq_(101) ]
+  defaultRenderer: [ 'type', _dereq_(108) ],
+  styles: [ 'type', _dereq_(109) ]
 };
 
-},{"100":100,"101":101}],103:[function(_dereq_,module,exports){
+},{"108":108,"109":109}],111:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    flatten = _dereq_(233),
-    union = _dereq_(236),
-    filter = _dereq_(243),
-    groupBy = _dereq_(246),
-    map = _dereq_(247);
+var forEach = _dereq_(262),
+    flatten = _dereq_(250),
+    union = _dereq_(253),
+    filter = _dereq_(260),
+    groupBy = _dereq_(263),
+    map = _dereq_(264);
 
-var saveClear = _dereq_(219).saveClear,
-    Collections = _dereq_(206);
+var saveClear = _dereq_(236).saveClear,
+    Collections = _dereq_(223);
 
-var getNewAttachShapeDelta = _dereq_(204).getNewAttachShapeDelta;
+var getNewAttachShapeDelta = _dereq_(221).getNewAttachShapeDelta;
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
 var HIGH_PRIORITY = 1500;
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
 
 function AttachSupport(eventBus, modeling, moveVisuals, rules) {
@@ -20026,21 +21877,174 @@ function removeAttached(elements) {
   });
 }
 
-},{"204":204,"206":206,"219":219,"231":231,"233":233,"236":236,"243":243,"245":245,"246":246,"247":247,"90":90}],104:[function(_dereq_,module,exports){
+},{"221":221,"223":223,"236":236,"248":248,"250":250,"253":253,"260":260,"262":262,"263":263,"264":264,"98":98}],112:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(162),
-    _dereq_(133)
+    _dereq_(176),
+    _dereq_(147)
   ],
   __init__: [ 'attachSupport'],
-  attachSupport: [ 'type', _dereq_(103) ]
+  attachSupport: [ 'type', _dereq_(111) ]
 };
 
-},{"103":103,"133":133,"162":162}],105:[function(_dereq_,module,exports){
+},{"111":111,"147":147,"176":176}],113:[function(_dereq_,module,exports){
 'use strict';
 
-var Geometry = _dereq_(211),
-    BendpointUtil = _dereq_(107);
+var assign = _dereq_(389);
+
+var EventUtil = _dereq_(227);
+
+
+/**
+ * Initiates canvas scrolling if current cursor point is close to a border.
+ * Cancelled when current point moves back inside the scrolling borders
+ * or cancelled manually.
+ *
+ * Default options :
+ *   scrollThresholdIn: [ 20, 20, 20, 20 ],
+ *   scrollThresholdOut: [ 0, 0, 0, 0 ],
+ *   scrollRepeatTimeout: 15,
+ *   scrollStep: 10
+ *
+ * Threshold order:
+ *   [ left, top, right, bottom ]
+ */
+function AutoScroll(config, eventBus, canvas, mouseTracking) {
+
+  this._canvas = canvas;
+  this._mouseTracking = mouseTracking;
+
+  this._opts = assign({
+    scrollThresholdIn: [ 20, 20, 20, 20 ],
+    scrollThresholdOut: [ 0, 0, 0, 0 ],
+    scrollRepeatTimeout: 15,
+    scrollStep: 10
+  }, config);
+
+  var self = this;
+
+  eventBus.on('drag.move', function(e) {
+    var point = self._toBorderPoint(e);
+
+    self.startScroll(point);
+  });
+
+  eventBus.on([ 'drag.cleanup' ], function() {
+    self.stopScroll();
+  });
+}
+
+AutoScroll.$inject = [ 'config.autoScroll', 'eventBus', 'canvas', 'mouseTracking'];
+
+module.exports = AutoScroll;
+
+
+/**
+ * Starts scrolling loop.
+ * Point is given in global scale in canvas container box plane.
+ *
+ * @param  {Object} point { x: X, y: Y }
+ */
+AutoScroll.prototype.startScroll = function(point) {
+
+  var canvas = this._canvas;
+  var opts = this._opts;
+  var self = this;
+
+  var clientRect = canvas.getContainer().getBoundingClientRect();
+
+  var diff = [
+    point.x,
+    point.y,
+    clientRect.width - point.x,
+    clientRect.height - point.y
+  ];
+
+  this.stopScroll();
+
+  var dx = 0,
+      dy = 0;
+
+  for (var i = 0; i < 4; i++) {
+    if (between(diff[i], opts.scrollThresholdOut[i], opts.scrollThresholdIn[i])) {
+      if (i === 0) {
+        dx = opts.scrollStep;
+      } else if (i == 1) {
+        dy = opts.scrollStep;
+      } else if (i == 2) {
+        dx = -opts.scrollStep;
+      } else if (i == 3) {
+        dy = -opts.scrollStep;
+      }
+    }
+  }
+
+  if (dx !== 0 || dy !== 0) {
+    canvas.scroll({ dx: dx, dy: dy });
+
+    this._scrolling = setTimeout(function() {
+      self.startScroll(point);
+    }, opts.scrollRepeatTimeout);
+  }
+};
+
+function between(val, start, end) {
+  if (start < val && val < end) {
+    return true;
+  }
+
+  return false;
+}
+
+
+/**
+ * Stops scrolling loop.
+ */
+AutoScroll.prototype.stopScroll = function() {
+  clearTimeout(this._scrolling);
+};
+
+
+/**
+ * Overrides defaults options.
+ *
+ * @param  {Object} options
+ */
+AutoScroll.prototype.setOptions = function(options) {
+  this._opts = assign({}, this._opts, options);
+};
+
+
+/**
+ * Converts event to a point in canvas container plane in global scale.
+ *
+ * @param  {Event} event
+ * @return {Point}
+ */
+AutoScroll.prototype._toBorderPoint = function(event) {
+  var clientRect = this._canvas._container.getBoundingClientRect();
+
+  var globalPosition = EventUtil.toPoint(event.originalEvent);
+
+  return {
+    x: globalPosition.x - clientRect.left,
+    y: globalPosition.y - clientRect.top
+  };
+};
+},{"227":227,"389":389}],114:[function(_dereq_,module,exports){
+module.exports = {
+  __depends__: [
+    _dereq_(135),
+    _dereq_(173)
+  ],
+  __init__: [ 'autoScroll' ],
+  autoScroll: [ 'type', _dereq_(113) ],
+};
+},{"113":113,"135":135,"173":173}],115:[function(_dereq_,module,exports){
+'use strict';
+
+var Geometry = _dereq_(228),
+    BendpointUtil = _dereq_(117);
 
 var MARKER_OK = 'connect-ok',
     MARKER_NOT_OK = 'connect-not-ok',
@@ -20106,9 +22110,32 @@ function BendpointMove(injector, eventBus, canvas, dragging, graphicsFactory, ru
   }
 
   function filterRedundantWaypoints(waypoints) {
-    return waypoints.filter(function(r, idx) {
-      return !Geometry.pointsOnLine(waypoints[idx - 1], waypoints[idx + 1], r);
-    });
+
+    // alter copy of waypoints, not original
+    waypoints = waypoints.slice();
+
+    var idx = 0,
+        point,
+        previousPoint,
+        nextPoint;
+
+    while (waypoints[idx]) {
+      point = waypoints[idx];
+      previousPoint = waypoints[idx - 1];
+      nextPoint = waypoints[idx + 1];
+
+      if (Geometry.pointDistance(point, nextPoint) === 0 ||
+          Geometry.pointsOnLine(previousPoint, nextPoint, point)) {
+
+        // remove point, if overlapping with {nextPoint}
+        // or on line with {previousPoint} -> {point} -> {nextPoint}
+        waypoints.splice(idx, 1);
+      } else {
+        idx++;
+      }
+    }
+
+    return waypoints;
   }
 
   eventBus.on('bendpoint.move.start', function(e) {
@@ -20267,13 +22294,13 @@ BendpointMove.$inject = [ 'injector', 'eventBus', 'canvas', 'dragging', 'graphic
 
 module.exports = BendpointMove;
 
-},{"107":107,"211":211}],106:[function(_dereq_,module,exports){
+},{"117":117,"228":228}],116:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    forEach = _dereq_(245);
+var assign = _dereq_(389),
+    forEach = _dereq_(262);
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var round = Math.round;
 
@@ -20444,13 +22471,13 @@ function BendpointSnapping(eventBus) {
 BendpointSnapping.$inject = [ 'eventBus' ];
 
 module.exports = BendpointSnapping;
-},{"228":228,"245":245,"372":372}],107:[function(_dereq_,module,exports){
+},{"245":245,"262":262,"389":389}],117:[function(_dereq_,module,exports){
 'use strict';
 
-var Events = _dereq_(210),
-    Geometry = _dereq_(211);
+var Events = _dereq_(227),
+    Geometry = _dereq_(228);
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var BENDPOINT_CLS = module.exports.BENDPOINT_CLS = 'djs-bendpoint';
 var SEGMENT_DRAGGER_CLS = module.exports.SEGMENT_DRAGGER_CLS = 'djs-segment-dragger';
@@ -20527,19 +22554,19 @@ module.exports.addSegmentDragger = function(parentGfx, segmentStart, segmentEnd)
   return groupGfx;
 };
 
-},{"210":210,"211":211,"228":228}],108:[function(_dereq_,module,exports){
+},{"227":227,"228":228,"245":245}],118:[function(_dereq_,module,exports){
 'use strict';
 
-var domEvent = _dereq_(390),
-    BendpointUtil = _dereq_(107);
+var domEvent = _dereq_(407),
+    BendpointUtil = _dereq_(117);
 
-var pointsAligned = _dereq_(211).pointsAligned,
-    getMidPoint = _dereq_(211).getMidPoint;
+var pointsAligned = _dereq_(228).pointsAligned,
+    getMidPoint = _dereq_(228).getMidPoint;
 
 var BENDPOINT_CLS = BendpointUtil.BENDPOINT_CLS,
     SEGMENT_DRAGGER_CLS = BendpointUtil.SEGMENT_DRAGGER_CLS;
 
-var getApproxIntersection = _dereq_(214).getApproxIntersection;
+var getApproxIntersection = _dereq_(231).getApproxIntersection;
 
 
 /**
@@ -20777,12 +22804,12 @@ Bendpoints.$inject = [
 
 module.exports = Bendpoints;
 
-},{"107":107,"211":211,"214":214,"390":390}],109:[function(_dereq_,module,exports){
+},{"117":117,"228":228,"231":231,"407":407}],119:[function(_dereq_,module,exports){
 'use strict';
 
-var Geometry = _dereq_(211),
-    BendpointUtil = _dereq_(107),
-    LayoutUtil = _dereq_(196);
+var Geometry = _dereq_(228),
+    BendpointUtil = _dereq_(117),
+    LayoutUtil = _dereq_(213);
 
 var MARKER_CONNECT_HOVER = 'connect-hover',
     MARKER_CONNECT_UPDATING = 'djs-updating';
@@ -21106,20 +23133,20 @@ ConnectionSegmentMove.$inject = [
 ];
 
 module.exports = ConnectionSegmentMove;
-},{"107":107,"196":196,"211":211}],110:[function(_dereq_,module,exports){
+},{"117":117,"213":213,"228":228}],120:[function(_dereq_,module,exports){
 module.exports = {
-  __depends__: [ _dereq_(123), _dereq_(181) ],
+  __depends__: [ _dereq_(135), _dereq_(195) ],
   __init__: [ 'bendpoints', 'bendpointSnapping' ],
-  bendpoints: [ 'type', _dereq_(108) ],
-  bendpointMove: [ 'type', _dereq_(105) ],
-  connectionSegmentMove: [ 'type', _dereq_(109) ],
-  bendpointSnapping: [ 'type', _dereq_(106) ]
+  bendpoints: [ 'type', _dereq_(118) ],
+  bendpointMove: [ 'type', _dereq_(115) ],
+  connectionSegmentMove: [ 'type', _dereq_(119) ],
+  bendpointSnapping: [ 'type', _dereq_(116) ]
 };
 
-},{"105":105,"106":106,"108":108,"109":109,"123":123,"181":181}],111:[function(_dereq_,module,exports){
+},{"115":115,"116":116,"118":118,"119":119,"135":135,"195":195}],121:[function(_dereq_,module,exports){
 'use strict';
 
-var getElementType = _dereq_(209).getType;
+var getElementType = _dereq_(226).getType;
 
 /**
  * Adds change support to the diagram, including
@@ -21176,58 +23203,215 @@ function ChangeSupport(eventBus, canvas, elementRegistry, graphicsFactory) {
 ChangeSupport.$inject = [ 'eventBus', 'canvas', 'elementRegistry', 'graphicsFactory' ];
 
 module.exports = ChangeSupport;
-},{"209":209}],112:[function(_dereq_,module,exports){
+},{"226":226}],122:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'changeSupport'],
-  changeSupport: [ 'type', _dereq_(111) ]
+  changeSupport: [ 'type', _dereq_(121) ]
 };
-},{"111":111}],113:[function(_dereq_,module,exports){
+},{"121":121}],123:[function(_dereq_,module,exports){
 'use strict';
 
-
-function Clipboard() {
-  this._clipboard = {};
-}
-
-Clipboard.prototype.get = function() {
-  return this._clipboard;
-};
-
-Clipboard.prototype.set = function(tree) {
-  this._clipboard = tree;
-};
-
-Clipboard.prototype.clear = function() {
-  var oldClipboard = this._clipboard;
-
-  this._clipboard = {};
-
-  return oldClipboard;
-};
-
-Clipboard.prototype.isEmpty = function() {
-  return Object.keys(this._clipboard).length === 0;
-};
+/**
+ * A clip board stub
+ */
+function Clipboard() {}
 
 module.exports = Clipboard;
 
-},{}],114:[function(_dereq_,module,exports){
-module.exports = {
-  clipboard: [ 'type', _dereq_(113) ]
+
+Clipboard.prototype.get = function() {
+  return this._data;
 };
 
-},{"113":113}],115:[function(_dereq_,module,exports){
+Clipboard.prototype.set = function(data) {
+  this._data = data;
+};
+
+Clipboard.prototype.clear = function() {
+  var data = this._data;
+
+  delete this._data;
+
+  return data;
+};
+
+Clipboard.prototype.isEmpty = function() {
+  return !this._data;
+};
+},{}],124:[function(_dereq_,module,exports){
+module.exports = {
+  clipboard: [ 'type', _dereq_(123) ]
+};
+
+},{"123":123}],125:[function(_dereq_,module,exports){
 'use strict';
 
-var isFunction = _dereq_(364),
-    forEach = _dereq_(245),
+var LayoutUtil = _dereq_(213);
 
-    domDelegate = _dereq_(388),
-    domEvent = _dereq_(390),
-    domAttr = _dereq_(384),
-    domQuery = _dereq_(392),
-    domClasses = _dereq_(385),
-    domify = _dereq_(389);
+var MARKER_OK = 'connect-ok',
+    MARKER_NOT_OK = 'connect-not-ok';
+
+
+function Connect(eventBus, dragging, modeling, rules, canvas, graphicsFactory) {
+
+  // TODO(nre): separate UI and events
+
+  // rules
+
+  function canConnect(source, target) {
+    return rules.allowed('connection.create', {
+      source: source,
+      target: target
+    });
+  }
+
+
+  // layouting
+
+  function crop(start, end, source, target) {
+
+    var sourcePath = graphicsFactory.getShapePath(source),
+        targetPath = target && graphicsFactory.getShapePath(target),
+        connectionPath = graphicsFactory.getConnectionPath({ waypoints: [ start, end ] });
+
+    start = LayoutUtil.getElementLineIntersection(sourcePath, connectionPath, true) || start;
+    end = (target && LayoutUtil.getElementLineIntersection(targetPath, connectionPath, false)) || end;
+
+    return [ start, end ];
+  }
+
+
+  // event handlers
+
+  eventBus.on('connect.move', function(event) {
+
+    var context = event.context,
+        source = context.source,
+        target = context.target,
+        visual = context.visual,
+        start, end, waypoints;
+
+    // update connection visuals during drag
+
+    start = LayoutUtil.getMid(source);
+
+    end = {
+      x: event.x,
+      y: event.y
+    };
+
+    waypoints = crop(start, end, source, target);
+
+    visual.attr('points', [ waypoints[0].x, waypoints[0].y, waypoints[1].x, waypoints[1].y ]);
+  });
+
+  eventBus.on('connect.hover', function(event) {
+    var context = event.context,
+        source = context.source,
+        hover = event.hover,
+        canExecute;
+
+    canExecute = context.canExecute = canConnect(source, hover);
+
+    // simply ignore hover
+    if (canExecute === null) {
+      return;
+    }
+
+    context.target = hover;
+
+    canvas.addMarker(hover, canExecute ? MARKER_OK : MARKER_NOT_OK);
+  });
+
+  eventBus.on([ 'connect.out', 'connect.cleanup' ], function(event) {
+    var context = event.context;
+
+    if (context.target) {
+      canvas.removeMarker(context.target, context.canExecute ? MARKER_OK : MARKER_NOT_OK);
+    }
+
+    context.target = null;
+  });
+
+  eventBus.on('connect.cleanup', function(event) {
+    var context = event.context;
+
+    if (context.visual) {
+      context.visual.remove();
+    }
+  });
+
+  eventBus.on('connect.start', function(event) {
+    var context = event.context,
+        visual;
+
+    visual = canvas.getDefaultLayer().polyline().attr({
+      'stroke': '#333',
+      'strokeDasharray': [ 1 ],
+      'strokeWidth': 2,
+      'pointer-events': 'none'
+    });
+
+    context.visual = visual;
+  });
+
+  eventBus.on('connect.end', function(event) {
+
+    var context = event.context,
+        source = context.source,
+        target = context.target,
+        canExecute = context.canExecute || canConnect(source, target);
+
+    if (!canExecute) {
+      return false;
+    }
+
+    modeling.connect(source, target, typeof canExecute === 'object' && canExecute);
+  });
+
+
+  // API
+
+  this.start = function(event, source, autoActivate) {
+
+    dragging.init(event, 'connect', {
+      autoActivate: autoActivate,
+      data: {
+        shape: source,
+        context: {
+          source: source
+        }
+      }
+    });
+  };
+}
+
+Connect.$inject = [ 'eventBus', 'dragging', 'modeling', 'rules', 'canvas', 'graphicsFactory' ];
+
+module.exports = Connect;
+
+},{"213":213}],126:[function(_dereq_,module,exports){
+module.exports = {
+  __depends__: [
+    _dereq_(201),
+    _dereq_(195),
+    _dereq_(135)
+  ],
+  connect: [ 'type', _dereq_(125) ]
+};
+
+},{"125":125,"135":135,"195":195,"201":201}],127:[function(_dereq_,module,exports){
+'use strict';
+
+var isFunction = _dereq_(381),
+    forEach = _dereq_(262),
+
+    domDelegate = _dereq_(405),
+    domEvent = _dereq_(407),
+    domAttr = _dereq_(401),
+    domQuery = _dereq_(409),
+    domClasses = _dereq_(402),
+    domify = _dereq_(406);
 
 
 var entrySelector = '.entry';
@@ -21503,31 +23687,31 @@ ContextPad.prototype.isOpen = function(element) {
 
 module.exports = ContextPad;
 
-},{"245":245,"364":364,"384":384,"385":385,"388":388,"389":389,"390":390,"392":392}],116:[function(_dereq_,module,exports){
+},{"262":262,"381":381,"401":401,"402":402,"405":405,"406":406,"407":407,"409":409}],128:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(129),
-    _dereq_(167)
+    _dereq_(143),
+    _dereq_(181)
   ],
-  contextPad: [ 'type', _dereq_(115) ]
+  contextPad: [ 'type', _dereq_(127) ]
 };
-},{"115":115,"129":129,"167":167}],117:[function(_dereq_,module,exports){
+},{"127":127,"143":143,"181":181}],129:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363),
-    forEach = _dereq_(245),
-    map = _dereq_(247),
-    find = _dereq_(244),
-    findIndex = _dereq_(232),
-    sortBy = _dereq_(251),
-    reduce = _dereq_(248);
+var isArray = _dereq_(380),
+    forEach = _dereq_(262),
+    map = _dereq_(264),
+    find = _dereq_(261),
+    findIndex = _dereq_(249),
+    sortBy = _dereq_(268),
+    reduce = _dereq_(265);
 
-var getBBox = _dereq_(209).getBBox;
+var getBBox = _dereq_(226).getBBox;
 
-var PositionUtil = _dereq_(218);
+var PositionUtil = _dereq_(235);
 
-var CopyPasteUtil = _dereq_(207),
-    ElementsUtil = _dereq_(209);
+var CopyPasteUtil = _dereq_(224),
+    ElementsUtil = _dereq_(226);
 
 
 
@@ -21622,8 +23806,13 @@ CopyPaste.$inject = [
 
 module.exports = CopyPaste;
 
-
-// Pass in the elements to copy
+/**
+ * Copy a number of elements.
+ *
+ * @param {djs.model.Base} selectedElements
+ *
+ * @return {Object} the copied tree
+ */
 CopyPaste.prototype.copy = function(selectedElements) {
   var clipboard = this._clipboard,
       tree, bbox;
@@ -21679,9 +23868,16 @@ CopyPaste.prototype.copy = function(selectedElements) {
 
   this._eventBus.fire('elements.copy', { context: { tree: tree } });
 
-  clipboard.set(tree);
+  // if tree is empty, means that nothing can be or is allowed to be copied
+  if (Object.keys(tree).length === 0) {
+    clipboard.clear();
+  } else {
+    clipboard.set(tree);
+  }
 
-  this._tree = tree;
+  this._eventBus.fire('elements.copied', { context: { tree: tree } });
+
+  return tree;
 };
 
 
@@ -21791,14 +23987,6 @@ CopyPaste.prototype.hasRelations = function(elements, element) {
     }
   }
 
-  // if (element.host) {
-  //   host = find(elements, { element: { id: element.host.id } });
-  //
-  //   if (!host) {
-  //     return false;
-  //   }
-  // }
-
   return true;
 };
 
@@ -21853,9 +24041,6 @@ CopyPaste.prototype.createTree = function(elements) {
 
   var topLevel = CopyPasteUtil.getTopLevel(elements);
 
-  // create top level depth
-  tree[0] = [];
-
   tree.allShapes = [];
 
   function canCopy(collection, element) {
@@ -21886,10 +24071,6 @@ CopyPaste.prototype.createTree = function(elements) {
 
   ElementsUtil.eachElement(topLevel, function(element, i, depth) {
     var nestedChildren = element.children;
-
-    if (!tree[depth]) {
-      tree[depth] = [];
-    }
 
     // don't add labels directly
     if (element.labelTarget) {
@@ -21966,24 +24147,29 @@ CopyPaste.prototype.createTree = function(elements) {
 
     tree.allShapes.push(data.element);
 
+    // create depth branches
+    if (!tree[depth]) {
+      tree[depth] = [];
+    }
+
     tree[depth].push(data.descriptor);
   }, this);
 
   return tree;
 };
 
-},{"207":207,"209":209,"218":218,"232":232,"244":244,"245":245,"247":247,"248":248,"251":251,"363":363}],118:[function(_dereq_,module,exports){
+},{"224":224,"226":226,"235":235,"249":249,"261":261,"262":262,"264":264,"265":265,"268":268,"380":380}],130:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(114),
-    _dereq_(181),
-    _dereq_(159)
+    _dereq_(124),
+    _dereq_(195),
+    _dereq_(173)
   ],
   __init__: [ 'copyPaste' ],
-  copyPaste: [ 'type', _dereq_(117) ]
+  copyPaste: [ 'type', _dereq_(129) ]
 };
 
-},{"114":114,"117":117,"159":159,"181":181}],119:[function(_dereq_,module,exports){
+},{"124":124,"129":129,"173":173,"195":195}],131:[function(_dereq_,module,exports){
 'use strict';
 
 var MARKER_OK = 'drop-ok',
@@ -22158,31 +24344,31 @@ Create.$inject = [ 'eventBus', 'dragging', 'rules', 'modeling', 'canvas', 'style
 
 module.exports = Create;
 
-},{}],120:[function(_dereq_,module,exports){
+},{}],132:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(123),
-    _dereq_(185),
-    _dereq_(181)
+    _dereq_(135),
+    _dereq_(201),
+    _dereq_(195)
   ],
-  create: [ 'type', _dereq_(119) ]
+  create: [ 'type', _dereq_(131) ]
 };
 
-},{"119":119,"123":123,"181":181,"185":185}],121:[function(_dereq_,module,exports){
+},{"131":131,"135":135,"195":195,"201":201}],133:[function(_dereq_,module,exports){
 'use strict';
 
 /* global TouchEvent */
 
 var round = Math.round;
 
-var assign = _dereq_(372);
+var assign = _dereq_(389);
 
-var domEvent = _dereq_(390),
-    Event = _dereq_(210),
-    ClickTrap = _dereq_(205),
-    Cursor = _dereq_(208);
+var domEvent = _dereq_(407),
+    Event = _dereq_(227),
+    ClickTrap = _dereq_(222),
+    Cursor = _dereq_(225);
 
-var EventBusEvent = _dereq_(96).Event;
+var EventBusEvent = _dereq_(104).Event;
 
 var DRAG_ACTIVE_CLS = 'djs-drag-active';
 
@@ -22336,7 +24522,7 @@ function Dragging(eventBus, canvas, selection) {
         globalDelta = substract(globalCurrent, globalStart);
 
     var localStart = context.localStart,
-        localCurrent = toLocalPoint(event),
+        localCurrent = toLocalPoint(globalCurrent),
         localDelta = substract(localCurrent, localStart);
 
     // activate context explicitly or once threshold is reached
@@ -22678,14 +24864,14 @@ Dragging.$inject = [ 'eventBus', 'canvas', 'selection' ];
 
 module.exports = Dragging;
 
-},{"205":205,"208":208,"210":210,"372":372,"390":390,"96":96}],122:[function(_dereq_,module,exports){
+},{"104":104,"222":222,"225":225,"227":227,"389":389,"407":407}],134:[function(_dereq_,module,exports){
 'use strict';
 
-var domClosest = _dereq_(387);
+var domClosest = _dereq_(404);
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
-var Event = _dereq_(210);
+var Event = _dereq_(227);
 
 function getGfx(target) {
   var node = domClosest(target, 'svg, .djs-element', true);
@@ -22770,22 +24956,22 @@ function HoverFix(eventBus, dragging, elementRegistry) {
 HoverFix.$inject = [ 'eventBus', 'dragging', 'elementRegistry' ];
 
 module.exports = HoverFix;
-},{"210":210,"228":228,"387":387}],123:[function(_dereq_,module,exports){
+},{"227":227,"245":245,"404":404}],135:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [
     'hoverFix'
   ],
   __depends__: [
-    _dereq_(185)
+    _dereq_(201)
   ],
-  dragging: [ 'type', _dereq_(121) ],
-  hoverFix: [ 'type', _dereq_(122) ]
+  dragging: [ 'type', _dereq_(133) ],
+  hoverFix: [ 'type', _dereq_(134) ]
 };
-},{"121":121,"122":122,"185":185}],124:[function(_dereq_,module,exports){
+},{"133":133,"134":134,"201":201}],136:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    isArray = _dereq_(363);
+var forEach = _dereq_(262),
+    isArray = _dereq_(380);
 
 var NOT_REGISTERED_ERROR = 'is not a registered action',
     IS_REGISTERED_ERROR = 'is already registered';
@@ -22994,21 +25180,146 @@ function error(action, message) {
   return new Error(action + ' ' + message);
 }
 
-},{"245":245,"363":363}],125:[function(_dereq_,module,exports){
+},{"262":262,"380":380}],137:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(185),
-    _dereq_(118),
-    _dereq_(203)
+    _dereq_(201),
+    _dereq_(130),
+    _dereq_(220)
   ],
   __init__: [ 'editorActions' ],
-  editorActions: [ 'type', _dereq_(124) ]
+  editorActions: [ 'type', _dereq_(136) ]
 };
 
-},{"118":118,"124":124,"185":185,"203":203}],126:[function(_dereq_,module,exports){
+},{"130":130,"136":136,"201":201,"220":220}],138:[function(_dereq_,module,exports){
 'use strict';
 
-var hasPrimaryModifier = _dereq_(216).hasPrimaryModifier;
+var MARKER_OK = 'connect-ok',
+    MARKER_NOT_OK = 'connect-not-ok';
+
+
+function GlobalConnect(eventBus, dragging, connect, canvas, toolManager) {
+  var self = this;
+
+  this._dragging = dragging;
+
+  toolManager.registerTool('global-connect', {
+    tool: 'global-connect',
+    dragging: 'global-connect.drag'
+  });
+
+  eventBus.on('global-connect.hover', function(event) {
+    var context = event.context,
+        startTarget = event.hover;
+
+    var canStartConnect = context.canStartConnect = self.canStartConnect(startTarget);
+
+    // simply ignore hover
+    if (canStartConnect === null) {
+      return;
+    }
+
+    context.startTarget = startTarget;
+
+    canvas.addMarker(startTarget, canStartConnect ? MARKER_OK : MARKER_NOT_OK);
+  });
+
+
+  eventBus.on([ 'global-connect.out', 'global-connect.cleanup' ], function(event) {
+    var startTarget = event.context.startTarget,
+        canStartConnect = event.context.canStartConnect;
+
+    if (startTarget) {
+      canvas.removeMarker(startTarget, canStartConnect ? MARKER_OK : MARKER_NOT_OK);
+    }
+  });
+
+
+  eventBus.on([ 'global-connect.ended' ], function(event) {
+    var context = event.context,
+        startTarget = context.startTarget;
+
+    var canStartConnect = self.canStartConnect(startTarget);
+
+    if (!canStartConnect) {
+      return;
+    }
+
+    eventBus.once('element.out', function () {
+      eventBus.once([ 'connect.ended', 'connect.canceled' ], function () {
+        eventBus.fire('global-connect.drag.ended');
+      });
+
+      connect.start(null, startTarget);
+    });
+
+    return false;
+  });
+}
+
+GlobalConnect.$inject = [ 'eventBus', 'dragging', 'connect', 'canvas', 'toolManager' ];
+
+module.exports = GlobalConnect;
+
+
+/**
+ * Initiates tool activity.
+ */
+GlobalConnect.prototype.start = function(event) {
+  this._dragging.init(event, 'global-connect', {
+    trapClick: false,
+    data: {
+      context: {}
+    }
+  });
+};
+
+
+GlobalConnect.prototype.toggle = function() {
+  if (this.isActive()) {
+    this._dragging.cancel();
+  } else {
+    this.start();
+  }
+};
+
+GlobalConnect.prototype.isActive = function() {
+  var context = this._dragging.context();
+
+  return context && /^global-connect/.test(context.prefix);
+};
+
+
+GlobalConnect.prototype.registerProvider = function(provider) {
+  this._provider = provider;
+};
+
+
+/**
+ * Check if source shape can initiate connection.
+ *
+ * @param  {Shape} startTarget
+ * @return {Boolean}
+ */
+GlobalConnect.prototype.canStartConnect = function(startTarget) {
+  return this._provider.canStartConnect(startTarget);
+};
+
+},{}],139:[function(_dereq_,module,exports){
+module.exports = {
+  __depends__: [
+    _dereq_(126),
+    _dereq_(195),
+    _dereq_(135),
+    _dereq_(210)
+  ],
+  globalConnect: [ 'type', _dereq_(138) ]
+};
+
+},{"126":126,"135":135,"138":138,"195":195,"210":210}],140:[function(_dereq_,module,exports){
+'use strict';
+
+var hasPrimaryModifier = _dereq_(233).hasPrimaryModifier;
 
 
 var HIGH_PRIORITY = 1500;
@@ -23127,27 +25438,27 @@ HandTool.prototype.isActive = function() {
   return context && /^hand/.test(context.prefix);
 };
 
-},{"216":216}],127:[function(_dereq_,module,exports){
+},{"233":233}],141:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
-  __depends__: [ _dereq_(194) ],
+  __depends__: [ _dereq_(210) ],
   __init__: [ 'handTool' ],
-  handTool: [ 'type', _dereq_(126) ]
+  handTool: [ 'type', _dereq_(140) ]
 };
 
-},{"126":126,"194":194}],128:[function(_dereq_,module,exports){
+},{"140":140,"210":210}],142:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    domDelegate = _dereq_(388);
+var forEach = _dereq_(262),
+    domDelegate = _dereq_(405);
 
 
-var isPrimaryButton = _dereq_(216).isPrimaryButton;
+var isPrimaryButton = _dereq_(233).isPrimaryButton;
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
-var renderUtil = _dereq_(220);
+var renderUtil = _dereq_(237);
 
 var createLine = renderUtil.createLine,
     updateLine = renderUtil.updateLine;
@@ -23425,16 +25736,16 @@ module.exports = InteractionEvents;
  * @property {Event} originalEvent
  */
 
-},{"216":216,"220":220,"228":228,"245":245,"388":388}],129:[function(_dereq_,module,exports){
+},{"233":233,"237":237,"245":245,"262":262,"405":405}],143:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'interactionEvents' ],
-  interactionEvents: [ 'type', _dereq_(128) ]
+  interactionEvents: [ 'type', _dereq_(142) ]
 };
-},{"128":128}],130:[function(_dereq_,module,exports){
+},{"142":142}],144:[function(_dereq_,module,exports){
 'use strict';
 
-var domEvent = _dereq_(390),
-    domMatches = _dereq_(391);
+var domEvent = _dereq_(407),
+    domMatches = _dereq_(408);
 
 /**
  * A keyboard abstraction that may be activated and
@@ -23745,26 +26056,26 @@ function isShift(modifiers) {
   return modifiers.shiftKey;
 }
 
-},{"390":390,"391":391}],131:[function(_dereq_,module,exports){
+},{"407":407,"408":408}],145:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(125)
+    _dereq_(137)
   ],
   __init__: [ 'keyboard' ],
-  keyboard: [ 'type', _dereq_(130) ]
+  keyboard: [ 'type', _dereq_(144) ]
 };
 
-},{"125":125,"130":130}],132:[function(_dereq_,module,exports){
+},{"137":137,"144":144}],146:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    filter = _dereq_(243),
-    inherits = _dereq_(231);
+var forEach = _dereq_(262),
+    filter = _dereq_(260),
+    inherits = _dereq_(248);
 
 var LOW_PRIORITY = 250,
     HIGH_PRIORITY = 1400;
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
 
 /**
@@ -23859,25 +26170,25 @@ function removeLabels(elements) {
   });
 }
 
-},{"231":231,"243":243,"245":245,"90":90}],133:[function(_dereq_,module,exports){
+},{"248":248,"260":260,"262":262,"98":98}],147:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(162)
+    _dereq_(176)
   ],
   __init__: [ 'labelSupport'],
-  labelSupport: [ 'type', _dereq_(132) ]
+  labelSupport: [ 'type', _dereq_(146) ]
 };
 
-},{"132":132,"162":162}],134:[function(_dereq_,module,exports){
+},{"146":146,"176":176}],148:[function(_dereq_,module,exports){
 'use strict';
 
-var values = _dereq_(380);
+var values = _dereq_(397);
 
-var getEnclosedElements = _dereq_(209).getEnclosedElements;
+var getEnclosedElements = _dereq_(226).getEnclosedElements;
 
-var hasSecondaryModifier = _dereq_(216).hasSecondaryModifier;
+var hasSecondaryModifier = _dereq_(233).hasSecondaryModifier;
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var LASSO_TOOL_CURSOR = 'crosshair';
 
@@ -24125,21 +26436,21 @@ function toBBox(event) {
   return bbox;
 }
 
-},{"209":209,"216":216,"228":228,"380":380}],135:[function(_dereq_,module,exports){
+},{"226":226,"233":233,"245":245,"397":397}],149:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
-  __depends__: [ _dereq_(194) ],
+  __depends__: [ _dereq_(210) ],
   __init__: [ 'lassoTool' ],
-  lassoTool: [ 'type', _dereq_(134) ]
+  lassoTool: [ 'type', _dereq_(148) ]
 };
 
-},{"134":134,"194":194}],136:[function(_dereq_,module,exports){
+},{"148":148,"210":210}],150:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var model = _dereq_(198);
+var model = _dereq_(215);
 
 
 /**
@@ -24169,34 +26480,34 @@ module.exports = Modeling;
 
 Modeling.prototype.getHandlers = function() {
   return {
-    'shape.append': _dereq_(137),
-    'shape.create': _dereq_(140),
-    'shape.delete': _dereq_(143),
-    'shape.move': _dereq_(147),
-    'shape.resize': _dereq_(152),
-    'shape.replace': _dereq_(151),
+    'shape.append': _dereq_(151),
+    'shape.create': _dereq_(154),
+    'shape.delete': _dereq_(157),
+    'shape.move': _dereq_(161),
+    'shape.resize': _dereq_(166),
+    'shape.replace': _dereq_(165),
 
-    'spaceTool': _dereq_(153),
+    'spaceTool': _dereq_(167),
 
-    'label.create': _dereq_(139),
+    'label.create': _dereq_(153),
 
-    'connection.create': _dereq_(138),
-    'connection.delete': _dereq_(141),
-    'connection.move': _dereq_(145),
-    'connection.layout': _dereq_(144),
+    'connection.create': _dereq_(152),
+    'connection.delete': _dereq_(155),
+    'connection.move': _dereq_(159),
+    'connection.layout': _dereq_(158),
 
-    'connection.updateWaypoints': _dereq_(156),
+    'connection.updateWaypoints': _dereq_(170),
 
-    'connection.reconnectStart': _dereq_(150),
-    'connection.reconnectEnd': _dereq_(150),
+    'connection.reconnectStart': _dereq_(164),
+    'connection.reconnectEnd': _dereq_(164),
 
-    'elements.move': _dereq_(146),
-    'elements.delete': _dereq_(142),
+    'elements.move': _dereq_(160),
+    'elements.delete': _dereq_(156),
 
-    'element.updateAttachment': _dereq_(155),
-    'element.updateAnchors': _dereq_(154),
+    'element.updateAttachment': _dereq_(169),
+    'element.updateAnchors': _dereq_(168),
 
-    'elements.paste': _dereq_(149)
+    'elements.paste': _dereq_(163)
   };
 };
 
@@ -24534,12 +26845,12 @@ Modeling.prototype._create = function(type, attrs) {
   }
 };
 
-},{"137":137,"138":138,"139":139,"140":140,"141":141,"142":142,"143":143,"144":144,"145":145,"146":146,"147":147,"149":149,"150":150,"151":151,"152":152,"153":153,"154":154,"155":155,"156":156,"198":198,"245":245}],137:[function(_dereq_,module,exports){
+},{"151":151,"152":152,"153":153,"154":154,"155":155,"156":156,"157":157,"158":158,"159":159,"160":160,"161":161,"163":163,"164":164,"165":165,"166":166,"167":167,"168":168,"169":169,"170":170,"215":215,"262":262}],151:[function(_dereq_,module,exports){
 'use strict';
 
-var any = _dereq_(241);
+var any = _dereq_(258);
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
 
 /**
@@ -24554,7 +26865,7 @@ function AppendShapeHandler(modeling) {
   this._modeling = modeling;
 }
 
-inherits(AppendShapeHandler, _dereq_(148));
+inherits(AppendShapeHandler, _dereq_(162));
 
 
 AppendShapeHandler.$inject = [ 'modeling' ];
@@ -24601,7 +26912,7 @@ function existsConnection(source, target) {
     return c.target === target;
   });
 }
-},{"148":148,"231":231,"241":241}],138:[function(_dereq_,module,exports){
+},{"162":162,"248":248,"258":258}],152:[function(_dereq_,module,exports){
 'use strict';
 
 
@@ -24663,12 +26974,12 @@ CreateConnectionHandler.prototype.revert = function(context) {
   connection.source = null;
   connection.target = null;
 };
-},{}],139:[function(_dereq_,module,exports){
+},{}],153:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CreateShapeHandler = _dereq_(140);
+var CreateShapeHandler = _dereq_(154);
 
 
 /**
@@ -24736,10 +27047,10 @@ function ensureValidDimensions(label) {
     }
   });
 }
-},{"140":140,"231":231}],140:[function(_dereq_,module,exports){
+},{"154":154,"248":248}],154:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372);
+var assign = _dereq_(389);
 
 var round = Math.round;
 
@@ -24809,10 +27120,10 @@ CreateShapeHandler.prototype.revert = function(context) {
   // (3) remove form canvas
   this._canvas.removeShape(context.shape);
 };
-},{"372":372}],141:[function(_dereq_,module,exports){
+},{"389":389}],155:[function(_dereq_,module,exports){
 'use strict';
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
 
 /**
@@ -24882,11 +27193,11 @@ DeleteConnectionHandler.prototype.revert = function(context) {
   return connection;
 };
 
-},{"206":206}],142:[function(_dereq_,module,exports){
+},{"223":223}],156:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    inherits = _dereq_(231);
+var forEach = _dereq_(262),
+    inherits = _dereq_(248);
 
 
 function DeleteElementsHandler(modeling, elementRegistry) {
@@ -24894,7 +27205,7 @@ function DeleteElementsHandler(modeling, elementRegistry) {
   this._elementRegistry = elementRegistry;
 }
 
-inherits(DeleteElementsHandler, _dereq_(148));
+inherits(DeleteElementsHandler, _dereq_(162));
 
 DeleteElementsHandler.$inject = [ 'modeling', 'elementRegistry' ];
 
@@ -24922,12 +27233,12 @@ DeleteElementsHandler.prototype.postExecute = function(context) {
     }
   });
 };
-},{"148":148,"231":231,"245":245}],143:[function(_dereq_,module,exports){
+},{"162":162,"248":248,"262":262}],157:[function(_dereq_,module,exports){
 'use strict';
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
-var saveClear = _dereq_(219).saveClear;
+var saveClear = _dereq_(236).saveClear;
 
 
 /**
@@ -25028,10 +27339,10 @@ DeleteShapeHandler.prototype.revert = function(context) {
   return shape;
 };
 
-},{"206":206,"219":219}],144:[function(_dereq_,module,exports){
+},{"223":223,"236":236}],158:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372);
+var assign = _dereq_(389);
 
 
 /**
@@ -25144,12 +27455,12 @@ function sendToFront(connection) {
   return insertIndex;
 }
 
-},{"372":372}],145:[function(_dereq_,module,exports){
+},{"389":389}],159:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
 
 /**
@@ -25232,10 +27543,10 @@ MoveConnectionHandler.prototype.revert = function(context) {
 
   return connection;
 };
-},{"206":206,"245":245}],146:[function(_dereq_,module,exports){
+},{"223":223,"262":262}],160:[function(_dereq_,module,exports){
 'use strict';
 
-var MoveHelper = _dereq_(157);
+var MoveHelper = _dereq_(171);
 
 
 /**
@@ -25270,15 +27581,15 @@ MoveElementsHandler.prototype.postExecute = function(context) {
 MoveElementsHandler.prototype.execute = function(context) { };
 MoveElementsHandler.prototype.revert = function(context) { };
 
-},{"157":157}],147:[function(_dereq_,module,exports){
+},{"171":171}],161:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    forEach = _dereq_(245),
-    pick = _dereq_(378);
+var assign = _dereq_(389),
+    forEach = _dereq_(262),
+    pick = _dereq_(395);
 
-var MoveHelper = _dereq_(157),
-    Collections = _dereq_(206);
+var MoveHelper = _dereq_(171),
+    Collections = _dereq_(223);
 
 /**
  * A handler that implements reversible moving of shapes.
@@ -25379,7 +27690,7 @@ MoveShapeHandler.prototype.getNewParent = function(context) {
   return context.newParent || context.shape.parent;
 };
 
-},{"157":157,"206":206,"245":245,"372":372,"378":378}],148:[function(_dereq_,module,exports){
+},{"171":171,"223":223,"262":262,"389":389,"395":395}],162:[function(_dereq_,module,exports){
 'use strict';
 
 function NoopHandler() {}
@@ -25388,15 +27699,15 @@ module.exports = NoopHandler;
 
 NoopHandler.prototype.execute = function() {};
 NoopHandler.prototype.revert = function() {};
-},{}],149:[function(_dereq_,module,exports){
+},{}],163:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    map = _dereq_(247),
-    sortBy = _dereq_(251),
-    clone = _dereq_(361);
+var forEach = _dereq_(262),
+    map = _dereq_(264),
+    sortBy = _dereq_(268),
+    clone = _dereq_(378);
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
 
 
@@ -25427,7 +27738,7 @@ function PasteHandler(eventBus, canvas, selection, elementFactory, modeling, rul
   this._rules = rules;
 }
 
-inherits(PasteHandler, _dereq_(148));
+inherits(PasteHandler, _dereq_(162));
 
 
 PasteHandler.$inject = [
@@ -25563,7 +27874,7 @@ PasteHandler.prototype.postExecute = function(context) {
 
   var tree = context.tree,
       labels = tree.labels,
-      pastedElements;
+      topLevelElements = [];
 
   forEach(labels, function(labelDescriptor) {
     var labelTarget = this._getCreatedElement(labelDescriptor.labelTarget, tree),
@@ -25596,11 +27907,16 @@ PasteHandler.prototype.postExecute = function(context) {
     modeling.moveShape(label, newPosition, labelTarget.parent);
   }, this);
 
-  pastedElements = map(tree.createdElements, function(data) {
-    return data.element;
+  forEach(tree[0], function(descriptor) {
+    var id = descriptor.id,
+        toplevel = tree.createdElements[id];
+
+    if (toplevel) {
+      topLevelElements.push(toplevel.element);
+    }
   });
 
-  selection.select(pastedElements);
+  selection.select(topLevelElements);
 };
 
 
@@ -25668,10 +27984,10 @@ PasteHandler.prototype._getCreatedElement = function(id, tree) {
   return tree.createdElements[id] && tree.createdElements[id].element;
 };
 
-},{"148":148,"231":231,"245":245,"247":247,"251":251,"361":361}],150:[function(_dereq_,module,exports){
+},{"162":162,"248":248,"262":262,"264":264,"268":268,"378":378}],164:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363);
+var isArray = _dereq_(380);
 
 
 /**
@@ -25743,10 +28059,10 @@ ReconnectConnectionHandler.prototype.revert = function(context) {
 
   return connection;
 };
-},{"363":363}],151:[function(_dereq_,module,exports){
+},{"380":380}],165:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
 
 /**
@@ -25785,13 +28101,22 @@ module.exports = ReplaceShapeHandler;
  */
  ReplaceShapeHandler.prototype.preExecute = function(context) {
 
-  var modeling = this._modeling,
+  var self = this,
+      modeling = this._modeling,
       rules = this._rules;
 
   var oldShape = context.oldShape,
       newData = context.newData,
       hints = context.hints,
       newShape;
+
+  function canReconnect(type, source, target, connection) {
+    return rules.allowed(type, {
+      source: source,
+      target: target,
+      connection: connection
+    });
+  }
 
 
   // (1) place a new shape at the given position
@@ -25801,7 +28126,7 @@ module.exports = ReplaceShapeHandler;
     y: newData.y
   };
 
-  newShape = context.newShape = context.newShape || modeling.createShape(newData, position, oldShape.parent);
+  newShape = context.newShape = context.newShape || self.createShape(newData, position, oldShape.parent);
 
 
   // (2) update the host
@@ -25813,8 +28138,12 @@ module.exports = ReplaceShapeHandler;
 
   // (3) adopt all children from the old shape
 
+  var children;
+
   if (hints.moveChildren !== false) {
-    modeling.moveElements(oldShape.children, { x: 0, y: 0 }, newShape);
+    children = oldShape.children.slice();
+
+    modeling.moveElements(children, { x: 0, y: 0 }, newShape);
   }
 
   // (4) reconnect connections to the new shape (where allowed)
@@ -25825,28 +28154,22 @@ module.exports = ReplaceShapeHandler;
   forEach(incoming, function(connection) {
     var waypoints = connection.waypoints,
         docking = waypoints[waypoints.length - 1],
-        allowed = rules.allowed('connection.reconnectEnd', {
-          source: connection.source,
-          target: newShape,
-          connection: connection
-        });
+        source = connection.source,
+        allowed = canReconnect('connection.reconnectEnd', source, newShape, connection);
 
     if (allowed) {
-      modeling.reconnectEnd(connection, newShape, docking);
+      self.reconnectEnd(connection, newShape, docking);
     }
   });
 
   forEach(outgoing, function(connection) {
     var waypoints = connection.waypoints,
         docking = waypoints[0],
-        allowed = rules.allowed('connection.reconnectStart', {
-          source: newShape,
-          target: connection.target,
-          connection: connection
-        });
+        target = connection.target,
+        allowed = canReconnect('connection.reconnectStart', newShape, target, connection);
 
     if (allowed) {
-      modeling.reconnectStart(connection, newShape, docking);
+      self.reconnectStart(connection, newShape, docking);
     }
 
   });
@@ -25876,11 +28199,29 @@ ReplaceShapeHandler.prototype.execute = function(context) {};
 
 ReplaceShapeHandler.prototype.revert = function(context) {};
 
-},{"245":245}],152:[function(_dereq_,module,exports){
+
+ReplaceShapeHandler.prototype.createShape = function(shape, position, target) {
+  var modeling = this._modeling;
+  return modeling.createShape(shape, position, target);
+};
+
+
+ReplaceShapeHandler.prototype.reconnectStart = function(connection, newSource, dockingPoint) {
+  var modeling = this._modeling;
+  modeling.reconnectStart(connection, newSource, dockingPoint);
+};
+
+
+ReplaceShapeHandler.prototype.reconnectEnd = function(connection, newTarget, dockingPoint) {
+  var modeling = this._modeling;
+  modeling.reconnectEnd(connection, newTarget, dockingPoint);
+};
+
+},{"262":262}],166:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    forEach = _dereq_(245);
+var assign = _dereq_(389),
+    forEach = _dereq_(262);
 
 
 /**
@@ -25975,12 +28316,12 @@ ResizeShapeHandler.prototype.revert = function(context) {
   return shape;
 };
 
-},{"245":245,"372":372}],153:[function(_dereq_,module,exports){
+},{"262":262,"389":389}],167:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var SpaceUtil = _dereq_(191);
+var SpaceUtil = _dereq_(207);
 
 /**
  * A handler that implements reversible creating and removing of space.
@@ -26026,12 +28367,12 @@ SpaceToolHandler.prototype.postExecute = function(context) {
 SpaceToolHandler.prototype.execute = function(context) {};
 SpaceToolHandler.prototype.revert = function(context) {};
 
-},{"191":191,"245":245}],154:[function(_dereq_,module,exports){
+},{"207":207,"262":262}],168:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var getNewAttachPoint = _dereq_(204).getNewAttachPoint;
+var getNewAttachPoint = _dereq_(221).getNewAttachPoint;
 
 /**
  * Update the anchors of
@@ -26101,10 +28442,10 @@ UpdateAnchorsHandler.prototype.revert = function(context) {
 
   return changedConnections;
 };
-},{"204":204,"245":245}],155:[function(_dereq_,module,exports){
+},{"221":221,"262":262}],169:[function(_dereq_,module,exports){
 'use strict';
 
-var Collections = _dereq_(206);
+var Collections = _dereq_(223);
 
 /**
  * A handler that implements reversible attaching/detaching of shapes.
@@ -26175,7 +28516,7 @@ function addAttacher(host, attacher, idx) {
   Collections.add(attachers, attacher, idx);
 }
 
-},{"206":206}],156:[function(_dereq_,module,exports){
+},{"223":223}],170:[function(_dereq_,module,exports){
 'use strict';
 
 function UpdateWaypointsHandler() { }
@@ -26203,12 +28544,12 @@ UpdateWaypointsHandler.prototype.revert = function(context) {
 
   return connection;
 };
-},{}],157:[function(_dereq_,module,exports){
+},{}],171:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var Elements = _dereq_(209);
+var Elements = _dereq_(226);
 
 
 /**
@@ -26301,10 +28642,10 @@ MoveHelper.prototype.getClosure = function(elements) {
   return Elements.getClosure(elements);
 };
 
-},{"209":209,"245":245}],158:[function(_dereq_,module,exports){
+},{"226":226,"262":262}],172:[function(_dereq_,module,exports){
 'use strict';
 
-var bind = _dereq_(253);
+var bind = _dereq_(270);
 
 
 function MouseTracking(eventBus, canvas) {
@@ -26362,26 +28703,26 @@ MouseTracking.prototype._setMousePosition = function(event) {
   this._mouseY = event.offsetY;
 };
 
-},{"253":253}],159:[function(_dereq_,module,exports){
+},{"270":270}],173:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'mouseTracking' ],
-  mouseTracking: [ 'type', _dereq_(158) ]
+  mouseTracking: [ 'type', _dereq_(172) ]
 };
 
-},{"158":158}],160:[function(_dereq_,module,exports){
+},{"172":172}],174:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    filter = _dereq_(243),
-    groupBy = _dereq_(246);
+var assign = _dereq_(389),
+    filter = _dereq_(260),
+    groupBy = _dereq_(263);
 
 var LOW_PRIORITY = 500,
     MEDIUM_PRIORITY = 1250,
     HIGH_PRIORITY = 1500;
 
-var getOriginalEvent = _dereq_(210).getOriginal;
+var getOriginalEvent = _dereq_(227).getOriginal;
 
 var round = Math.round;
 
@@ -26532,12 +28873,13 @@ function MoveEvents(eventBus, dragging, modeling, selection, rules) {
 
     var originalEvent = getOriginalEvent(event);
 
-    //only activate, if originalEvent exists
-    if (originalEvent) {
-      start(originalEvent, event.element);
+    if (!originalEvent) {
+      throw new Error('must supply DOM mousedown event');
     }
 
+    start(originalEvent, event.element);
   });
+
 
   function start(event, element, activate) {
 
@@ -26556,10 +28898,10 @@ function MoveEvents(eventBus, dragging, modeling, selection, rules) {
         context: {}
       }
     });
-
   }
 
   // API
+
   this.start = start;
 }
 
@@ -26593,18 +28935,18 @@ function removeNested(elements) {
   });
 }
 
-},{"210":210,"243":243,"246":246,"372":372}],161:[function(_dereq_,module,exports){
+},{"227":227,"260":260,"263":263,"389":389}],175:[function(_dereq_,module,exports){
 'use strict';
 
-var flatten = _dereq_(233),
-    forEach = _dereq_(245),
-    filter = _dereq_(243),
-    find = _dereq_(244),
-    size = _dereq_(249),
-    groupBy = _dereq_(246),
-    map = _dereq_(247);
+var flatten = _dereq_(250),
+    forEach = _dereq_(262),
+    filter = _dereq_(260),
+    find = _dereq_(261),
+    size = _dereq_(266),
+    groupBy = _dereq_(263),
+    map = _dereq_(264);
 
-var Elements = _dereq_(209);
+var Elements = _dereq_(226);
 
 var LOW_PRIORITY = 500;
 
@@ -26828,26 +29170,26 @@ MoveVisuals.$inject = [ 'eventBus', 'elementRegistry', 'canvas', 'styles' ];
 
 module.exports = MoveVisuals;
 
-},{"209":209,"233":233,"243":243,"244":244,"245":245,"246":246,"247":247,"249":249}],162:[function(_dereq_,module,exports){
+},{"226":226,"250":250,"260":260,"261":261,"262":262,"263":263,"264":264,"266":266}],176:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(129),
-    _dereq_(185),
-    _dereq_(165),
-    _dereq_(181),
-    _dereq_(123)
+    _dereq_(143),
+    _dereq_(201),
+    _dereq_(179),
+    _dereq_(195),
+    _dereq_(135)
   ],
   __init__: [ 'move', 'moveVisuals' ],
-  move: [ 'type', _dereq_(160) ],
-  moveVisuals: [ 'type', _dereq_(161) ]
+  move: [ 'type', _dereq_(174) ],
+  moveVisuals: [ 'type', _dereq_(175) ]
 };
 
-},{"123":123,"129":129,"160":160,"161":161,"165":165,"181":181,"185":185}],163:[function(_dereq_,module,exports){
+},{"135":135,"143":143,"174":174,"175":175,"179":179,"195":195,"201":201}],177:[function(_dereq_,module,exports){
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
 
 /**
@@ -26942,10 +29284,10 @@ OrderingProvider.prototype.getOrdering = function(element, newParent) {
 inherits(OrderingProvider, CommandInterceptor);
 
 module.exports = OrderingProvider;
-},{"231":231,"90":90}],164:[function(_dereq_,module,exports){
+},{"248":248,"98":98}],178:[function(_dereq_,module,exports){
 'use strict';
 
-var getBBox = _dereq_(209).getBBox;
+var getBBox = _dereq_(226).getBBox;
 
 
 /**
@@ -27042,33 +29384,33 @@ Outline.$inject = ['eventBus', 'styles', 'elementRegistry'];
 
 module.exports = Outline;
 
-},{"209":209}],165:[function(_dereq_,module,exports){
+},{"226":226}],179:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'outline' ],
-  outline: [ 'type', _dereq_(164) ]
+  outline: [ 'type', _dereq_(178) ]
 };
-},{"164":164}],166:[function(_dereq_,module,exports){
+},{"178":178}],180:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363),
-    isString = _dereq_(369),
-    isObject = _dereq_(367),
-    assign = _dereq_(372),
-    forEach = _dereq_(245),
-    find = _dereq_(244),
-    filter = _dereq_(243);
+var isArray = _dereq_(380),
+    isString = _dereq_(386),
+    isObject = _dereq_(384),
+    assign = _dereq_(389),
+    forEach = _dereq_(262),
+    find = _dereq_(261),
+    filter = _dereq_(260);
 
-var domify = _dereq_(389),
-    domClasses = _dereq_(385),
-    domAttr = _dereq_(384),
-    domRemove = _dereq_(393);
+var domify = _dereq_(406),
+    domClasses = _dereq_(402),
+    domAttr = _dereq_(401),
+    domRemove = _dereq_(410);
 
-var getBBox = _dereq_(209).getBBox;
+var getBBox = _dereq_(226).getBBox;
 
 // document wide unique overlay ids
-var ids = new (_dereq_(213))('ov');
+var ids = new (_dereq_(230))('ov');
 
 
 function createRoot(parent) {
@@ -27550,8 +29892,10 @@ Overlays.prototype._init = function() {
 
     if (container) {
       domRemove(container.html);
-      var i = self._overlayContainers.indexOf();
-      self._overlayContainers.splice(i, 1);
+      var i = self._overlayContainers.indexOf(container);
+      if (i !== -1) {
+        self._overlayContainers.splice(i, 1);
+      }
     }
   });
 
@@ -27585,25 +29929,25 @@ Overlays.prototype._init = function() {
   });
 };
 
-},{"209":209,"213":213,"243":243,"244":244,"245":245,"363":363,"367":367,"369":369,"372":372,"384":384,"385":385,"389":389,"393":393}],167:[function(_dereq_,module,exports){
+},{"226":226,"230":230,"260":260,"261":261,"262":262,"380":380,"384":384,"386":386,"389":389,"401":401,"402":402,"406":406,"410":410}],181:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'overlays' ],
-  overlays: [ 'type', _dereq_(166) ]
+  overlays: [ 'type', _dereq_(180) ]
 };
-},{"166":166}],168:[function(_dereq_,module,exports){
+},{"180":180}],182:[function(_dereq_,module,exports){
 'use strict';
 
-var isFunction = _dereq_(364),
-    forEach = _dereq_(245);
+var isFunction = _dereq_(381),
+    forEach = _dereq_(262);
 
-var domify = _dereq_(389),
-    domQuery = _dereq_(392),
-    domAttr = _dereq_(384),
-    domClear = _dereq_(386),
-    domClasses = _dereq_(385),
-    domMatches = _dereq_(391),
-    domDelegate = _dereq_(388),
-    domEvent = _dereq_(390);
+var domify = _dereq_(406),
+    domQuery = _dereq_(409),
+    domAttr = _dereq_(401),
+    domClear = _dereq_(403),
+    domClasses = _dereq_(402),
+    domMatches = _dereq_(408),
+    domDelegate = _dereq_(405),
+    domEvent = _dereq_(407);
 
 
 var toggleSelector = '.djs-palette-toggle',
@@ -27904,27 +30248,27 @@ Palette.HTML_MARKUP =
     '<div class="djs-palette-toggle"></div>' +
   '</div>';
 
-},{"245":245,"364":364,"384":384,"385":385,"386":386,"388":388,"389":389,"390":390,"391":391,"392":392}],169:[function(_dereq_,module,exports){
+},{"262":262,"381":381,"401":401,"402":402,"403":403,"405":405,"406":406,"407":407,"408":408,"409":409}],183:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
-  __depends__: [ _dereq_(194) ],
+  __depends__: [ _dereq_(210) ],
   __init__: [ 'palette' ],
-  palette: [ 'type', _dereq_(168) ]
+  palette: [ 'type', _dereq_(182) ]
 };
 
-},{"168":168,"194":194}],170:[function(_dereq_,module,exports){
+},{"182":182,"210":210}],184:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245),
-    assign = _dereq_(372),
-    find = _dereq_(244);
+var forEach = _dereq_(262),
+    assign = _dereq_(389),
+    find = _dereq_(261);
 
-var domDelegate = _dereq_(388),
-    domify = _dereq_(389),
-    domClasses = _dereq_(385),
-    domAttr = _dereq_(384),
-    domRemove = _dereq_(393);
+var domDelegate = _dereq_(405),
+    domify = _dereq_(406),
+    domClasses = _dereq_(402),
+    domAttr = _dereq_(401),
+    domRemove = _dereq_(410);
 
 var DATA_REF = 'data-id';
 
@@ -28346,15 +30690,15 @@ PopupMenu.prototype._unbindHandlers = function() {
 
 module.exports = PopupMenu;
 
-},{"244":244,"245":245,"372":372,"384":384,"385":385,"388":388,"389":389,"393":393}],171:[function(_dereq_,module,exports){
+},{"261":261,"262":262,"389":389,"401":401,"402":402,"405":405,"406":406,"410":410}],185:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'popupMenu' ],
-  popupMenu: [ 'type', _dereq_(170) ]
+  popupMenu: [ 'type', _dereq_(184) ]
 };
 
-},{"170":170}],172:[function(_dereq_,module,exports){
+},{"184":184}],186:[function(_dereq_,module,exports){
 'use strict';
 
 
@@ -28403,24 +30747,24 @@ Replace.prototype.replaceElement = function(oldElement, newElementData, options)
   return newElement;
 };
 
-},{}],173:[function(_dereq_,module,exports){
+},{}],187:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'replace' ],
-  replace: [ 'type', _dereq_(172) ]
+  replace: [ 'type', _dereq_(186) ]
 };
 
-},{"172":172}],174:[function(_dereq_,module,exports){
+},{"186":186}],188:[function(_dereq_,module,exports){
 'use strict';
 
-var pick = _dereq_(378),
-    assign = _dereq_(372);
+var pick = _dereq_(395),
+    assign = _dereq_(389);
 
-var ResizeUtil = _dereq_(176);
+var ResizeUtil = _dereq_(190);
 
-var asTRBL = _dereq_(196).asTRBL,
-    roundBounds = _dereq_(196).roundBounds;
+var asTRBL = _dereq_(213).asTRBL,
+    roundBounds = _dereq_(213).roundBounds;
 
 var DEFAULT_MIN_WIDTH = 10;
 
@@ -28602,12 +30946,12 @@ Resize.$inject = [ 'eventBus', 'rules', 'modeling', 'dragging' ];
 
 module.exports = Resize;
 
-},{"176":176,"196":196,"372":372,"378":378}],175:[function(_dereq_,module,exports){
+},{"190":190,"213":213,"389":389,"395":395}],189:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var HANDLE_OFFSET = -2,
     HANDLE_SIZE  = 5,
@@ -28615,11 +30959,11 @@ var HANDLE_OFFSET = -2,
 
 var CLS_RESIZER   = 'djs-resizer';
 
-var domEvent = _dereq_(390);
+var domEvent = _dereq_(407);
 
-var isPrimaryButton = _dereq_(216).isPrimaryButton;
+var isPrimaryButton = _dereq_(233).isPrimaryButton;
 
-var asTRBL = _dereq_(196).asTRBL;
+var asTRBL = _dereq_(213).asTRBL;
 
 
 /**
@@ -28758,21 +31102,21 @@ ResizeHandles.$inject = [ 'eventBus', 'canvas', 'selection', 'resize' ];
 
 module.exports = ResizeHandles;
 
-},{"196":196,"216":216,"228":228,"245":245,"390":390}],176:[function(_dereq_,module,exports){
+},{"213":213,"233":233,"245":245,"262":262,"407":407}],190:[function(_dereq_,module,exports){
 'use strict';
 
-var filter = _dereq_(243);
+var filter = _dereq_(260);
 
 var max = Math.max,
     min = Math.min;
 
 var DEFAULT_CHILD_BOX_PADDING = 20;
 
-var getBBox = _dereq_(209).getBBox;
+var getBBox = _dereq_(226).getBBox;
 
 
-var asTRBL = _dereq_(196).asTRBL,
-    asBounds = _dereq_(196).asBounds;
+var asTRBL = _dereq_(213).asTRBL,
+    asBounds = _dereq_(213).asBounds;
 
 function isNumber(a) {
   return typeof a === 'number';
@@ -29022,10 +31366,10 @@ function computeChildrenBBox(shapeOrChildren, padding) {
 
 module.exports.computeChildrenBBox = computeChildrenBBox;
 
-},{"196":196,"209":209,"243":243}],177:[function(_dereq_,module,exports){
+},{"213":213,"226":226,"260":260}],191:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var MARKER_RESIZING = 'djs-resizing',
     MARKER_RESIZE_NOT_OK = 'resize-not-ok';
@@ -29126,25 +31470,25 @@ ResizeVisuals.$inject = [ 'eventBus', 'canvas' ];
 
 module.exports = ResizeVisuals;
 
-},{"228":228}],178:[function(_dereq_,module,exports){
+},{"245":245}],192:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
-    _dereq_(181),
-    _dereq_(123)
+    _dereq_(195),
+    _dereq_(135)
   ],
   __init__: [ 'resize', 'resizeVisuals', 'resizeHandles' ],
-  resize: [ 'type', _dereq_(174) ],
-  resizeVisuals: [ 'type', _dereq_(177) ],
-  resizeHandles: [ 'type', _dereq_(175) ]
+  resize: [ 'type', _dereq_(188) ],
+  resizeVisuals: [ 'type', _dereq_(191) ],
+  resizeHandles: [ 'type', _dereq_(189) ]
 };
 
-},{"123":123,"174":174,"175":175,"177":177,"181":181}],179:[function(_dereq_,module,exports){
+},{"135":135,"188":188,"189":189,"191":191,"195":195}],193:[function(_dereq_,module,exports){
 
 'use strict';
 
-var inherits = _dereq_(231);
+var inherits = _dereq_(248);
 
-var CommandInterceptor = _dereq_(90);
+var CommandInterceptor = _dereq_(98);
 
 /**
  * A basic provider that may be extended to implement modeling rules.
@@ -29231,7 +31575,7 @@ RuleProvider.prototype.addRule = function(actions, priority, fn) {
  * Implement this method to add new rules during provider initialization.
  */
 RuleProvider.prototype.init = function() {};
-},{"231":231,"90":90}],180:[function(_dereq_,module,exports){
+},{"248":248,"98":98}],194:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -29282,17 +31626,576 @@ Rules.prototype.allowed = function(action, context) {
   // map undefined to true, i.e. no rules
   return allowed === undefined ? true : allowed;
 };
-},{}],181:[function(_dereq_,module,exports){
+},{}],195:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'rules' ],
-  rules: [ 'type', _dereq_(180) ]
+  rules: [ 'type', _dereq_(194) ]
 };
 
-},{"180":180}],182:[function(_dereq_,module,exports){
+},{"194":194}],196:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363),
-    forEach = _dereq_(245);
+var domClear = _dereq_(403),
+    domDelegate = _dereq_(405),
+    domQuery = _dereq_(409),
+    domClasses = _dereq_(402),
+    domAttr = _dereq_(401),
+    domify = _dereq_(406);
+
+var getBoundingBox = _dereq_(226).getBBox;
+
+
+/**
+ * Provides searching infrastructure
+ */
+function SearchPad(canvas, eventBus, overlays, selection) {
+  this._open = false;
+  this._results = [];
+  this._eventMaps = [];
+
+  this._canvas = canvas;
+  this._eventBus = eventBus;
+  this._overlays = overlays;
+  this._selection = selection;
+
+  // setup elements
+  this._container = domify(SearchPad.BOX_HTML);
+  this._searchInput = domQuery(SearchPad.INPUT_SELECTOR, this._container);
+  this._resultsContainer = domQuery(SearchPad.RESULTS_CONTAINER_SELECTOR, this._container);
+
+  // attach search pad
+  this._canvas.getContainer().appendChild(this._container);
+
+  // cleanup on destroy
+  eventBus.on([ 'canvas.destroy', 'diagram.destroy' ], this.close, this);
+}
+
+
+SearchPad.$inject = [
+  'canvas',
+  'eventBus',
+  'overlays',
+  'selection'
+];
+
+
+/**
+ * Binds and keeps track of all event listereners
+ */
+SearchPad.prototype._bindEvents = function() {
+  var self = this;
+
+  function listen(el, selector, type, fn) {
+    self._eventMaps.push({
+      el: el,
+      type: type,
+      listener: domDelegate.bind(el, selector, type, fn)
+    });
+  }
+
+  // close search on clicking anywhere outside
+  listen(document, 'html', 'click', function(e) {
+    self.close();
+  }, true);
+
+  // stop event from propagating and closing search
+  // focus on input
+  listen(this._container, SearchPad.INPUT_SELECTOR, 'click', function(e) {
+    e.stopPropagation();
+    e.delegateTarget.focus();
+  });
+
+  // preselect result on hover
+  listen(this._container, SearchPad.RESULT_SELECTOR, 'mouseover', function(e) {
+    e.stopPropagation();
+    self._scrollToNode(e.delegateTarget);
+    self._preselect(e.delegateTarget);
+  });
+
+  // selects desired result on mouse click
+  listen(this._container, SearchPad.RESULT_SELECTOR, 'click', function(e) {
+    e.stopPropagation();
+    self._select(e.delegateTarget);
+  });
+
+  // prevent cursor in input from going left and right when using up/down to
+  // navigate results
+  listen(this._container, SearchPad.INPUT_SELECTOR, 'keydown', function(e) {
+    // up
+    if (e.keyCode === 38) {
+      e.preventDefault();
+    }
+
+    // down
+    if (e.keyCode === 40) {
+      e.preventDefault();
+    }
+  });
+
+  // handle keyboard input
+  listen(this._container, SearchPad.INPUT_SELECTOR, 'keyup', function(e) {
+    // escape
+    if (e.keyCode === 27) {
+      return self.close();
+    }
+
+    // enter
+    if (e.keyCode === 13) {
+      var selected = self._getCurrentResult();
+
+      return selected ? self._select(selected) : self.close();
+    }
+
+    // up
+    if (e.keyCode === 38) {
+      return self._scrollToDirection(true);
+    }
+
+    // down
+    if (e.keyCode === 40) {
+      return self._scrollToDirection();
+    }
+
+    // left && right
+    // do not search while navigating text input
+    if (e.keyCode === 37 || e.keyCode === 39) {
+      return;
+    }
+
+    // anything else
+    self._search(e.delegateTarget.value);
+  });
+};
+
+
+/**
+ * Unbinds all previously established listeners
+ */
+SearchPad.prototype._unbindEvents = function() {
+  this._eventMaps.forEach(function(m){
+    domDelegate.unbind(m.el, m.type, m.listener);
+  });
+};
+
+
+/**
+ * Performs a search for the given pattern.
+ *
+ * @param  {String} pattern
+ */
+SearchPad.prototype._search = function(pattern) {
+  var self = this;
+
+  this._clearResults();
+
+  // do not search on empty query
+  if (!pattern || pattern === '') {
+    return;
+  }
+
+  var searchResults = this._searchProvider.find(pattern);
+
+  if (!searchResults.length) {
+    return;
+  }
+
+  // append new results
+  searchResults.forEach(function(result) {
+    var id = result.element.id;
+    var node = self._createResultNode(result, id);
+    self._results[id] = {
+      element: result.element,
+      node: node
+    };
+  });
+
+  // preselect first result
+  var node = domQuery(SearchPad.RESULT_SELECTOR, this._resultsContainer);
+  this._scrollToNode(node);
+  this._preselect(node);
+};
+
+
+/**
+ * Navigate to the previous/next result. Defaults to next result.
+ * @param  {Boolean} previous
+ */
+SearchPad.prototype._scrollToDirection = function(previous) {
+  var selected = this._getCurrentResult();
+  if (!selected) {
+    return;
+  }
+
+  var node = previous ? selected.previousElementSibling : selected.nextElementSibling;
+  if (node) {
+    this._scrollToNode(node);
+    this._preselect(node);
+  }
+};
+
+
+/**
+ * Scroll to the node if it is not visible.
+ *
+ * @param  {Element} node
+ */
+SearchPad.prototype._scrollToNode = function(node) {
+  if (!node || node === this._getCurrentResult()) {
+    return;
+  }
+
+  var nodeOffset = node.offsetTop;
+  var containerScroll = this._resultsContainer.scrollTop;
+
+  var bottomScroll = nodeOffset - this._resultsContainer.clientHeight + node.clientHeight;
+
+  if (nodeOffset < containerScroll) {
+    this._resultsContainer.scrollTop = nodeOffset;
+  } else if (containerScroll < bottomScroll) {
+    this._resultsContainer.scrollTop = bottomScroll;
+  }
+};
+
+
+/**
+ * Clears all results data.
+ */
+SearchPad.prototype._clearResults = function() {
+  domClear(this._resultsContainer);
+
+  this._results = [];
+
+  this._resetOverlay();
+
+  this._eventBus.fire('searchPad.cleared');
+};
+
+
+/**
+ * Get currently selected result.
+ *
+ * @return {Element}
+ */
+SearchPad.prototype._getCurrentResult = function() {
+  return domQuery(SearchPad.RESULT_SELECTED_SELECTOR, this._resultsContainer);
+};
+
+
+/**
+ * Create result DOM element within results container
+ * that corresponds to a search result.
+ *
+ * 'result' : one of the elements returned by SearchProvider
+ * 'id' : id attribute value to assign to the new DOM node
+ * return : created DOM element
+ *
+ * @param  {SearchResult} result
+ * @param  {String} id
+ * @return {Element}
+ */
+SearchPad.prototype._createResultNode = function(result, id) {
+  var node = domify(SearchPad.RESULT_HTML);
+
+  // create only if available
+  if (result.primaryTokens.length > 0){
+    createInnerTextNode(node, result.primaryTokens, SearchPad.RESULT_PRIMARY_HTML);
+  }
+
+  // secondary tokens (represent element ID) are allways available
+  createInnerTextNode(node, result.secondaryTokens, SearchPad.RESULT_SECONDARY_HTML);
+
+  domAttr(node, SearchPad.RESULT_ID_ATTRIBUTE, id);
+
+  this._resultsContainer.appendChild(node);
+
+  return node;
+};
+
+
+/**
+ * Register search element provider.
+ *
+ * SearchProvider.find - provides search function over own elements
+ *  (pattern) => [{ text: <String>, element: <Element>}, ...]
+ *
+ * @param  {SearchProvider} provider
+ */
+SearchPad.prototype.registerProvider = function(provider) {
+  this._searchProvider = provider;
+};
+
+
+/**
+ * Open search pad.
+ */
+SearchPad.prototype.open = function() {
+  if (!this._searchProvider) {
+    throw new Error('no search provider registered');
+  }
+
+  if (this.isOpen()) {
+    return;
+  }
+
+  this._bindEvents();
+
+  this._open = true;
+
+  domClasses(this._container).add('open');
+
+  this._searchInput.focus();
+
+  this._eventBus.fire('searchPad.opened');
+};
+
+
+/**
+ * Close search pad.
+ */
+SearchPad.prototype.close = function() {
+  if (!this.isOpen()) {
+    return;
+  }
+
+  this._unbindEvents();
+
+  this._open = false;
+
+  domClasses(this._container).remove('open');
+
+  this._clearResults();
+
+  this._searchInput.value = '';
+  this._searchInput.blur();
+
+  this._resetOverlay();
+
+  this._eventBus.fire('searchPad.closed');
+};
+
+
+/**
+ * Toggles search pad on/off.
+ */
+SearchPad.prototype.toggle = function() {
+  this.isOpen() ? this.close() : this.open();
+};
+
+
+/**
+ * Report state of search pad.
+ */
+SearchPad.prototype.isOpen = function() {
+  return this._open;
+};
+
+
+/**
+ * Preselect result entry.
+ *
+ * @param  {Element} element
+ */
+SearchPad.prototype._preselect = function(node) {
+  var selectedNode = this._getCurrentResult();
+
+  // already selected
+  if (node === selectedNode) {
+    return;
+  }
+
+  // removing preselection from current node
+  if (selectedNode) {
+    domClasses(selectedNode).remove(SearchPad.RESULT_SELECTED_CLASS);
+  }
+
+  var id = domAttr(node, SearchPad.RESULT_ID_ATTRIBUTE);
+  var element = this._results[id].element;
+
+  domClasses(node).add(SearchPad.RESULT_SELECTED_CLASS);
+
+  this._resetOverlay(element);
+
+  this._centerViewbox(element);
+
+  this._selection.select(element);
+
+  this._eventBus.fire('searchPad.preselected', element);
+};
+
+
+/**
+ * Select result node.
+ *
+ * @param  {Element} element
+ */
+SearchPad.prototype._select = function(node) {
+  var id = domAttr(node, SearchPad.RESULT_ID_ATTRIBUTE);
+  var element = this._results[id].element;
+
+  this.close();
+
+  this._resetOverlay();
+
+  this._centerViewbox(element);
+
+  this._selection.select(element);
+
+  this._eventBus.fire('searchPad.selected', element);
+};
+
+
+/**
+ * Center viewbox on the element middle point.
+ *
+ * @param  {Element} element
+ */
+SearchPad.prototype._centerViewbox = function(element) {
+  var viewbox = this._canvas.viewbox();
+
+  var box = getBoundingBox(element);
+
+  var newViewbox = {
+    x: (box.x + box.width/2) - viewbox.outer.width/2,
+    y: (box.y + box.height/2) - viewbox.outer.height/2,
+    width: viewbox.outer.width,
+    height: viewbox.outer.height
+  };
+
+  this._canvas.viewbox(newViewbox);
+
+  this._canvas.zoom(viewbox.scale);
+};
+
+
+/**
+ * Reset overlay removes and, optionally, set
+ * overlay to a new element.
+ *
+ * @param  {Element} element
+ */
+SearchPad.prototype._resetOverlay = function(element) {
+  if (this._overlayId) {
+    this._overlays.remove(this._overlayId);
+  }
+
+  if (element) {
+    var box = getBoundingBox(element);
+    var overlay = constructOverlay(box);
+    this._overlayId = this._overlays.add(element, overlay);
+  }
+};
+
+
+module.exports = SearchPad;
+
+/**
+ * Construct overlay object for the given bounding box.
+ *
+ * @param  {BoundingBox} box
+ * @return {Object}
+ */
+function constructOverlay(box) {
+
+  var offset = 6;
+  var w = box.width + offset * 2;
+  var h = box.height + offset * 2;
+
+  var styles = [
+    'width: '+ w +'px',
+    'height: '+ h + 'px',
+  ].join('; ');
+
+  return {
+    position: {
+      bottom: h - offset,
+      right: w - offset
+    },
+    show: true,
+    html: '<div style="' + styles + '" class="' + SearchPad.OVERLAY_CLASS + '"></div>'
+  };
+}
+
+
+/**
+ * Creates and appends child node from result tokens and HTML template.
+ *
+ * @param  {Element} node
+ * @param  {Array<Object>} tokens
+ * @param  {String} template
+ */
+function createInnerTextNode(parentNode, tokens, template) {
+  var text = createHtmlText(tokens);
+  var childNode = domify(template);
+  childNode.innerHTML = text;
+  parentNode.appendChild(childNode);
+}
+
+/**
+ * Create internal HTML markup from result tokens.
+ * Caters for highlighting pattern matched tokens.
+ *
+ * @param  {Array<Object>} tokens
+ * @return {String}
+ */
+function createHtmlText(tokens) {
+  var htmlText = '';
+
+  tokens.forEach(function(t) {
+    if (t.matched) {
+      htmlText += '<strong class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + t.matched + '</strong>';
+    } else {
+      htmlText += t.normal;
+    }
+  });
+
+  return htmlText !== '' ? htmlText : null;
+}
+
+
+/**
+ * CONSTANTS
+ */
+SearchPad.CONTAINER_SELECTOR = '.djs-search-container';
+SearchPad.INPUT_SELECTOR = '.djs-search-input input';
+SearchPad.RESULTS_CONTAINER_SELECTOR = '.djs-search-results';
+SearchPad.RESULT_SELECTOR = '.djs-search-result';
+SearchPad.RESULT_SELECTED_CLASS = 'djs-search-result-selected';
+SearchPad.RESULT_SELECTED_SELECTOR = '.' + SearchPad.RESULT_SELECTED_CLASS;
+SearchPad.RESULT_ID_ATTRIBUTE = 'data-result-id';
+SearchPad.RESULT_HIGHLIGHT_CLASS = 'djs-search-highlight';
+SearchPad.OVERLAY_CLASS = 'djs-search-overlay';
+
+SearchPad.BOX_HTML =
+  '<div class="djs-search-container djs-draggable djs-scrollable">' +
+    '<div class="djs-search-input">' +
+      '<input type="text"/>' +
+    '</div>' +
+    '<div class="djs-search-results"></div>' +
+  '</div>';
+
+SearchPad.RESULT_HTML =
+  '<div class="djs-search-result"></div>';
+
+SearchPad.RESULT_PRIMARY_HTML =
+  '<div class="djs-search-result-primary"></div>';
+
+SearchPad.RESULT_SECONDARY_HTML =
+  '<p class="djs-search-result-secondary"></p>';
+
+},{"226":226,"401":401,"402":402,"403":403,"405":405,"406":406,"409":409}],197:[function(_dereq_,module,exports){
+module.exports = {
+  __depends__: [
+    _dereq_(181),
+    _dereq_(201)
+  ],
+  searchPad: [ 'type', _dereq_(196) ]
+};
+
+},{"181":181,"196":196,"201":201}],198:[function(_dereq_,module,exports){
+'use strict';
+
+var isArray = _dereq_(380),
+    forEach = _dereq_(262);
 
 
 /**
@@ -29387,10 +32290,10 @@ Selection.prototype.select = function(elements, add) {
   this._eventBus.fire('selection.changed', { oldSelection: oldSelection, newSelection: selectedElements });
 };
 
-},{"245":245,"363":363}],183:[function(_dereq_,module,exports){
+},{"262":262,"380":380}],199:[function(_dereq_,module,exports){
 'use strict';
 
-var hasPrimaryModifier = _dereq_(216).hasPrimaryModifier;
+var hasPrimaryModifier = _dereq_(233).hasPrimaryModifier;
 
 
 function SelectionBehavior(eventBus, selection, canvas, elementRegistry) {
@@ -29462,10 +32365,10 @@ function SelectionBehavior(eventBus, selection, canvas, elementRegistry) {
 SelectionBehavior.$inject = [ 'eventBus', 'selection', 'canvas', 'elementRegistry' ];
 module.exports = SelectionBehavior;
 
-},{"216":216}],184:[function(_dereq_,module,exports){
+},{"233":233}],200:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
 var MARKER_HOVER = 'hover',
     MARKER_SELECTED = 'selected';
@@ -29540,24 +32443,24 @@ SelectionVisuals.$inject = [
 
 module.exports = SelectionVisuals;
 
-},{"245":245}],185:[function(_dereq_,module,exports){
+},{"262":262}],201:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'selectionVisuals', 'selectionBehavior' ],
   __depends__: [
-    _dereq_(129),
-    _dereq_(165)
+    _dereq_(143),
+    _dereq_(179)
   ],
-  selection: [ 'type', _dereq_(182) ],
-  selectionVisuals: [ 'type', _dereq_(184) ],
-  selectionBehavior: [ 'type', _dereq_(183) ]
+  selection: [ 'type', _dereq_(198) ],
+  selectionVisuals: [ 'type', _dereq_(200) ],
+  selectionBehavior: [ 'type', _dereq_(199) ]
 };
 
-},{"129":129,"165":165,"182":182,"183":183,"184":184}],186:[function(_dereq_,module,exports){
+},{"143":143,"179":179,"198":198,"199":199,"200":200}],202:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
-var snapTo = _dereq_(187).snapTo;
+var snapTo = _dereq_(203).snapTo;
 
 
 /**
@@ -29723,7 +32626,7 @@ SnapPoints.prototype.initDefaults = function(defaultSnaps) {
     });
   });
 };
-},{"187":187,"245":245}],187:[function(_dereq_,module,exports){
+},{"203":203,"262":262}],203:[function(_dereq_,module,exports){
 'use strict';
 
 var abs = Math.abs,
@@ -29852,19 +32755,19 @@ module.exports.setSnapped = function(event, axis, value) {
 
   return previousValue;
 };
-},{}],188:[function(_dereq_,module,exports){
+},{}],204:[function(_dereq_,module,exports){
 'use strict';
 
-var filter = _dereq_(243),
-    forEach = _dereq_(245),
-    debounce = _dereq_(254);
+var filter = _dereq_(260),
+    forEach = _dereq_(262),
+    debounce = _dereq_(271);
 
 
-var mid = _dereq_(187).mid;
+var mid = _dereq_(203).mid;
 
-var SnapContext = _dereq_(186);
+var SnapContext = _dereq_(202);
 
-var SnapUtil = _dereq_(187);
+var SnapUtil = _dereq_(203);
 
 
 var isSnapped = SnapUtil.isSnapped,
@@ -30090,14 +32993,14 @@ Snapping.prototype.getSiblings = function(element, target) {
     return !e.hidden && !e.labelTarget && !e.waypoints && e.host !== element && e !== element;
   });
 };
-},{"186":186,"187":187,"243":243,"245":245,"254":254}],189:[function(_dereq_,module,exports){
+},{"202":202,"203":203,"260":260,"262":262,"271":271}],205:[function(_dereq_,module,exports){
 'use strict';
 
-var SpaceUtil = _dereq_(191);
+var SpaceUtil = _dereq_(207);
 
-var Cursor = _dereq_(208);
+var Cursor = _dereq_(225);
 
-var hasPrimaryModifier = _dereq_(216).hasPrimaryModifier;
+var hasPrimaryModifier = _dereq_(233).hasPrimaryModifier;
 
 var abs = Math.abs,
     round = Math.round;
@@ -30108,10 +33011,10 @@ var HIGH_PRIORITY = 1500,
 var AXIS_TO_DIMENSION = { x: 'width', y: 'height' },
     AXIS_INVERTED = { x: 'y', y: 'x' };
 
-var getAllChildren = _dereq_(209).selfAndAllChildren;
+var getAllChildren = _dereq_(226).selfAndAllChildren;
 
-var assign = _dereq_(372),
-    forEach = _dereq_(245);
+var assign = _dereq_(389),
+    forEach = _dereq_(262);
 
 
 /**
@@ -30368,10 +33271,10 @@ SpaceTool.prototype.isActive = function() {
   return context && /^spaceTool/.test(context.prefix);
 };
 
-},{"191":191,"208":208,"209":209,"216":216,"245":245,"372":372}],190:[function(_dereq_,module,exports){
+},{"207":207,"225":225,"226":226,"233":233,"262":262,"389":389}],206:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
 var MARKER_DRAGGING = 'djs-dragging';
 
@@ -30511,7 +33414,7 @@ SpaceToolVisuals.$inject = [ 'eventBus', 'elementRegistry', 'canvas', 'styles' ]
 
 module.exports = SpaceToolVisuals;
 
-},{"245":245}],191:[function(_dereq_,module,exports){
+},{"262":262}],207:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -30601,24 +33504,24 @@ module.exports.resizeBounds = function(bounds, direction, delta) {
       throw new Error('unrecognized direction: ' + direction);
   }
 };
-},{}],192:[function(_dereq_,module,exports){
+},{}],208:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: ['spaceToolVisuals'],
   __depends__: [
-    _dereq_(123),
-    _dereq_(181),
-    _dereq_(194)
+    _dereq_(135),
+    _dereq_(195),
+    _dereq_(210)
   ],
-  spaceTool: ['type', _dereq_(189)],
-  spaceToolVisuals: ['type', _dereq_(190) ]
+  spaceTool: ['type', _dereq_(205)],
+  spaceToolVisuals: ['type', _dereq_(206) ]
 };
 
-},{"123":123,"181":181,"189":189,"190":190,"194":194}],193:[function(_dereq_,module,exports){
+},{"135":135,"195":195,"205":205,"206":206,"210":210}],209:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
 var LOW_PRIORITY = 250;
 
@@ -30712,19 +33615,19 @@ ToolManager.prototype.bindEvents = function(name, events) {
   }, this);
 };
 
-},{"245":245}],194:[function(_dereq_,module,exports){
+},{"262":262}],210:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
-  __depends__: [ _dereq_(123) ],
+  __depends__: [ _dereq_(135) ],
   __init__: [ 'toolManager' ],
-  toolManager: [ 'type', _dereq_(193) ]
+  toolManager: [ 'type', _dereq_(209) ]
 };
 
-},{"123":123,"193":193}],195:[function(_dereq_,module,exports){
+},{"135":135,"209":209}],211:[function(_dereq_,module,exports){
 'use strict';
 
-var getMid = _dereq_(196).getMid;
+var getMid = _dereq_(213).getMid;
 
 
 /**
@@ -30754,14 +33657,111 @@ BaseLayouter.prototype.layoutConnection = function(connection, hints) {
   ];
 };
 
-},{"196":196}],196:[function(_dereq_,module,exports){
+},{"213":213}],212:[function(_dereq_,module,exports){
 'use strict';
 
-var isObject = _dereq_(367),
-    sortBy = _dereq_(251),
-    pointDistance = _dereq_(211).pointDistance;
+var assign = _dereq_(389);
 
-var Snap = _dereq_(228);
+var LayoutUtil = _dereq_(213);
+
+
+function dockingToPoint(docking) {
+  // use the dockings actual point and
+  // retain the original docking
+  return assign({ original: docking.point.original || docking.point }, docking.actual);
+}
+
+
+/**
+ * A {@link ConnectionDocking} that crops connection waypoints based on
+ * the path(s) of the connection source and target.
+ *
+ * @param {djs.core.ElementRegistry} elementRegistry
+ */
+function CroppingConnectionDocking(elementRegistry, graphicsFactory) {
+  this._elementRegistry = elementRegistry;
+  this._graphicsFactory = graphicsFactory;
+}
+
+CroppingConnectionDocking.$inject = [ 'elementRegistry', 'graphicsFactory' ];
+
+module.exports = CroppingConnectionDocking;
+
+
+/**
+ * @inheritDoc ConnectionDocking#getCroppedWaypoints
+ */
+CroppingConnectionDocking.prototype.getCroppedWaypoints = function(connection, source, target) {
+
+  source = source || connection.source;
+  target = target || connection.target;
+
+  var sourceDocking = this.getDockingPoint(connection, source, true),
+      targetDocking = this.getDockingPoint(connection, target);
+
+  var croppedWaypoints = connection.waypoints.slice(sourceDocking.idx + 1, targetDocking.idx);
+
+  croppedWaypoints.unshift(dockingToPoint(sourceDocking));
+  croppedWaypoints.push(dockingToPoint(targetDocking));
+
+  return croppedWaypoints;
+};
+
+/**
+ * Return the connection docking point on the specified shape
+ *
+ * @inheritDoc ConnectionDocking#getDockingPoint
+ */
+CroppingConnectionDocking.prototype.getDockingPoint = function(connection, shape, dockStart) {
+
+  var waypoints = connection.waypoints,
+      dockingIdx,
+      dockingPoint,
+      croppedPoint;
+
+  dockingIdx = dockStart ? 0 : waypoints.length - 1;
+  dockingPoint = waypoints[dockingIdx];
+
+  croppedPoint = this._getIntersection(shape, connection, dockStart);
+
+  return {
+    point: dockingPoint,
+    actual: croppedPoint || dockingPoint,
+    idx: dockingIdx
+  };
+};
+
+
+////// helper methods ///////////////////////////////////////////////////
+
+CroppingConnectionDocking.prototype._getIntersection = function(shape, connection, takeFirst) {
+
+  var shapePath = this._getShapePath(shape),
+      connectionPath = this._getConnectionPath(connection);
+
+  return LayoutUtil.getElementLineIntersection(shapePath, connectionPath, takeFirst);
+};
+
+CroppingConnectionDocking.prototype._getConnectionPath = function(connection) {
+  return this._graphicsFactory.getConnectionPath(connection);
+};
+
+CroppingConnectionDocking.prototype._getShapePath = function(shape) {
+  return this._graphicsFactory.getShapePath(shape);
+};
+
+CroppingConnectionDocking.prototype._getGfx = function(element) {
+  return this._elementRegistry.getGraphics(element);
+};
+
+},{"213":213,"389":389}],213:[function(_dereq_,module,exports){
+'use strict';
+
+var isObject = _dereq_(384),
+    sortBy = _dereq_(268),
+    pointDistance = _dereq_(228).pointDistance;
+
+var Snap = _dereq_(245);
 
 
 function roundBounds(bounds) {
@@ -30935,16 +33935,16 @@ function getIntersections(a, b) {
 
 module.exports.getIntersections = getIntersections;
 
-},{"211":211,"228":228,"251":251,"367":367}],197:[function(_dereq_,module,exports){
+},{"228":228,"245":245,"268":268,"384":384}],214:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363),
-    find = _dereq_(244),
-    without = _dereq_(239),
-    assign = _dereq_(372);
+var isArray = _dereq_(380),
+    find = _dereq_(261),
+    without = _dereq_(256),
+    assign = _dereq_(389);
 
-var LayoutUtil = _dereq_(196),
-    Geometry = _dereq_(211);
+var LayoutUtil = _dereq_(213),
+    Geometry = _dereq_(228);
 
 var getOrientation = LayoutUtil.getOrientation,
     getMid = LayoutUtil.getMid,
@@ -31390,13 +34390,13 @@ function getDirections(orientation, defaultLayout) {
   }
 }
 
-},{"196":196,"211":211,"239":239,"244":244,"363":363,"372":372}],198:[function(_dereq_,module,exports){
+},{"213":213,"228":228,"256":256,"261":261,"380":380,"389":389}],215:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(372),
-    inherits = _dereq_(231);
+var assign = _dereq_(389),
+    inherits = _dereq_(248);
 
-var Refs = _dereq_(402);
+var Refs = _dereq_(419);
 
 var parentRefs = new Refs({ name: 'children', enumerable: true, collection: true }, { name: 'parent' }),
     labelRefs = new Refs({ name: 'label', enumerable: true }, { name: 'labelTarget' }),
@@ -31606,15 +34606,15 @@ module.exports.Shape = Shape;
 module.exports.Connection = Connection;
 module.exports.Label = Label;
 
-},{"231":231,"372":372,"402":402}],199:[function(_dereq_,module,exports){
+},{"248":248,"389":389,"419":419}],216:[function(_dereq_,module,exports){
 'use strict';
 
-var Cursor = _dereq_(208),
-    ClickTrap = _dereq_(205),
-    substract = _dereq_(215).substract,
-    domEvent = _dereq_(390),
-    domClosest = _dereq_(387),
-    EventUtil = _dereq_(210);
+var Cursor = _dereq_(225),
+    ClickTrap = _dereq_(222),
+    substract = _dereq_(232).substract,
+    domEvent = _dereq_(407),
+    domClosest = _dereq_(404),
+    EventUtil = _dereq_(227);
 
 
 function length(point) {
@@ -31709,28 +34709,28 @@ MoveCanvas.$inject = [ 'eventBus', 'canvas' ];
 
 module.exports = MoveCanvas;
 
-},{"205":205,"208":208,"210":210,"215":215,"387":387,"390":390}],200:[function(_dereq_,module,exports){
+},{"222":222,"225":225,"227":227,"232":232,"404":404,"407":407}],217:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'moveCanvas' ],
-  moveCanvas: [ 'type', _dereq_(199) ]
+  moveCanvas: [ 'type', _dereq_(216) ]
 };
-},{"199":199}],201:[function(_dereq_,module,exports){
+},{"216":216}],218:[function(_dereq_,module,exports){
 'use strict';
 
-var domEvent = _dereq_(390),
-    domClosest = _dereq_(387);
+var domEvent = _dereq_(407),
+    domClosest = _dereq_(404);
 
-var hasPrimaryModifier = _dereq_(216).hasPrimaryModifier,
-    hasSecondaryModifier = _dereq_(216).hasSecondaryModifier;
+var hasPrimaryModifier = _dereq_(233).hasPrimaryModifier,
+    hasSecondaryModifier = _dereq_(233).hasSecondaryModifier;
 
-var isMac = _dereq_(217).isMac;
+var isMac = _dereq_(234).isMac;
 
-var getStepRange = _dereq_(202).getStepRange,
-    cap = _dereq_(202).cap;
+var getStepRange = _dereq_(219).getStepRange,
+    cap = _dereq_(219).cap;
 
-var log10 = _dereq_(215).log10;
+var log10 = _dereq_(232).log10;
 
-var bind = _dereq_(253);
+var bind = _dereq_(270);
 
 var RANGE = { min: 0.2, max: 4 },
     NUM_STEPS = 10;
@@ -31903,11 +34903,11 @@ ZoomScroll.prototype._init = function(newEnabled) {
   this.toggle(newEnabled);
 };
 
-},{"202":202,"215":215,"216":216,"217":217,"253":253,"387":387,"390":390}],202:[function(_dereq_,module,exports){
+},{"219":219,"232":232,"233":233,"234":234,"270":270,"404":404,"407":407}],219:[function(_dereq_,module,exports){
 'use strict';
 
 
-var log10 = _dereq_(215).log10;
+var log10 = _dereq_(232).log10;
 
 /**
  * Get the linear range between two zoom steps based on the
@@ -31927,18 +34927,18 @@ module.exports.cap = function(range, scale) {
   return Math.max(range.min, Math.min(range.max, scale));
 };
 
-},{"215":215}],203:[function(_dereq_,module,exports){
+},{"232":232}],220:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'zoomScroll' ],
-  zoomScroll: [ 'type', _dereq_(201) ]
+  zoomScroll: [ 'type', _dereq_(218) ]
 };
-},{"201":201}],204:[function(_dereq_,module,exports){
+},{"218":218}],221:[function(_dereq_,module,exports){
 'use strict';
 
-var roundPoint = _dereq_(196).roundPoint;
+var roundPoint = _dereq_(213).roundPoint;
 
-var center = _dereq_(218).center,
-    delta = _dereq_(218).delta;
+var center = _dereq_(235).center,
+    delta = _dereq_(235).delta;
 
 
 /**
@@ -32004,11 +35004,11 @@ function getNewAttachShapeDelta(shape, oldBounds, newBounds) {
 
 module.exports.getNewAttachShapeDelta = getNewAttachShapeDelta;
 
-},{"196":196,"218":218}],205:[function(_dereq_,module,exports){
+},{"213":213,"235":235}],222:[function(_dereq_,module,exports){
 'use strict';
 
-var domEvent = _dereq_(390),
-    stopEvent = _dereq_(210).stopEvent;
+var domEvent = _dereq_(407),
+    stopEvent = _dereq_(227).stopEvent;
 
 function trap(event) {
   stopEvent(event);
@@ -32035,7 +35035,7 @@ function install() {
 }
 
 module.exports.install = install;
-},{"210":210,"390":390}],206:[function(_dereq_,module,exports){
+},{"227":227,"407":407}],223:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -32126,10 +35126,10 @@ module.exports.indexOf = function(collection, element) {
   return collection.indexOf(element);
 };
 
-},{}],207:[function(_dereq_,module,exports){
+},{}],224:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(245);
+var forEach = _dereq_(262);
 
 function getTopLevel(elements) {
   var topLevel = {},
@@ -32172,10 +35172,10 @@ function getTopLevel(elements) {
 
 module.exports.getTopLevel = getTopLevel;
 
-},{"245":245}],208:[function(_dereq_,module,exports){
+},{"262":262}],225:[function(_dereq_,module,exports){
 'use strict';
 
-var domClasses = _dereq_(385);
+var domClasses = _dereq_(402);
 
 var CURSOR_CLS_PATTERN = /^djs-cursor-.*$/;
 
@@ -32200,13 +35200,13 @@ module.exports.has = function(mode) {
   return classes.has('djs-cursor-' + mode);
 };
 
-},{"385":385}],209:[function(_dereq_,module,exports){
+},{"402":402}],226:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(363),
-    isNumber = _dereq_(366),
-    groupBy = _dereq_(246),
-    forEach = _dereq_(245);
+var isArray = _dereq_(380),
+    isNumber = _dereq_(383),
+    groupBy = _dereq_(263),
+    forEach = _dereq_(262);
 
 /**
  * Adds an element to a collection and returns true if the
@@ -32495,7 +35495,7 @@ function getElementType(element) {
 }
 
 module.exports.getType = getElementType;
-},{"245":245,"246":246,"363":363,"366":366}],210:[function(_dereq_,module,exports){
+},{"262":262,"263":263,"380":380,"383":383}],227:[function(_dereq_,module,exports){
 'use strict';
 
 function __preventDefault(event) {
@@ -32566,7 +35566,7 @@ function toPoint(event) {
 
 module.exports.toPoint = toPoint;
 
-},{}],211:[function(_dereq_,module,exports){
+},{}],228:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -32578,6 +35578,10 @@ module.exports.toPoint = toPoint;
  * @return {Number}  distance
  */
 function pointDistance(a, b) {
+  if (!a || !b) {
+    return -1;
+  }
+
   return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 }
 
@@ -32667,7 +35671,7 @@ module.exports.getMidPoint = function(p, q) {
   };
 };
 
-},{}],212:[function(_dereq_,module,exports){
+},{}],229:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -32713,7 +35717,7 @@ function getBBox(gfx) {
 module.exports.getVisual = getVisual;
 module.exports.getChildren = getChildren;
 module.exports.getBBox = getBBox;
-},{}],213:[function(_dereq_,module,exports){
+},{}],230:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -32746,12 +35750,12 @@ IdGenerator.prototype.next = function() {
   return this._prefix + (++this._counter);
 };
 
-},{}],214:[function(_dereq_,module,exports){
+},{}],231:[function(_dereq_,module,exports){
 'use strict';
 
-var pointDistance = _dereq_(211).pointDistance;
+var pointDistance = _dereq_(228).pointDistance;
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var round = Math.round,
     max = Math.max;
@@ -32858,7 +35862,7 @@ function getPathIntersection(waypoints, reference) {
 module.exports.getApproxIntersection = function(waypoints, reference) {
   return getBendpointIntersection(waypoints, reference) || getPathIntersection(waypoints, reference);
 };
-},{"211":211,"228":228}],215:[function(_dereq_,module,exports){
+},{"228":228,"245":245}],232:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -32881,12 +35885,12 @@ function substract(p1, p2) {
 
 module.exports.substract = substract;
 
-},{}],216:[function(_dereq_,module,exports){
+},{}],233:[function(_dereq_,module,exports){
 'use strict';
 
-var getOriginalEvent = _dereq_(210).getOriginal;
+var getOriginalEvent = _dereq_(227).getOriginal;
 
-var isMac = _dereq_(217).isMac;
+var isMac = _dereq_(234).isMac;
 
 
 function isPrimaryButton(event) {
@@ -32920,13 +35924,13 @@ module.exports.hasSecondaryModifier = function(event) {
   return isPrimaryButton(event) && originalEvent.shiftKey;
 };
 
-},{"210":210,"217":217}],217:[function(_dereq_,module,exports){
+},{"227":227,"234":234}],234:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports.isMac = function isMac() {
   return (/mac/i).test(navigator.platform);
 };
-},{}],218:[function(_dereq_,module,exports){
+},{}],235:[function(_dereq_,module,exports){
 'use strict';
 
 function center(bounds) {
@@ -32948,7 +35952,7 @@ function delta(a, b) {
 
 module.exports.delta = delta;
 
-},{}],219:[function(_dereq_,module,exports){
+},{}],236:[function(_dereq_,module,exports){
 'use strict';
 
 
@@ -32987,10 +35991,10 @@ module.exports.saveClear = function(collection, removeFn) {
   return collection;
 };
 
-},{}],220:[function(_dereq_,module,exports){
+},{}],237:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 
 module.exports.componentsToPath = function(elements) {
@@ -33017,17 +36021,17 @@ module.exports.updateLine = function(gfx, points) {
   return gfx.attr({ points: toSVGPoints(points) });
 };
 
-},{"228":228}],221:[function(_dereq_,module,exports){
+},{"245":245}],238:[function(_dereq_,module,exports){
 'use strict';
 
-var isObject = _dereq_(367),
-    assign = _dereq_(372),
-    pick = _dereq_(378),
-    forEach = _dereq_(245),
-    reduce = _dereq_(248),
-    merge = _dereq_(375);
+var isObject = _dereq_(384),
+    assign = _dereq_(389),
+    pick = _dereq_(395),
+    forEach = _dereq_(262),
+    reduce = _dereq_(265),
+    merge = _dereq_(392);
 
-var Snap = _dereq_(228);
+var Snap = _dereq_(245);
 
 var DEFAULT_BOX_PADDING = 0;
 
@@ -33269,7 +36273,7 @@ Text.prototype.createText = function(parent, text, options) {
 
 module.exports = Text;
 
-},{"228":228,"245":245,"248":248,"367":367,"372":372,"375":375,"378":378}],222:[function(_dereq_,module,exports){
+},{"245":245,"262":262,"265":265,"384":384,"389":389,"392":392,"395":395}],239:[function(_dereq_,module,exports){
 
 var isArray = function(obj) {
   return Object.prototype.toString.call(obj) === '[object Array]';
@@ -33319,18 +36323,18 @@ exports.annotate = annotate;
 exports.parse = parse;
 exports.isArray = isArray;
 
-},{}],223:[function(_dereq_,module,exports){
+},{}],240:[function(_dereq_,module,exports){
 module.exports = {
-  annotate: _dereq_(222).annotate,
-  Module: _dereq_(225),
-  Injector: _dereq_(224)
+  annotate: _dereq_(239).annotate,
+  Module: _dereq_(242),
+  Injector: _dereq_(241)
 };
 
-},{"222":222,"224":224,"225":225}],224:[function(_dereq_,module,exports){
-var Module = _dereq_(225);
-var autoAnnotate = _dereq_(222).parse;
-var annotate = _dereq_(222).annotate;
-var isArray = _dereq_(222).isArray;
+},{"239":239,"241":241,"242":242}],241:[function(_dereq_,module,exports){
+var Module = _dereq_(242);
+var autoAnnotate = _dereq_(239).parse;
+var annotate = _dereq_(239).annotate;
+var isArray = _dereq_(239).isArray;
 
 
 var Injector = function(modules, parent) {
@@ -33555,7 +36559,7 @@ var Injector = function(modules, parent) {
 
 module.exports = Injector;
 
-},{"222":222,"225":225}],225:[function(_dereq_,module,exports){
+},{"239":239,"242":242}],242:[function(_dereq_,module,exports){
 var Module = function() {
   var providers = [];
 
@@ -33581,7 +36585,7 @@ var Module = function() {
 
 module.exports = Module;
 
-},{}],226:[function(_dereq_,module,exports){
+},{}],243:[function(_dereq_,module,exports){
 // Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -33986,7 +36990,7 @@ module.exports = Module;
     (typeof module != "undefined" && module.exports) ? (module.exports = eve) : (typeof define === "function" && define.amd ? (define("eve", [], function() { return eve; })) : (glob.eve = eve));
 })(this);
 
-},{}],227:[function(_dereq_,module,exports){
+},{}],244:[function(_dereq_,module,exports){
 // Snap.svg 0.3.0
 // 
 // Copyright (c) 2013 – 2014 Adobe Systems Incorporated. All rights reserved.
@@ -34014,7 +37018,7 @@ module.exports = Module;
         });
     } else if (typeof exports !== 'undefined') {
         // Next for Node.js or CommonJS
-        var eve = _dereq_(226);
+        var eve = _dereq_(243);
         module.exports = factory(glob, eve);
     } else {
         // Browser globals (glob is window)
@@ -40639,10 +43643,10 @@ Snap.plugin(function (Snap, Element, Paper, glob) {
 
 return Snap;
 }));
-},{"226":226}],228:[function(_dereq_,module,exports){
+},{"243":243}],245:[function(_dereq_,module,exports){
 'use strict';
 
-var snapsvg = module.exports = _dereq_(227);
+var snapsvg = module.exports = _dereq_(244);
 
 snapsvg.plugin(function(Snap, Element) {
 
@@ -40848,10 +43852,10 @@ snapsvg.plugin(function(Snap, Element, Paper, global) {
     return new Snap(svg);
   };
 });
-},{"227":227}],229:[function(_dereq_,module,exports){
+},{"244":244}],246:[function(_dereq_,module,exports){
 'use strict';
 
-var hat = _dereq_(230);
+var hat = _dereq_(247);
 
 
 /**
@@ -40947,7 +43951,7 @@ Ids.prototype.clear = function() {
     this.unclaim(id);
   }
 };
-},{"230":230}],230:[function(_dereq_,module,exports){
+},{"247":247}],247:[function(_dereq_,module,exports){
 var hat = module.exports = function (bits, base) {
     if (!base) base = 16;
     if (bits === undefined) bits = 128;
@@ -41011,7 +44015,7 @@ hat.rack = function (bits, base, expandBy) {
     return fn;
 };
 
-},{}],231:[function(_dereq_,module,exports){
+},{}],248:[function(_dereq_,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -41036,8 +44040,8 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],232:[function(_dereq_,module,exports){
-var createFindIndex = _dereq_(322);
+},{}],249:[function(_dereq_,module,exports){
+var createFindIndex = _dereq_(339);
 
 /**
  * This method is like `_.find` except that it returns the index of the first
@@ -41091,9 +44095,9 @@ var findIndex = createFindIndex();
 
 module.exports = findIndex;
 
-},{"322":322}],233:[function(_dereq_,module,exports){
-var baseFlatten = _dereq_(282),
-    isIterateeCall = _dereq_(342);
+},{"339":339}],250:[function(_dereq_,module,exports){
+var baseFlatten = _dereq_(299),
+    isIterateeCall = _dereq_(359);
 
 /**
  * Flattens a nested array. If `isDeep` is `true` the array is recursively
@@ -41125,12 +44129,12 @@ function flatten(array, isDeep, guard) {
 
 module.exports = flatten;
 
-},{"282":282,"342":342}],234:[function(_dereq_,module,exports){
-var baseIndexOf = _dereq_(287),
-    cacheIndexOf = _dereq_(309),
-    createCache = _dereq_(319),
-    isArrayLike = _dereq_(340),
-    restParam = _dereq_(256);
+},{"299":299,"359":359}],251:[function(_dereq_,module,exports){
+var baseIndexOf = _dereq_(304),
+    cacheIndexOf = _dereq_(326),
+    createCache = _dereq_(336),
+    isArrayLike = _dereq_(357),
+    restParam = _dereq_(273);
 
 /**
  * Creates an array of unique values that are included in all of the provided
@@ -41185,7 +44189,7 @@ var intersection = restParam(function(arrays) {
 
 module.exports = intersection;
 
-},{"256":256,"287":287,"309":309,"319":319,"340":340}],235:[function(_dereq_,module,exports){
+},{"273":273,"304":304,"326":326,"336":336,"357":357}],252:[function(_dereq_,module,exports){
 /**
  * Gets the last element of `array`.
  *
@@ -41206,10 +44210,10 @@ function last(array) {
 
 module.exports = last;
 
-},{}],236:[function(_dereq_,module,exports){
-var baseFlatten = _dereq_(282),
-    baseUniq = _dereq_(305),
-    restParam = _dereq_(256);
+},{}],253:[function(_dereq_,module,exports){
+var baseFlatten = _dereq_(299),
+    baseUniq = _dereq_(322),
+    restParam = _dereq_(273);
 
 /**
  * Creates an array of unique values, in order, from all of the provided arrays
@@ -41232,11 +44236,11 @@ var union = restParam(function(arrays) {
 
 module.exports = union;
 
-},{"256":256,"282":282,"305":305}],237:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(270),
-    baseUniq = _dereq_(305),
-    isIterateeCall = _dereq_(342),
-    sortedUniq = _dereq_(357);
+},{"273":273,"299":299,"322":322}],254:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(287),
+    baseUniq = _dereq_(322),
+    isIterateeCall = _dereq_(359),
+    sortedUniq = _dereq_(374);
 
 /**
  * Creates a duplicate-free version of an array, using
@@ -41305,13 +44309,13 @@ function uniq(array, isSorted, iteratee, thisArg) {
 
 module.exports = uniq;
 
-},{"270":270,"305":305,"342":342,"357":357}],238:[function(_dereq_,module,exports){
-module.exports = _dereq_(237);
+},{"287":287,"322":322,"359":359,"374":374}],255:[function(_dereq_,module,exports){
+module.exports = _dereq_(254);
 
-},{"237":237}],239:[function(_dereq_,module,exports){
-var baseDifference = _dereq_(276),
-    isArrayLike = _dereq_(340),
-    restParam = _dereq_(256);
+},{"254":254}],256:[function(_dereq_,module,exports){
+var baseDifference = _dereq_(293),
+    isArrayLike = _dereq_(357),
+    restParam = _dereq_(273);
 
 /**
  * Creates an array excluding all provided values using
@@ -41337,13 +44341,13 @@ var without = restParam(function(array, values) {
 
 module.exports = without;
 
-},{"256":256,"276":276,"340":340}],240:[function(_dereq_,module,exports){
-var LazyWrapper = _dereq_(257),
-    LodashWrapper = _dereq_(258),
-    baseLodash = _dereq_(291),
-    isArray = _dereq_(363),
-    isObjectLike = _dereq_(346),
-    wrapperClone = _dereq_(360);
+},{"273":273,"293":293,"357":357}],257:[function(_dereq_,module,exports){
+var LazyWrapper = _dereq_(274),
+    LodashWrapper = _dereq_(275),
+    baseLodash = _dereq_(308),
+    isArray = _dereq_(380),
+    isObjectLike = _dereq_(363),
+    wrapperClone = _dereq_(377);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -41464,15 +44468,15 @@ lodash.prototype = baseLodash.prototype;
 
 module.exports = lodash;
 
-},{"257":257,"258":258,"291":291,"346":346,"360":360,"363":363}],241:[function(_dereq_,module,exports){
-module.exports = _dereq_(250);
+},{"274":274,"275":275,"308":308,"363":363,"377":377,"380":380}],258:[function(_dereq_,module,exports){
+module.exports = _dereq_(267);
 
-},{"250":250}],242:[function(_dereq_,module,exports){
-var arrayEvery = _dereq_(262),
-    baseCallback = _dereq_(270),
-    baseEvery = _dereq_(278),
-    isArray = _dereq_(363),
-    isIterateeCall = _dereq_(342);
+},{"267":267}],259:[function(_dereq_,module,exports){
+var arrayEvery = _dereq_(279),
+    baseCallback = _dereq_(287),
+    baseEvery = _dereq_(295),
+    isArray = _dereq_(380),
+    isIterateeCall = _dereq_(359);
 
 /**
  * Checks if `predicate` returns truthy for **all** elements of `collection`.
@@ -41535,11 +44539,11 @@ function every(collection, predicate, thisArg) {
 
 module.exports = every;
 
-},{"262":262,"270":270,"278":278,"342":342,"363":363}],243:[function(_dereq_,module,exports){
-var arrayFilter = _dereq_(263),
-    baseCallback = _dereq_(270),
-    baseFilter = _dereq_(279),
-    isArray = _dereq_(363);
+},{"279":279,"287":287,"295":295,"359":359,"380":380}],260:[function(_dereq_,module,exports){
+var arrayFilter = _dereq_(280),
+    baseCallback = _dereq_(287),
+    baseFilter = _dereq_(296),
+    isArray = _dereq_(380);
 
 /**
  * Iterates over elements of `collection`, returning an array of all elements
@@ -41598,9 +44602,9 @@ function filter(collection, predicate, thisArg) {
 
 module.exports = filter;
 
-},{"263":263,"270":270,"279":279,"363":363}],244:[function(_dereq_,module,exports){
-var baseEach = _dereq_(277),
-    createFind = _dereq_(321);
+},{"280":280,"287":287,"296":296,"380":380}],261:[function(_dereq_,module,exports){
+var baseEach = _dereq_(294),
+    createFind = _dereq_(338);
 
 /**
  * Iterates over elements of `collection`, returning the first element
@@ -41656,10 +44660,10 @@ var find = createFind(baseEach);
 
 module.exports = find;
 
-},{"277":277,"321":321}],245:[function(_dereq_,module,exports){
-var arrayEach = _dereq_(261),
-    baseEach = _dereq_(277),
-    createForEach = _dereq_(323);
+},{"294":294,"338":338}],262:[function(_dereq_,module,exports){
+var arrayEach = _dereq_(278),
+    baseEach = _dereq_(294),
+    createForEach = _dereq_(340);
 
 /**
  * Iterates over elements of `collection` invoking `iteratee` for each element.
@@ -41695,8 +44699,8 @@ var forEach = createForEach(arrayEach, baseEach);
 
 module.exports = forEach;
 
-},{"261":261,"277":277,"323":323}],246:[function(_dereq_,module,exports){
-var createAggregator = _dereq_(314);
+},{"278":278,"294":294,"340":340}],263:[function(_dereq_,module,exports){
+var createAggregator = _dereq_(331);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -41756,11 +44760,11 @@ var groupBy = createAggregator(function(result, value, key) {
 
 module.exports = groupBy;
 
-},{"314":314}],247:[function(_dereq_,module,exports){
-var arrayMap = _dereq_(264),
-    baseCallback = _dereq_(270),
-    baseMap = _dereq_(292),
-    isArray = _dereq_(363);
+},{"331":331}],264:[function(_dereq_,module,exports){
+var arrayMap = _dereq_(281),
+    baseCallback = _dereq_(287),
+    baseMap = _dereq_(309),
+    isArray = _dereq_(380);
 
 /**
  * Creates an array of values by running each element in `collection` through
@@ -41826,10 +44830,10 @@ function map(collection, iteratee, thisArg) {
 
 module.exports = map;
 
-},{"264":264,"270":270,"292":292,"363":363}],248:[function(_dereq_,module,exports){
-var arrayReduce = _dereq_(266),
-    baseEach = _dereq_(277),
-    createReduce = _dereq_(326);
+},{"281":281,"287":287,"309":309,"380":380}],265:[function(_dereq_,module,exports){
+var arrayReduce = _dereq_(283),
+    baseEach = _dereq_(294),
+    createReduce = _dereq_(343);
 
 /**
  * Reduces `collection` to a value which is the accumulated result of running
@@ -41872,10 +44876,10 @@ var reduce = createReduce(arrayReduce, baseEach);
 
 module.exports = reduce;
 
-},{"266":266,"277":277,"326":326}],249:[function(_dereq_,module,exports){
-var getLength = _dereq_(333),
-    isLength = _dereq_(345),
-    keys = _dereq_(373);
+},{"283":283,"294":294,"343":343}],266:[function(_dereq_,module,exports){
+var getLength = _dereq_(350),
+    isLength = _dereq_(362),
+    keys = _dereq_(390);
 
 /**
  * Gets the size of `collection` by returning its length for array-like
@@ -41904,12 +44908,12 @@ function size(collection) {
 
 module.exports = size;
 
-},{"333":333,"345":345,"373":373}],250:[function(_dereq_,module,exports){
-var arraySome = _dereq_(267),
-    baseCallback = _dereq_(270),
-    baseSome = _dereq_(302),
-    isArray = _dereq_(363),
-    isIterateeCall = _dereq_(342);
+},{"350":350,"362":362,"390":390}],267:[function(_dereq_,module,exports){
+var arraySome = _dereq_(284),
+    baseCallback = _dereq_(287),
+    baseSome = _dereq_(319),
+    isArray = _dereq_(380),
+    isIterateeCall = _dereq_(359);
 
 /**
  * Checks if `predicate` returns truthy for **any** element of `collection`.
@@ -41973,12 +44977,12 @@ function some(collection, predicate, thisArg) {
 
 module.exports = some;
 
-},{"267":267,"270":270,"302":302,"342":342,"363":363}],251:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(270),
-    baseMap = _dereq_(292),
-    baseSortBy = _dereq_(303),
-    compareAscending = _dereq_(311),
-    isIterateeCall = _dereq_(342);
+},{"284":284,"287":287,"319":319,"359":359,"380":380}],268:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(287),
+    baseMap = _dereq_(309),
+    baseSortBy = _dereq_(320),
+    compareAscending = _dereq_(328),
+    isIterateeCall = _dereq_(359);
 
 /**
  * Creates an array of elements, sorted in ascending order by the results of
@@ -42046,8 +45050,8 @@ function sortBy(collection, iteratee, thisArg) {
 
 module.exports = sortBy;
 
-},{"270":270,"292":292,"303":303,"311":311,"342":342}],252:[function(_dereq_,module,exports){
-var getNative = _dereq_(335);
+},{"287":287,"309":309,"320":320,"328":328,"359":359}],269:[function(_dereq_,module,exports){
+var getNative = _dereq_(352);
 
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeNow = getNative(Date, 'now');
@@ -42072,10 +45076,10 @@ var now = nativeNow || function() {
 
 module.exports = now;
 
-},{"335":335}],253:[function(_dereq_,module,exports){
-var createWrapper = _dereq_(327),
-    replaceHolders = _dereq_(354),
-    restParam = _dereq_(256);
+},{"352":352}],270:[function(_dereq_,module,exports){
+var createWrapper = _dereq_(344),
+    replaceHolders = _dereq_(371),
+    restParam = _dereq_(273);
 
 /** Used to compose bitmasks for wrapper metadata. */
 var BIND_FLAG = 1,
@@ -42130,9 +45134,9 @@ bind.placeholder = {};
 
 module.exports = bind;
 
-},{"256":256,"327":327,"354":354}],254:[function(_dereq_,module,exports){
-var isObject = _dereq_(367),
-    now = _dereq_(252);
+},{"273":273,"344":344,"371":371}],271:[function(_dereq_,module,exports){
+var isObject = _dereq_(384),
+    now = _dereq_(269);
 
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -42313,9 +45317,9 @@ function debounce(func, wait, options) {
 
 module.exports = debounce;
 
-},{"252":252,"367":367}],255:[function(_dereq_,module,exports){
-var baseDelay = _dereq_(275),
-    restParam = _dereq_(256);
+},{"269":269,"384":384}],272:[function(_dereq_,module,exports){
+var baseDelay = _dereq_(292),
+    restParam = _dereq_(273);
 
 /**
  * Defers invoking the `func` until the current call stack has cleared. Any
@@ -42340,7 +45344,7 @@ var defer = restParam(function(func, args) {
 
 module.exports = defer;
 
-},{"256":256,"275":275}],256:[function(_dereq_,module,exports){
+},{"273":273,"292":292}],273:[function(_dereq_,module,exports){
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
@@ -42400,9 +45404,9 @@ function restParam(func, start) {
 
 module.exports = restParam;
 
-},{}],257:[function(_dereq_,module,exports){
-var baseCreate = _dereq_(274),
-    baseLodash = _dereq_(291);
+},{}],274:[function(_dereq_,module,exports){
+var baseCreate = _dereq_(291),
+    baseLodash = _dereq_(308);
 
 /** Used as references for `-Infinity` and `Infinity`. */
 var POSITIVE_INFINITY = Number.POSITIVE_INFINITY;
@@ -42428,9 +45432,9 @@ LazyWrapper.prototype.constructor = LazyWrapper;
 
 module.exports = LazyWrapper;
 
-},{"274":274,"291":291}],258:[function(_dereq_,module,exports){
-var baseCreate = _dereq_(274),
-    baseLodash = _dereq_(291);
+},{"291":291,"308":308}],275:[function(_dereq_,module,exports){
+var baseCreate = _dereq_(291),
+    baseLodash = _dereq_(308);
 
 /**
  * The base constructor for creating `lodash` wrapper objects.
@@ -42451,10 +45455,10 @@ LodashWrapper.prototype.constructor = LodashWrapper;
 
 module.exports = LodashWrapper;
 
-},{"274":274,"291":291}],259:[function(_dereq_,module,exports){
+},{"291":291,"308":308}],276:[function(_dereq_,module,exports){
 (function (global){
-var cachePush = _dereq_(310),
-    getNative = _dereq_(335);
+var cachePush = _dereq_(327),
+    getNative = _dereq_(352);
 
 /** Native method references. */
 var Set = getNative(global, 'Set');
@@ -42485,7 +45489,7 @@ module.exports = SetCache;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"310":310,"335":335}],260:[function(_dereq_,module,exports){
+},{"327":327,"352":352}],277:[function(_dereq_,module,exports){
 /**
  * Copies the values of `source` to `array`.
  *
@@ -42507,7 +45511,7 @@ function arrayCopy(source, array) {
 
 module.exports = arrayCopy;
 
-},{}],261:[function(_dereq_,module,exports){
+},{}],278:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.forEach` for arrays without support for callback
  * shorthands and `this` binding.
@@ -42531,7 +45535,7 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],262:[function(_dereq_,module,exports){
+},{}],279:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.every` for arrays without support for callback
  * shorthands and `this` binding.
@@ -42556,7 +45560,7 @@ function arrayEvery(array, predicate) {
 
 module.exports = arrayEvery;
 
-},{}],263:[function(_dereq_,module,exports){
+},{}],280:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.filter` for arrays without support for callback
  * shorthands and `this` binding.
@@ -42583,7 +45587,7 @@ function arrayFilter(array, predicate) {
 
 module.exports = arrayFilter;
 
-},{}],264:[function(_dereq_,module,exports){
+},{}],281:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.map` for arrays without support for callback
  * shorthands and `this` binding.
@@ -42606,7 +45610,7 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],265:[function(_dereq_,module,exports){
+},{}],282:[function(_dereq_,module,exports){
 /**
  * Appends the elements of `values` to `array`.
  *
@@ -42628,7 +45632,7 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],266:[function(_dereq_,module,exports){
+},{}],283:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.reduce` for arrays without support for callback
  * shorthands and `this` binding.
@@ -42656,7 +45660,7 @@ function arrayReduce(array, iteratee, accumulator, initFromArray) {
 
 module.exports = arrayReduce;
 
-},{}],267:[function(_dereq_,module,exports){
+},{}],284:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.some` for arrays without support for callback
  * shorthands and `this` binding.
@@ -42681,8 +45685,8 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],268:[function(_dereq_,module,exports){
-var keys = _dereq_(373);
+},{}],285:[function(_dereq_,module,exports){
+var keys = _dereq_(390);
 
 /**
  * A specialized version of `_.assign` for customizing assigned values without
@@ -42715,9 +45719,9 @@ function assignWith(object, source, customizer) {
 
 module.exports = assignWith;
 
-},{"373":373}],269:[function(_dereq_,module,exports){
-var baseCopy = _dereq_(273),
-    keys = _dereq_(373);
+},{"390":390}],286:[function(_dereq_,module,exports){
+var baseCopy = _dereq_(290),
+    keys = _dereq_(390);
 
 /**
  * The base implementation of `_.assign` without support for argument juggling,
@@ -42736,12 +45740,12 @@ function baseAssign(object, source) {
 
 module.exports = baseAssign;
 
-},{"273":273,"373":373}],270:[function(_dereq_,module,exports){
-var baseMatches = _dereq_(293),
-    baseMatchesProperty = _dereq_(294),
-    bindCallback = _dereq_(307),
-    identity = _dereq_(381),
-    property = _dereq_(383);
+},{"290":290,"390":390}],287:[function(_dereq_,module,exports){
+var baseMatches = _dereq_(310),
+    baseMatchesProperty = _dereq_(311),
+    bindCallback = _dereq_(324),
+    identity = _dereq_(398),
+    property = _dereq_(400);
 
 /**
  * The base implementation of `_.callback` which supports specifying the
@@ -42773,16 +45777,16 @@ function baseCallback(func, thisArg, argCount) {
 
 module.exports = baseCallback;
 
-},{"293":293,"294":294,"307":307,"381":381,"383":383}],271:[function(_dereq_,module,exports){
-var arrayCopy = _dereq_(260),
-    arrayEach = _dereq_(261),
-    baseAssign = _dereq_(269),
-    baseForOwn = _dereq_(285),
-    initCloneArray = _dereq_(337),
-    initCloneByTag = _dereq_(338),
-    initCloneObject = _dereq_(339),
-    isArray = _dereq_(363),
-    isObject = _dereq_(367);
+},{"310":310,"311":311,"324":324,"398":398,"400":400}],288:[function(_dereq_,module,exports){
+var arrayCopy = _dereq_(277),
+    arrayEach = _dereq_(278),
+    baseAssign = _dereq_(286),
+    baseForOwn = _dereq_(302),
+    initCloneArray = _dereq_(354),
+    initCloneByTag = _dereq_(355),
+    initCloneObject = _dereq_(356),
+    isArray = _dereq_(380),
+    isObject = _dereq_(384);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -42903,7 +45907,7 @@ function baseClone(value, isDeep, customizer, key, object, stackA, stackB) {
 
 module.exports = baseClone;
 
-},{"260":260,"261":261,"269":269,"285":285,"337":337,"338":338,"339":339,"363":363,"367":367}],272:[function(_dereq_,module,exports){
+},{"277":277,"278":278,"286":286,"302":302,"354":354,"355":355,"356":356,"380":380,"384":384}],289:[function(_dereq_,module,exports){
 /**
  * The base implementation of `compareAscending` which compares values and
  * sorts them in ascending order without guaranteeing a stable sort.
@@ -42939,7 +45943,7 @@ function baseCompareAscending(value, other) {
 
 module.exports = baseCompareAscending;
 
-},{}],273:[function(_dereq_,module,exports){
+},{}],290:[function(_dereq_,module,exports){
 /**
  * Copies properties of `source` to `object`.
  *
@@ -42964,8 +45968,8 @@ function baseCopy(source, props, object) {
 
 module.exports = baseCopy;
 
-},{}],274:[function(_dereq_,module,exports){
-var isObject = _dereq_(367);
+},{}],291:[function(_dereq_,module,exports){
+var isObject = _dereq_(384);
 
 /**
  * The base implementation of `_.create` without support for assigning
@@ -42989,7 +45993,7 @@ var baseCreate = (function() {
 
 module.exports = baseCreate;
 
-},{"367":367}],275:[function(_dereq_,module,exports){
+},{"384":384}],292:[function(_dereq_,module,exports){
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
 
@@ -43012,10 +46016,10 @@ function baseDelay(func, wait, args) {
 
 module.exports = baseDelay;
 
-},{}],276:[function(_dereq_,module,exports){
-var baseIndexOf = _dereq_(287),
-    cacheIndexOf = _dereq_(309),
-    createCache = _dereq_(319);
+},{}],293:[function(_dereq_,module,exports){
+var baseIndexOf = _dereq_(304),
+    cacheIndexOf = _dereq_(326),
+    createCache = _dereq_(336);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -43069,9 +46073,9 @@ function baseDifference(array, values) {
 
 module.exports = baseDifference;
 
-},{"287":287,"309":309,"319":319}],277:[function(_dereq_,module,exports){
-var baseForOwn = _dereq_(285),
-    createBaseEach = _dereq_(316);
+},{"304":304,"326":326,"336":336}],294:[function(_dereq_,module,exports){
+var baseForOwn = _dereq_(302),
+    createBaseEach = _dereq_(333);
 
 /**
  * The base implementation of `_.forEach` without support for callback
@@ -43086,8 +46090,8 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"285":285,"316":316}],278:[function(_dereq_,module,exports){
-var baseEach = _dereq_(277);
+},{"302":302,"333":333}],295:[function(_dereq_,module,exports){
+var baseEach = _dereq_(294);
 
 /**
  * The base implementation of `_.every` without support for callback
@@ -43110,8 +46114,8 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"277":277}],279:[function(_dereq_,module,exports){
-var baseEach = _dereq_(277);
+},{"294":294}],296:[function(_dereq_,module,exports){
+var baseEach = _dereq_(294);
 
 /**
  * The base implementation of `_.filter` without support for callback
@@ -43134,7 +46138,7 @@ function baseFilter(collection, predicate) {
 
 module.exports = baseFilter;
 
-},{"277":277}],280:[function(_dereq_,module,exports){
+},{"294":294}],297:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`,
  * without support for callback shorthands and `this` binding, which iterates
@@ -43161,7 +46165,7 @@ function baseFind(collection, predicate, eachFunc, retKey) {
 
 module.exports = baseFind;
 
-},{}],281:[function(_dereq_,module,exports){
+},{}],298:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.findIndex` and `_.findLastIndex` without
  * support for callback shorthands and `this` binding.
@@ -43186,12 +46190,12 @@ function baseFindIndex(array, predicate, fromRight) {
 
 module.exports = baseFindIndex;
 
-},{}],282:[function(_dereq_,module,exports){
-var arrayPush = _dereq_(265),
-    isArguments = _dereq_(362),
-    isArray = _dereq_(363),
-    isArrayLike = _dereq_(340),
-    isObjectLike = _dereq_(346);
+},{}],299:[function(_dereq_,module,exports){
+var arrayPush = _dereq_(282),
+    isArguments = _dereq_(379),
+    isArray = _dereq_(380),
+    isArrayLike = _dereq_(357),
+    isObjectLike = _dereq_(363);
 
 /**
  * The base implementation of `_.flatten` with added support for restricting
@@ -43229,8 +46233,8 @@ function baseFlatten(array, isDeep, isStrict, result) {
 
 module.exports = baseFlatten;
 
-},{"265":265,"340":340,"346":346,"362":362,"363":363}],283:[function(_dereq_,module,exports){
-var createBaseFor = _dereq_(317);
+},{"282":282,"357":357,"363":363,"379":379,"380":380}],300:[function(_dereq_,module,exports){
+var createBaseFor = _dereq_(334);
 
 /**
  * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -43248,9 +46252,9 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"317":317}],284:[function(_dereq_,module,exports){
-var baseFor = _dereq_(283),
-    keysIn = _dereq_(374);
+},{"334":334}],301:[function(_dereq_,module,exports){
+var baseFor = _dereq_(300),
+    keysIn = _dereq_(391);
 
 /**
  * The base implementation of `_.forIn` without support for callback
@@ -43267,9 +46271,9 @@ function baseForIn(object, iteratee) {
 
 module.exports = baseForIn;
 
-},{"283":283,"374":374}],285:[function(_dereq_,module,exports){
-var baseFor = _dereq_(283),
-    keys = _dereq_(373);
+},{"300":300,"391":391}],302:[function(_dereq_,module,exports){
+var baseFor = _dereq_(300),
+    keys = _dereq_(390);
 
 /**
  * The base implementation of `_.forOwn` without support for callback
@@ -43286,8 +46290,8 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"283":283,"373":373}],286:[function(_dereq_,module,exports){
-var toObject = _dereq_(358);
+},{"300":300,"390":390}],303:[function(_dereq_,module,exports){
+var toObject = _dereq_(375);
 
 /**
  * The base implementation of `get` without support for string paths
@@ -43317,8 +46321,8 @@ function baseGet(object, path, pathKey) {
 
 module.exports = baseGet;
 
-},{"358":358}],287:[function(_dereq_,module,exports){
-var indexOfNaN = _dereq_(336);
+},{"375":375}],304:[function(_dereq_,module,exports){
+var indexOfNaN = _dereq_(353);
 
 /**
  * The base implementation of `_.indexOf` without support for binary searches.
@@ -43346,10 +46350,10 @@ function baseIndexOf(array, value, fromIndex) {
 
 module.exports = baseIndexOf;
 
-},{"336":336}],288:[function(_dereq_,module,exports){
-var baseIsEqualDeep = _dereq_(289),
-    isObject = _dereq_(367),
-    isObjectLike = _dereq_(346);
+},{"353":353}],305:[function(_dereq_,module,exports){
+var baseIsEqualDeep = _dereq_(306),
+    isObject = _dereq_(384),
+    isObjectLike = _dereq_(363);
 
 /**
  * The base implementation of `_.isEqual` without support for `this` binding
@@ -43376,12 +46380,12 @@ function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
 
 module.exports = baseIsEqual;
 
-},{"289":289,"346":346,"367":367}],289:[function(_dereq_,module,exports){
-var equalArrays = _dereq_(328),
-    equalByTag = _dereq_(329),
-    equalObjects = _dereq_(330),
-    isArray = _dereq_(363),
-    isTypedArray = _dereq_(370);
+},{"306":306,"363":363,"384":384}],306:[function(_dereq_,module,exports){
+var equalArrays = _dereq_(345),
+    equalByTag = _dereq_(346),
+    equalObjects = _dereq_(347),
+    isArray = _dereq_(380),
+    isTypedArray = _dereq_(387);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -43480,9 +46484,9 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, 
 
 module.exports = baseIsEqualDeep;
 
-},{"328":328,"329":329,"330":330,"363":363,"370":370}],290:[function(_dereq_,module,exports){
-var baseIsEqual = _dereq_(288),
-    toObject = _dereq_(358);
+},{"345":345,"346":346,"347":347,"380":380,"387":387}],307:[function(_dereq_,module,exports){
+var baseIsEqual = _dereq_(305),
+    toObject = _dereq_(375);
 
 /**
  * The base implementation of `_.isMatch` without support for callback
@@ -43534,7 +46538,7 @@ function baseIsMatch(object, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"288":288,"358":358}],291:[function(_dereq_,module,exports){
+},{"305":305,"375":375}],308:[function(_dereq_,module,exports){
 /**
  * The function whose prototype all chaining wrappers inherit from.
  *
@@ -43546,9 +46550,9 @@ function baseLodash() {
 
 module.exports = baseLodash;
 
-},{}],292:[function(_dereq_,module,exports){
-var baseEach = _dereq_(277),
-    isArrayLike = _dereq_(340);
+},{}],309:[function(_dereq_,module,exports){
+var baseEach = _dereq_(294),
+    isArrayLike = _dereq_(357);
 
 /**
  * The base implementation of `_.map` without support for callback shorthands
@@ -43571,10 +46575,10 @@ function baseMap(collection, iteratee) {
 
 module.exports = baseMap;
 
-},{"277":277,"340":340}],293:[function(_dereq_,module,exports){
-var baseIsMatch = _dereq_(290),
-    getMatchData = _dereq_(334),
-    toObject = _dereq_(358);
+},{"294":294,"357":357}],310:[function(_dereq_,module,exports){
+var baseIsMatch = _dereq_(307),
+    getMatchData = _dereq_(351),
+    toObject = _dereq_(375);
 
 /**
  * The base implementation of `_.matches` which does not clone `source`.
@@ -43603,16 +46607,16 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"290":290,"334":334,"358":358}],294:[function(_dereq_,module,exports){
-var baseGet = _dereq_(286),
-    baseIsEqual = _dereq_(288),
-    baseSlice = _dereq_(301),
-    isArray = _dereq_(363),
-    isKey = _dereq_(343),
-    isStrictComparable = _dereq_(347),
-    last = _dereq_(235),
-    toObject = _dereq_(358),
-    toPath = _dereq_(359);
+},{"307":307,"351":351,"375":375}],311:[function(_dereq_,module,exports){
+var baseGet = _dereq_(303),
+    baseIsEqual = _dereq_(305),
+    baseSlice = _dereq_(318),
+    isArray = _dereq_(380),
+    isKey = _dereq_(360),
+    isStrictComparable = _dereq_(364),
+    last = _dereq_(252),
+    toObject = _dereq_(375),
+    toPath = _dereq_(376);
 
 /**
  * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -43650,15 +46654,15 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"235":235,"286":286,"288":288,"301":301,"343":343,"347":347,"358":358,"359":359,"363":363}],295:[function(_dereq_,module,exports){
-var arrayEach = _dereq_(261),
-    baseMergeDeep = _dereq_(296),
-    isArray = _dereq_(363),
-    isArrayLike = _dereq_(340),
-    isObject = _dereq_(367),
-    isObjectLike = _dereq_(346),
-    isTypedArray = _dereq_(370),
-    keys = _dereq_(373);
+},{"252":252,"303":303,"305":305,"318":318,"360":360,"364":364,"375":375,"376":376,"380":380}],312:[function(_dereq_,module,exports){
+var arrayEach = _dereq_(278),
+    baseMergeDeep = _dereq_(313),
+    isArray = _dereq_(380),
+    isArrayLike = _dereq_(357),
+    isObject = _dereq_(384),
+    isObjectLike = _dereq_(363),
+    isTypedArray = _dereq_(387),
+    keys = _dereq_(390);
 
 /**
  * The base implementation of `_.merge` without support for argument juggling,
@@ -43708,14 +46712,14 @@ function baseMerge(object, source, customizer, stackA, stackB) {
 
 module.exports = baseMerge;
 
-},{"261":261,"296":296,"340":340,"346":346,"363":363,"367":367,"370":370,"373":373}],296:[function(_dereq_,module,exports){
-var arrayCopy = _dereq_(260),
-    isArguments = _dereq_(362),
-    isArray = _dereq_(363),
-    isArrayLike = _dereq_(340),
-    isPlainObject = _dereq_(368),
-    isTypedArray = _dereq_(370),
-    toPlainObject = _dereq_(371);
+},{"278":278,"313":313,"357":357,"363":363,"380":380,"384":384,"387":387,"390":390}],313:[function(_dereq_,module,exports){
+var arrayCopy = _dereq_(277),
+    isArguments = _dereq_(379),
+    isArray = _dereq_(380),
+    isArrayLike = _dereq_(357),
+    isPlainObject = _dereq_(385),
+    isTypedArray = _dereq_(387),
+    toPlainObject = _dereq_(388);
 
 /**
  * A specialized version of `baseMerge` for arrays and objects which performs
@@ -43777,7 +46781,7 @@ function baseMergeDeep(object, source, key, mergeFunc, customizer, stackA, stack
 
 module.exports = baseMergeDeep;
 
-},{"260":260,"340":340,"362":362,"363":363,"368":368,"370":370,"371":371}],297:[function(_dereq_,module,exports){
+},{"277":277,"357":357,"379":379,"380":380,"385":385,"387":387,"388":388}],314:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -43793,9 +46797,9 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],298:[function(_dereq_,module,exports){
-var baseGet = _dereq_(286),
-    toPath = _dereq_(359);
+},{}],315:[function(_dereq_,module,exports){
+var baseGet = _dereq_(303),
+    toPath = _dereq_(376);
 
 /**
  * A specialized version of `baseProperty` which supports deep paths.
@@ -43814,7 +46818,7 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"286":286,"359":359}],299:[function(_dereq_,module,exports){
+},{"303":303,"376":376}],316:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.reduce` and `_.reduceRight` without support
  * for callback shorthands and `this` binding, which iterates over `collection`
@@ -43840,9 +46844,9 @@ function baseReduce(collection, iteratee, accumulator, initFromCollection, eachF
 
 module.exports = baseReduce;
 
-},{}],300:[function(_dereq_,module,exports){
-var identity = _dereq_(381),
-    metaMap = _dereq_(349);
+},{}],317:[function(_dereq_,module,exports){
+var identity = _dereq_(398),
+    metaMap = _dereq_(366);
 
 /**
  * The base implementation of `setData` without support for hot loop detection.
@@ -43859,7 +46863,7 @@ var baseSetData = !metaMap ? identity : function(func, data) {
 
 module.exports = baseSetData;
 
-},{"349":349,"381":381}],301:[function(_dereq_,module,exports){
+},{"366":366,"398":398}],318:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.slice` without an iteratee call guard.
  *
@@ -43893,8 +46897,8 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],302:[function(_dereq_,module,exports){
-var baseEach = _dereq_(277);
+},{}],319:[function(_dereq_,module,exports){
+var baseEach = _dereq_(294);
 
 /**
  * The base implementation of `_.some` without support for callback shorthands
@@ -43918,7 +46922,7 @@ function baseSome(collection, predicate) {
 
 module.exports = baseSome;
 
-},{"277":277}],303:[function(_dereq_,module,exports){
+},{"294":294}],320:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.sortBy` which uses `comparer` to define
  * the sort order of `array` and replaces criteria objects with their
@@ -43941,7 +46945,7 @@ function baseSortBy(array, comparer) {
 
 module.exports = baseSortBy;
 
-},{}],304:[function(_dereq_,module,exports){
+},{}],321:[function(_dereq_,module,exports){
 /**
  * Converts `value` to a string if it's not one. An empty string is returned
  * for `null` or `undefined` values.
@@ -43956,10 +46960,10 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{}],305:[function(_dereq_,module,exports){
-var baseIndexOf = _dereq_(287),
-    cacheIndexOf = _dereq_(309),
-    createCache = _dereq_(319);
+},{}],322:[function(_dereq_,module,exports){
+var baseIndexOf = _dereq_(304),
+    cacheIndexOf = _dereq_(326),
+    createCache = _dereq_(336);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -44018,7 +47022,7 @@ function baseUniq(array, iteratee) {
 
 module.exports = baseUniq;
 
-},{"287":287,"309":309,"319":319}],306:[function(_dereq_,module,exports){
+},{"304":304,"326":326,"336":336}],323:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.values` and `_.valuesIn` which creates an
  * array of `object` property values corresponding to the property names
@@ -44042,8 +47046,8 @@ function baseValues(object, props) {
 
 module.exports = baseValues;
 
-},{}],307:[function(_dereq_,module,exports){
-var identity = _dereq_(381);
+},{}],324:[function(_dereq_,module,exports){
+var identity = _dereq_(398);
 
 /**
  * A specialized version of `baseCallback` which only supports `this` binding
@@ -44083,7 +47087,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"381":381}],308:[function(_dereq_,module,exports){
+},{"398":398}],325:[function(_dereq_,module,exports){
 (function (global){
 /** Native method references. */
 var ArrayBuffer = global.ArrayBuffer,
@@ -44108,8 +47112,8 @@ module.exports = bufferClone;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],309:[function(_dereq_,module,exports){
-var isObject = _dereq_(367);
+},{}],326:[function(_dereq_,module,exports){
+var isObject = _dereq_(384);
 
 /**
  * Checks if `value` is in `cache` mimicking the return signature of
@@ -44129,8 +47133,8 @@ function cacheIndexOf(cache, value) {
 
 module.exports = cacheIndexOf;
 
-},{"367":367}],310:[function(_dereq_,module,exports){
-var isObject = _dereq_(367);
+},{"384":384}],327:[function(_dereq_,module,exports){
+var isObject = _dereq_(384);
 
 /**
  * Adds `value` to the cache.
@@ -44151,8 +47155,8 @@ function cachePush(value) {
 
 module.exports = cachePush;
 
-},{"367":367}],311:[function(_dereq_,module,exports){
-var baseCompareAscending = _dereq_(272);
+},{"384":384}],328:[function(_dereq_,module,exports){
+var baseCompareAscending = _dereq_(289);
 
 /**
  * Used by `_.sortBy` to compare transformed elements of a collection and stable
@@ -44169,7 +47173,7 @@ function compareAscending(object, other) {
 
 module.exports = compareAscending;
 
-},{"272":272}],312:[function(_dereq_,module,exports){
+},{"289":289}],329:[function(_dereq_,module,exports){
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
 
@@ -44205,7 +47209,7 @@ function composeArgs(args, partials, holders) {
 
 module.exports = composeArgs;
 
-},{}],313:[function(_dereq_,module,exports){
+},{}],330:[function(_dereq_,module,exports){
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
 
@@ -44243,10 +47247,10 @@ function composeArgsRight(args, partials, holders) {
 
 module.exports = composeArgsRight;
 
-},{}],314:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(270),
-    baseEach = _dereq_(277),
-    isArray = _dereq_(363);
+},{}],331:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(287),
+    baseEach = _dereq_(294),
+    isArray = _dereq_(380);
 
 /**
  * Creates a `_.countBy`, `_.groupBy`, `_.indexBy`, or `_.partition` function.
@@ -44280,10 +47284,10 @@ function createAggregator(setter, initializer) {
 
 module.exports = createAggregator;
 
-},{"270":270,"277":277,"363":363}],315:[function(_dereq_,module,exports){
-var bindCallback = _dereq_(307),
-    isIterateeCall = _dereq_(342),
-    restParam = _dereq_(256);
+},{"287":287,"294":294,"380":380}],332:[function(_dereq_,module,exports){
+var bindCallback = _dereq_(324),
+    isIterateeCall = _dereq_(359),
+    restParam = _dereq_(273);
 
 /**
  * Creates a `_.assign`, `_.defaults`, or `_.merge` function.
@@ -44323,10 +47327,10 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"256":256,"307":307,"342":342}],316:[function(_dereq_,module,exports){
-var getLength = _dereq_(333),
-    isLength = _dereq_(345),
-    toObject = _dereq_(358);
+},{"273":273,"324":324,"359":359}],333:[function(_dereq_,module,exports){
+var getLength = _dereq_(350),
+    isLength = _dereq_(362),
+    toObject = _dereq_(375);
 
 /**
  * Creates a `baseEach` or `baseEachRight` function.
@@ -44356,8 +47360,8 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"333":333,"345":345,"358":358}],317:[function(_dereq_,module,exports){
-var toObject = _dereq_(358);
+},{"350":350,"362":362,"375":375}],334:[function(_dereq_,module,exports){
+var toObject = _dereq_(375);
 
 /**
  * Creates a base function for `_.forIn` or `_.forInRight`.
@@ -44385,9 +47389,9 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{"358":358}],318:[function(_dereq_,module,exports){
+},{"375":375}],335:[function(_dereq_,module,exports){
 (function (global){
-var createCtorWrapper = _dereq_(320);
+var createCtorWrapper = _dereq_(337);
 
 /**
  * Creates a function that wraps `func` and invokes it with the `this`
@@ -44412,10 +47416,10 @@ module.exports = createBindWrapper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"320":320}],319:[function(_dereq_,module,exports){
+},{"337":337}],336:[function(_dereq_,module,exports){
 (function (global){
-var SetCache = _dereq_(259),
-    getNative = _dereq_(335);
+var SetCache = _dereq_(276),
+    getNative = _dereq_(352);
 
 /** Native method references. */
 var Set = getNative(global, 'Set');
@@ -44438,9 +47442,9 @@ module.exports = createCache;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"259":259,"335":335}],320:[function(_dereq_,module,exports){
-var baseCreate = _dereq_(274),
-    isObject = _dereq_(367);
+},{"276":276,"352":352}],337:[function(_dereq_,module,exports){
+var baseCreate = _dereq_(291),
+    isObject = _dereq_(384);
 
 /**
  * Creates a function that produces an instance of `Ctor` regardless of
@@ -44477,11 +47481,11 @@ function createCtorWrapper(Ctor) {
 
 module.exports = createCtorWrapper;
 
-},{"274":274,"367":367}],321:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(270),
-    baseFind = _dereq_(280),
-    baseFindIndex = _dereq_(281),
-    isArray = _dereq_(363);
+},{"291":291,"384":384}],338:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(287),
+    baseFind = _dereq_(297),
+    baseFindIndex = _dereq_(298),
+    isArray = _dereq_(380);
 
 /**
  * Creates a `_.find` or `_.findLast` function.
@@ -44504,9 +47508,9 @@ function createFind(eachFunc, fromRight) {
 
 module.exports = createFind;
 
-},{"270":270,"280":280,"281":281,"363":363}],322:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(270),
-    baseFindIndex = _dereq_(281);
+},{"287":287,"297":297,"298":298,"380":380}],339:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(287),
+    baseFindIndex = _dereq_(298);
 
 /**
  * Creates a `_.findIndex` or `_.findLastIndex` function.
@@ -44527,9 +47531,9 @@ function createFindIndex(fromRight) {
 
 module.exports = createFindIndex;
 
-},{"270":270,"281":281}],323:[function(_dereq_,module,exports){
-var bindCallback = _dereq_(307),
-    isArray = _dereq_(363);
+},{"287":287,"298":298}],340:[function(_dereq_,module,exports){
+var bindCallback = _dereq_(324),
+    isArray = _dereq_(380);
 
 /**
  * Creates a function for `_.forEach` or `_.forEachRight`.
@@ -44549,16 +47553,16 @@ function createForEach(arrayFunc, eachFunc) {
 
 module.exports = createForEach;
 
-},{"307":307,"363":363}],324:[function(_dereq_,module,exports){
+},{"324":324,"380":380}],341:[function(_dereq_,module,exports){
 (function (global){
-var arrayCopy = _dereq_(260),
-    composeArgs = _dereq_(312),
-    composeArgsRight = _dereq_(313),
-    createCtorWrapper = _dereq_(320),
-    isLaziable = _dereq_(344),
-    reorder = _dereq_(353),
-    replaceHolders = _dereq_(354),
-    setData = _dereq_(355);
+var arrayCopy = _dereq_(277),
+    composeArgs = _dereq_(329),
+    composeArgsRight = _dereq_(330),
+    createCtorWrapper = _dereq_(337),
+    isLaziable = _dereq_(361),
+    reorder = _dereq_(370),
+    replaceHolders = _dereq_(371),
+    setData = _dereq_(372);
 
 /** Used to compose bitmasks for wrapper metadata. */
 var BIND_FLAG = 1,
@@ -44665,9 +47669,9 @@ module.exports = createHybridWrapper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"260":260,"312":312,"313":313,"320":320,"344":344,"353":353,"354":354,"355":355}],325:[function(_dereq_,module,exports){
+},{"277":277,"329":329,"330":330,"337":337,"361":361,"370":370,"371":371,"372":372}],342:[function(_dereq_,module,exports){
 (function (global){
-var createCtorWrapper = _dereq_(320);
+var createCtorWrapper = _dereq_(337);
 
 /** Used to compose bitmasks for wrapper metadata. */
 var BIND_FLAG = 1;
@@ -44713,10 +47717,10 @@ module.exports = createPartialWrapper;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"320":320}],326:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(270),
-    baseReduce = _dereq_(299),
-    isArray = _dereq_(363);
+},{"337":337}],343:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(287),
+    baseReduce = _dereq_(316),
+    isArray = _dereq_(380);
 
 /**
  * Creates a function for `_.reduce` or `_.reduceRight`.
@@ -44737,14 +47741,14 @@ function createReduce(arrayFunc, eachFunc) {
 
 module.exports = createReduce;
 
-},{"270":270,"299":299,"363":363}],327:[function(_dereq_,module,exports){
-var baseSetData = _dereq_(300),
-    createBindWrapper = _dereq_(318),
-    createHybridWrapper = _dereq_(324),
-    createPartialWrapper = _dereq_(325),
-    getData = _dereq_(331),
-    mergeData = _dereq_(348),
-    setData = _dereq_(355);
+},{"287":287,"316":316,"380":380}],344:[function(_dereq_,module,exports){
+var baseSetData = _dereq_(317),
+    createBindWrapper = _dereq_(335),
+    createHybridWrapper = _dereq_(341),
+    createPartialWrapper = _dereq_(342),
+    getData = _dereq_(348),
+    mergeData = _dereq_(365),
+    setData = _dereq_(372);
 
 /** Used to compose bitmasks for wrapper metadata. */
 var BIND_FLAG = 1,
@@ -44825,8 +47829,8 @@ function createWrapper(func, bitmask, thisArg, partials, holders, argPos, ary, a
 
 module.exports = createWrapper;
 
-},{"300":300,"318":318,"324":324,"325":325,"331":331,"348":348,"355":355}],328:[function(_dereq_,module,exports){
-var arraySome = _dereq_(267);
+},{"317":317,"335":335,"341":341,"342":342,"348":348,"365":365,"372":372}],345:[function(_dereq_,module,exports){
+var arraySome = _dereq_(284);
 
 /**
  * A specialized version of `baseIsEqualDeep` for arrays with support for
@@ -44878,7 +47882,7 @@ function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stack
 
 module.exports = equalArrays;
 
-},{"267":267}],329:[function(_dereq_,module,exports){
+},{"284":284}],346:[function(_dereq_,module,exports){
 /** `Object#toString` result references. */
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
@@ -44928,8 +47932,8 @@ function equalByTag(object, other, tag) {
 
 module.exports = equalByTag;
 
-},{}],330:[function(_dereq_,module,exports){
-var keys = _dereq_(373);
+},{}],347:[function(_dereq_,module,exports){
+var keys = _dereq_(390);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -44997,9 +48001,9 @@ function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, sta
 
 module.exports = equalObjects;
 
-},{"373":373}],331:[function(_dereq_,module,exports){
-var metaMap = _dereq_(349),
-    noop = _dereq_(382);
+},{"390":390}],348:[function(_dereq_,module,exports){
+var metaMap = _dereq_(366),
+    noop = _dereq_(399);
 
 /**
  * Gets metadata for `func`.
@@ -45014,8 +48018,8 @@ var getData = !metaMap ? noop : function(func) {
 
 module.exports = getData;
 
-},{"349":349,"382":382}],332:[function(_dereq_,module,exports){
-var realNames = _dereq_(352);
+},{"366":366,"399":399}],349:[function(_dereq_,module,exports){
+var realNames = _dereq_(369);
 
 /**
  * Gets the name of `func`.
@@ -45041,8 +48045,8 @@ function getFuncName(func) {
 
 module.exports = getFuncName;
 
-},{"352":352}],333:[function(_dereq_,module,exports){
-var baseProperty = _dereq_(297);
+},{"369":369}],350:[function(_dereq_,module,exports){
+var baseProperty = _dereq_(314);
 
 /**
  * Gets the "length" property value of `object`.
@@ -45058,9 +48062,9 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"297":297}],334:[function(_dereq_,module,exports){
-var isStrictComparable = _dereq_(347),
-    pairs = _dereq_(377);
+},{"314":314}],351:[function(_dereq_,module,exports){
+var isStrictComparable = _dereq_(364),
+    pairs = _dereq_(394);
 
 /**
  * Gets the propery names, values, and compare flags of `object`.
@@ -45081,8 +48085,8 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"347":347,"377":377}],335:[function(_dereq_,module,exports){
-var isNative = _dereq_(365);
+},{"364":364,"394":394}],352:[function(_dereq_,module,exports){
+var isNative = _dereq_(382);
 
 /**
  * Gets the native function at `key` of `object`.
@@ -45099,7 +48103,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"365":365}],336:[function(_dereq_,module,exports){
+},{"382":382}],353:[function(_dereq_,module,exports){
 /**
  * Gets the index at which the first occurrence of `NaN` is found in `array`.
  *
@@ -45124,7 +48128,7 @@ function indexOfNaN(array, fromIndex, fromRight) {
 
 module.exports = indexOfNaN;
 
-},{}],337:[function(_dereq_,module,exports){
+},{}],354:[function(_dereq_,module,exports){
 /** Used for native method references. */
 var objectProto = Object.prototype;
 
@@ -45152,8 +48156,8 @@ function initCloneArray(array) {
 
 module.exports = initCloneArray;
 
-},{}],338:[function(_dereq_,module,exports){
-var bufferClone = _dereq_(308);
+},{}],355:[function(_dereq_,module,exports){
+var bufferClone = _dereq_(325);
 
 /** `Object#toString` result references. */
 var boolTag = '[object Boolean]',
@@ -45217,7 +48221,7 @@ function initCloneByTag(object, tag, isDeep) {
 
 module.exports = initCloneByTag;
 
-},{"308":308}],339:[function(_dereq_,module,exports){
+},{"325":325}],356:[function(_dereq_,module,exports){
 /**
  * Initializes an object clone.
  *
@@ -45235,9 +48239,9 @@ function initCloneObject(object) {
 
 module.exports = initCloneObject;
 
-},{}],340:[function(_dereq_,module,exports){
-var getLength = _dereq_(333),
-    isLength = _dereq_(345);
+},{}],357:[function(_dereq_,module,exports){
+var getLength = _dereq_(350),
+    isLength = _dereq_(362);
 
 /**
  * Checks if `value` is array-like.
@@ -45252,7 +48256,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"333":333,"345":345}],341:[function(_dereq_,module,exports){
+},{"350":350,"362":362}],358:[function(_dereq_,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -45278,10 +48282,10 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],342:[function(_dereq_,module,exports){
-var isArrayLike = _dereq_(340),
-    isIndex = _dereq_(341),
-    isObject = _dereq_(367);
+},{}],359:[function(_dereq_,module,exports){
+var isArrayLike = _dereq_(357),
+    isIndex = _dereq_(358),
+    isObject = _dereq_(384);
 
 /**
  * Checks if the provided arguments are from an iteratee call.
@@ -45308,9 +48312,9 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"340":340,"341":341,"367":367}],343:[function(_dereq_,module,exports){
-var isArray = _dereq_(363),
-    toObject = _dereq_(358);
+},{"357":357,"358":358,"384":384}],360:[function(_dereq_,module,exports){
+var isArray = _dereq_(380),
+    toObject = _dereq_(375);
 
 /** Used to match property names within property paths. */
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
@@ -45338,11 +48342,11 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"358":358,"363":363}],344:[function(_dereq_,module,exports){
-var LazyWrapper = _dereq_(257),
-    getData = _dereq_(331),
-    getFuncName = _dereq_(332),
-    lodash = _dereq_(240);
+},{"375":375,"380":380}],361:[function(_dereq_,module,exports){
+var LazyWrapper = _dereq_(274),
+    getData = _dereq_(348),
+    getFuncName = _dereq_(349),
+    lodash = _dereq_(257);
 
 /**
  * Checks if `func` has a lazy counterpart.
@@ -45367,7 +48371,7 @@ function isLaziable(func) {
 
 module.exports = isLaziable;
 
-},{"240":240,"257":257,"331":331,"332":332}],345:[function(_dereq_,module,exports){
+},{"257":257,"274":274,"348":348,"349":349}],362:[function(_dereq_,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -45389,7 +48393,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],346:[function(_dereq_,module,exports){
+},{}],363:[function(_dereq_,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -45403,8 +48407,8 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],347:[function(_dereq_,module,exports){
-var isObject = _dereq_(367);
+},{}],364:[function(_dereq_,module,exports){
+var isObject = _dereq_(384);
 
 /**
  * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -45420,11 +48424,11 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"367":367}],348:[function(_dereq_,module,exports){
-var arrayCopy = _dereq_(260),
-    composeArgs = _dereq_(312),
-    composeArgsRight = _dereq_(313),
-    replaceHolders = _dereq_(354);
+},{"384":384}],365:[function(_dereq_,module,exports){
+var arrayCopy = _dereq_(277),
+    composeArgs = _dereq_(329),
+    composeArgsRight = _dereq_(330),
+    replaceHolders = _dereq_(371);
 
 /** Used to compose bitmasks for wrapper metadata. */
 var BIND_FLAG = 1,
@@ -45511,9 +48515,9 @@ function mergeData(data, source) {
 
 module.exports = mergeData;
 
-},{"260":260,"312":312,"313":313,"354":354}],349:[function(_dereq_,module,exports){
+},{"277":277,"329":329,"330":330,"371":371}],366:[function(_dereq_,module,exports){
 (function (global){
-var getNative = _dereq_(335);
+var getNative = _dereq_(352);
 
 /** Native method references. */
 var WeakMap = getNative(global, 'WeakMap');
@@ -45525,8 +48529,8 @@ module.exports = metaMap;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"335":335}],350:[function(_dereq_,module,exports){
-var toObject = _dereq_(358);
+},{"352":352}],367:[function(_dereq_,module,exports){
+var toObject = _dereq_(375);
 
 /**
  * A specialized version of `_.pick` which picks `object` properties specified
@@ -45555,8 +48559,8 @@ function pickByArray(object, props) {
 
 module.exports = pickByArray;
 
-},{"358":358}],351:[function(_dereq_,module,exports){
-var baseForIn = _dereq_(284);
+},{"375":375}],368:[function(_dereq_,module,exports){
+var baseForIn = _dereq_(301);
 
 /**
  * A specialized version of `_.pick` which picks `object` properties `predicate`
@@ -45579,15 +48583,15 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-},{"284":284}],352:[function(_dereq_,module,exports){
+},{"301":301}],369:[function(_dereq_,module,exports){
 /** Used to lookup unminified function names. */
 var realNames = {};
 
 module.exports = realNames;
 
-},{}],353:[function(_dereq_,module,exports){
-var arrayCopy = _dereq_(260),
-    isIndex = _dereq_(341);
+},{}],370:[function(_dereq_,module,exports){
+var arrayCopy = _dereq_(277),
+    isIndex = _dereq_(358);
 
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeMin = Math.min;
@@ -45616,7 +48620,7 @@ function reorder(array, indexes) {
 
 module.exports = reorder;
 
-},{"260":260,"341":341}],354:[function(_dereq_,module,exports){
+},{"277":277,"358":358}],371:[function(_dereq_,module,exports){
 /** Used as the internal argument placeholder. */
 var PLACEHOLDER = '__lodash_placeholder__';
 
@@ -45646,9 +48650,9 @@ function replaceHolders(array, placeholder) {
 
 module.exports = replaceHolders;
 
-},{}],355:[function(_dereq_,module,exports){
-var baseSetData = _dereq_(300),
-    now = _dereq_(252);
+},{}],372:[function(_dereq_,module,exports){
+var baseSetData = _dereq_(317),
+    now = _dereq_(269);
 
 /** Used to detect when a function becomes hot. */
 var HOT_COUNT = 150,
@@ -45689,12 +48693,12 @@ var setData = (function() {
 
 module.exports = setData;
 
-},{"252":252,"300":300}],356:[function(_dereq_,module,exports){
-var isArguments = _dereq_(362),
-    isArray = _dereq_(363),
-    isIndex = _dereq_(341),
-    isLength = _dereq_(345),
-    keysIn = _dereq_(374);
+},{"269":269,"317":317}],373:[function(_dereq_,module,exports){
+var isArguments = _dereq_(379),
+    isArray = _dereq_(380),
+    isIndex = _dereq_(358),
+    isLength = _dereq_(362),
+    keysIn = _dereq_(391);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -45732,7 +48736,7 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"341":341,"345":345,"362":362,"363":363,"374":374}],357:[function(_dereq_,module,exports){
+},{"358":358,"362":362,"379":379,"380":380,"391":391}],374:[function(_dereq_,module,exports){
 /**
  * An implementation of `_.uniq` optimized for sorted arrays without support
  * for callback shorthands and `this` binding.
@@ -45763,8 +48767,8 @@ function sortedUniq(array, iteratee) {
 
 module.exports = sortedUniq;
 
-},{}],358:[function(_dereq_,module,exports){
-var isObject = _dereq_(367);
+},{}],375:[function(_dereq_,module,exports){
+var isObject = _dereq_(384);
 
 /**
  * Converts `value` to an object if it's not one.
@@ -45779,9 +48783,9 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"367":367}],359:[function(_dereq_,module,exports){
-var baseToString = _dereq_(304),
-    isArray = _dereq_(363);
+},{"384":384}],376:[function(_dereq_,module,exports){
+var baseToString = _dereq_(321),
+    isArray = _dereq_(380);
 
 /** Used to match property names within property paths. */
 var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -45809,10 +48813,10 @@ function toPath(value) {
 
 module.exports = toPath;
 
-},{"304":304,"363":363}],360:[function(_dereq_,module,exports){
-var LazyWrapper = _dereq_(257),
-    LodashWrapper = _dereq_(258),
-    arrayCopy = _dereq_(260);
+},{"321":321,"380":380}],377:[function(_dereq_,module,exports){
+var LazyWrapper = _dereq_(274),
+    LodashWrapper = _dereq_(275),
+    arrayCopy = _dereq_(277);
 
 /**
  * Creates a clone of `wrapper`.
@@ -45829,10 +48833,10 @@ function wrapperClone(wrapper) {
 
 module.exports = wrapperClone;
 
-},{"257":257,"258":258,"260":260}],361:[function(_dereq_,module,exports){
-var baseClone = _dereq_(271),
-    bindCallback = _dereq_(307),
-    isIterateeCall = _dereq_(342);
+},{"274":274,"275":275,"277":277}],378:[function(_dereq_,module,exports){
+var baseClone = _dereq_(288),
+    bindCallback = _dereq_(324),
+    isIterateeCall = _dereq_(359);
 
 /**
  * Creates a clone of `value`. If `isDeep` is `true` nested objects are cloned,
@@ -45901,9 +48905,9 @@ function clone(value, isDeep, customizer, thisArg) {
 
 module.exports = clone;
 
-},{"271":271,"307":307,"342":342}],362:[function(_dereq_,module,exports){
-var isArrayLike = _dereq_(340),
-    isObjectLike = _dereq_(346);
+},{"288":288,"324":324,"359":359}],379:[function(_dereq_,module,exports){
+var isArrayLike = _dereq_(357),
+    isObjectLike = _dereq_(363);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -45937,10 +48941,10 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"340":340,"346":346}],363:[function(_dereq_,module,exports){
-var getNative = _dereq_(335),
-    isLength = _dereq_(345),
-    isObjectLike = _dereq_(346);
+},{"357":357,"363":363}],380:[function(_dereq_,module,exports){
+var getNative = _dereq_(352),
+    isLength = _dereq_(362),
+    isObjectLike = _dereq_(363);
 
 /** `Object#toString` result references. */
 var arrayTag = '[object Array]';
@@ -45979,8 +48983,8 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"335":335,"345":345,"346":346}],364:[function(_dereq_,module,exports){
-var isObject = _dereq_(367);
+},{"352":352,"362":362,"363":363}],381:[function(_dereq_,module,exports){
+var isObject = _dereq_(384);
 
 /** `Object#toString` result references. */
 var funcTag = '[object Function]';
@@ -46019,9 +49023,9 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"367":367}],365:[function(_dereq_,module,exports){
-var isFunction = _dereq_(364),
-    isObjectLike = _dereq_(346);
+},{"384":384}],382:[function(_dereq_,module,exports){
+var isFunction = _dereq_(381),
+    isObjectLike = _dereq_(363);
 
 /** Used to detect host constructors (Safari > 5). */
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -46069,8 +49073,8 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"346":346,"364":364}],366:[function(_dereq_,module,exports){
-var isObjectLike = _dereq_(346);
+},{"363":363,"381":381}],383:[function(_dereq_,module,exports){
+var isObjectLike = _dereq_(363);
 
 /** `Object#toString` result references. */
 var numberTag = '[object Number]';
@@ -46112,7 +49116,7 @@ function isNumber(value) {
 
 module.exports = isNumber;
 
-},{"346":346}],367:[function(_dereq_,module,exports){
+},{"363":363}],384:[function(_dereq_,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -46142,10 +49146,10 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],368:[function(_dereq_,module,exports){
-var baseForIn = _dereq_(284),
-    isArguments = _dereq_(362),
-    isObjectLike = _dereq_(346);
+},{}],385:[function(_dereq_,module,exports){
+var baseForIn = _dereq_(301),
+    isArguments = _dereq_(379),
+    isObjectLike = _dereq_(363);
 
 /** `Object#toString` result references. */
 var objectTag = '[object Object]';
@@ -46215,8 +49219,8 @@ function isPlainObject(value) {
 
 module.exports = isPlainObject;
 
-},{"284":284,"346":346,"362":362}],369:[function(_dereq_,module,exports){
-var isObjectLike = _dereq_(346);
+},{"301":301,"363":363,"379":379}],386:[function(_dereq_,module,exports){
+var isObjectLike = _dereq_(363);
 
 /** `Object#toString` result references. */
 var stringTag = '[object String]';
@@ -46252,9 +49256,9 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"346":346}],370:[function(_dereq_,module,exports){
-var isLength = _dereq_(345),
-    isObjectLike = _dereq_(346);
+},{"363":363}],387:[function(_dereq_,module,exports){
+var isLength = _dereq_(362),
+    isObjectLike = _dereq_(363);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -46328,9 +49332,9 @@ function isTypedArray(value) {
 
 module.exports = isTypedArray;
 
-},{"345":345,"346":346}],371:[function(_dereq_,module,exports){
-var baseCopy = _dereq_(273),
-    keysIn = _dereq_(374);
+},{"362":362,"363":363}],388:[function(_dereq_,module,exports){
+var baseCopy = _dereq_(290),
+    keysIn = _dereq_(391);
 
 /**
  * Converts `value` to a plain object flattening inherited enumerable
@@ -46361,10 +49365,10 @@ function toPlainObject(value) {
 
 module.exports = toPlainObject;
 
-},{"273":273,"374":374}],372:[function(_dereq_,module,exports){
-var assignWith = _dereq_(268),
-    baseAssign = _dereq_(269),
-    createAssigner = _dereq_(315);
+},{"290":290,"391":391}],389:[function(_dereq_,module,exports){
+var assignWith = _dereq_(285),
+    baseAssign = _dereq_(286),
+    createAssigner = _dereq_(332);
 
 /**
  * Assigns own enumerable properties of source object(s) to the destination
@@ -46406,11 +49410,11 @@ var assign = createAssigner(function(object, source, customizer) {
 
 module.exports = assign;
 
-},{"268":268,"269":269,"315":315}],373:[function(_dereq_,module,exports){
-var getNative = _dereq_(335),
-    isArrayLike = _dereq_(340),
-    isObject = _dereq_(367),
-    shimKeys = _dereq_(356);
+},{"285":285,"286":286,"332":332}],390:[function(_dereq_,module,exports){
+var getNative = _dereq_(352),
+    isArrayLike = _dereq_(357),
+    isObject = _dereq_(384),
+    shimKeys = _dereq_(373);
 
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeKeys = getNative(Object, 'keys');
@@ -46453,12 +49457,12 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"335":335,"340":340,"356":356,"367":367}],374:[function(_dereq_,module,exports){
-var isArguments = _dereq_(362),
-    isArray = _dereq_(363),
-    isIndex = _dereq_(341),
-    isLength = _dereq_(345),
-    isObject = _dereq_(367);
+},{"352":352,"357":357,"373":373,"384":384}],391:[function(_dereq_,module,exports){
+var isArguments = _dereq_(379),
+    isArray = _dereq_(380),
+    isIndex = _dereq_(358),
+    isLength = _dereq_(362),
+    isObject = _dereq_(384);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -46519,9 +49523,9 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"341":341,"345":345,"362":362,"363":363,"367":367}],375:[function(_dereq_,module,exports){
-var baseMerge = _dereq_(295),
-    createAssigner = _dereq_(315);
+},{"358":358,"362":362,"379":379,"380":380,"384":384}],392:[function(_dereq_,module,exports){
+var baseMerge = _dereq_(312),
+    createAssigner = _dereq_(332);
 
 /**
  * Recursively merges own enumerable properties of the source object(s), that
@@ -46575,15 +49579,15 @@ var merge = createAssigner(baseMerge);
 
 module.exports = merge;
 
-},{"295":295,"315":315}],376:[function(_dereq_,module,exports){
-var arrayMap = _dereq_(264),
-    baseDifference = _dereq_(276),
-    baseFlatten = _dereq_(282),
-    bindCallback = _dereq_(307),
-    keysIn = _dereq_(374),
-    pickByArray = _dereq_(350),
-    pickByCallback = _dereq_(351),
-    restParam = _dereq_(256);
+},{"312":312,"332":332}],393:[function(_dereq_,module,exports){
+var arrayMap = _dereq_(281),
+    baseDifference = _dereq_(293),
+    baseFlatten = _dereq_(299),
+    bindCallback = _dereq_(324),
+    keysIn = _dereq_(391),
+    pickByArray = _dereq_(367),
+    pickByCallback = _dereq_(368),
+    restParam = _dereq_(273);
 
 /**
  * The opposite of `_.pick`; this method creates an object composed of the
@@ -46624,9 +49628,9 @@ var omit = restParam(function(object, props) {
 
 module.exports = omit;
 
-},{"256":256,"264":264,"276":276,"282":282,"307":307,"350":350,"351":351,"374":374}],377:[function(_dereq_,module,exports){
-var keys = _dereq_(373),
-    toObject = _dereq_(358);
+},{"273":273,"281":281,"293":293,"299":299,"324":324,"367":367,"368":368,"391":391}],394:[function(_dereq_,module,exports){
+var keys = _dereq_(390),
+    toObject = _dereq_(375);
 
 /**
  * Creates a two dimensional array of the key-value pairs for `object`,
@@ -46659,12 +49663,12 @@ function pairs(object) {
 
 module.exports = pairs;
 
-},{"358":358,"373":373}],378:[function(_dereq_,module,exports){
-var baseFlatten = _dereq_(282),
-    bindCallback = _dereq_(307),
-    pickByArray = _dereq_(350),
-    pickByCallback = _dereq_(351),
-    restParam = _dereq_(256);
+},{"375":375,"390":390}],395:[function(_dereq_,module,exports){
+var baseFlatten = _dereq_(299),
+    bindCallback = _dereq_(324),
+    pickByArray = _dereq_(367),
+    pickByCallback = _dereq_(368),
+    restParam = _dereq_(273);
 
 /**
  * Creates an object composed of the picked `object` properties. Property
@@ -46703,15 +49707,15 @@ var pick = restParam(function(object, props) {
 
 module.exports = pick;
 
-},{"256":256,"282":282,"307":307,"350":350,"351":351}],379:[function(_dereq_,module,exports){
-var arrayEach = _dereq_(261),
-    baseCallback = _dereq_(270),
-    baseCreate = _dereq_(274),
-    baseForOwn = _dereq_(285),
-    isArray = _dereq_(363),
-    isFunction = _dereq_(364),
-    isObject = _dereq_(367),
-    isTypedArray = _dereq_(370);
+},{"273":273,"299":299,"324":324,"367":367,"368":368}],396:[function(_dereq_,module,exports){
+var arrayEach = _dereq_(278),
+    baseCallback = _dereq_(287),
+    baseCreate = _dereq_(291),
+    baseForOwn = _dereq_(302),
+    isArray = _dereq_(380),
+    isFunction = _dereq_(381),
+    isObject = _dereq_(384),
+    isTypedArray = _dereq_(387);
 
 /**
  * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -46766,9 +49770,9 @@ function transform(object, iteratee, accumulator, thisArg) {
 
 module.exports = transform;
 
-},{"261":261,"270":270,"274":274,"285":285,"363":363,"364":364,"367":367,"370":370}],380:[function(_dereq_,module,exports){
-var baseValues = _dereq_(306),
-    keys = _dereq_(373);
+},{"278":278,"287":287,"291":291,"302":302,"380":380,"381":381,"384":384,"387":387}],397:[function(_dereq_,module,exports){
+var baseValues = _dereq_(323),
+    keys = _dereq_(390);
 
 /**
  * Creates an array of the own enumerable property values of `object`.
@@ -46801,7 +49805,7 @@ function values(object) {
 
 module.exports = values;
 
-},{"306":306,"373":373}],381:[function(_dereq_,module,exports){
+},{"323":323,"390":390}],398:[function(_dereq_,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -46823,7 +49827,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],382:[function(_dereq_,module,exports){
+},{}],399:[function(_dereq_,module,exports){
 /**
  * A no-operation function that returns `undefined` regardless of the
  * arguments it receives.
@@ -46844,10 +49848,10 @@ function noop() {
 
 module.exports = noop;
 
-},{}],383:[function(_dereq_,module,exports){
-var baseProperty = _dereq_(297),
-    basePropertyDeep = _dereq_(298),
-    isKey = _dereq_(343);
+},{}],400:[function(_dereq_,module,exports){
+var baseProperty = _dereq_(314),
+    basePropertyDeep = _dereq_(315),
+    isKey = _dereq_(360);
 
 /**
  * Creates a function that returns the property value at `path` on a
@@ -46877,7 +49881,7 @@ function property(path) {
 
 module.exports = property;
 
-},{"297":297,"298":298,"343":343}],384:[function(_dereq_,module,exports){
+},{"314":314,"315":315,"360":360}],401:[function(_dereq_,module,exports){
 /**
  * Set attribute `name` to `val`, or get attr `name`.
  *
@@ -46903,9 +49907,9 @@ module.exports = function(el, name, val) {
 
   return el;
 };
-},{}],385:[function(_dereq_,module,exports){
-module.exports = _dereq_(394);
-},{"394":394}],386:[function(_dereq_,module,exports){
+},{}],402:[function(_dereq_,module,exports){
+module.exports = _dereq_(411);
+},{"411":411}],403:[function(_dereq_,module,exports){
 module.exports = function(el) {
 
   var c;
@@ -46917,31 +49921,31 @@ module.exports = function(el) {
 
   return el;
 };
-},{}],387:[function(_dereq_,module,exports){
-module.exports = _dereq_(396);
-},{"396":396}],388:[function(_dereq_,module,exports){
-module.exports = _dereq_(397);
-},{"397":397}],389:[function(_dereq_,module,exports){
-module.exports = _dereq_(401);
-},{"401":401}],390:[function(_dereq_,module,exports){
-module.exports = _dereq_(398);
-},{"398":398}],391:[function(_dereq_,module,exports){
-module.exports = _dereq_(399);
-},{"399":399}],392:[function(_dereq_,module,exports){
-module.exports = _dereq_(400);
-},{"400":400}],393:[function(_dereq_,module,exports){
+},{}],404:[function(_dereq_,module,exports){
+module.exports = _dereq_(413);
+},{"413":413}],405:[function(_dereq_,module,exports){
+module.exports = _dereq_(414);
+},{"414":414}],406:[function(_dereq_,module,exports){
+module.exports = _dereq_(418);
+},{"418":418}],407:[function(_dereq_,module,exports){
+module.exports = _dereq_(415);
+},{"415":415}],408:[function(_dereq_,module,exports){
+module.exports = _dereq_(416);
+},{"416":416}],409:[function(_dereq_,module,exports){
+module.exports = _dereq_(417);
+},{"417":417}],410:[function(_dereq_,module,exports){
 module.exports = function(el) {
   el.parentNode && el.parentNode.removeChild(el);
 };
-},{}],394:[function(_dereq_,module,exports){
+},{}],411:[function(_dereq_,module,exports){
 /**
  * Module dependencies.
  */
 
 try {
-  var index = _dereq_(395);
+  var index = _dereq_(412);
 } catch (err) {
-  var index = _dereq_(395);
+  var index = _dereq_(412);
 }
 
 /**
@@ -47126,7 +50130,7 @@ ClassList.prototype.contains = function(name){
     : !! ~index(this.array(), name);
 };
 
-},{"395":395}],395:[function(_dereq_,module,exports){
+},{"412":412}],412:[function(_dereq_,module,exports){
 module.exports = function(arr, obj){
   if (arr.indexOf) return arr.indexOf(obj);
   for (var i = 0; i < arr.length; ++i) {
@@ -47134,8 +50138,8 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],396:[function(_dereq_,module,exports){
-var matches = _dereq_(399)
+},{}],413:[function(_dereq_,module,exports){
+var matches = _dereq_(416)
 
 module.exports = function (element, selector, checkYoSelf, root) {
   element = checkYoSelf ? {parentNode: element} : element
@@ -47155,21 +50159,21 @@ module.exports = function (element, selector, checkYoSelf, root) {
   }
 }
 
-},{"399":399}],397:[function(_dereq_,module,exports){
+},{"416":416}],414:[function(_dereq_,module,exports){
 /**
  * Module dependencies.
  */
 
 try {
-  var closest = _dereq_(396);
+  var closest = _dereq_(413);
 } catch(err) {
-  var closest = _dereq_(396);
+  var closest = _dereq_(413);
 }
 
 try {
-  var event = _dereq_(398);
+  var event = _dereq_(415);
 } catch(err) {
-  var event = _dereq_(398);
+  var event = _dereq_(415);
 }
 
 /**
@@ -47208,7 +50212,7 @@ exports.unbind = function(el, type, fn, capture){
   event.unbind(el, type, fn, capture);
 };
 
-},{"396":396,"398":398}],398:[function(_dereq_,module,exports){
+},{"413":413,"415":415}],415:[function(_dereq_,module,exports){
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
     unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
     prefix = bind !== 'addEventListener' ? 'on' : '';
@@ -47244,15 +50248,15 @@ exports.unbind = function(el, type, fn, capture){
   el[unbind](prefix + type, fn, capture || false);
   return fn;
 };
-},{}],399:[function(_dereq_,module,exports){
+},{}],416:[function(_dereq_,module,exports){
 /**
  * Module dependencies.
  */
 
 try {
-  var query = _dereq_(400);
+  var query = _dereq_(417);
 } catch (err) {
-  var query = _dereq_(400);
+  var query = _dereq_(417);
 }
 
 /**
@@ -47296,7 +50300,7 @@ function match(el, selector) {
   return false;
 }
 
-},{"400":400}],400:[function(_dereq_,module,exports){
+},{"417":417}],417:[function(_dereq_,module,exports){
 function one(selector, el) {
   return el.querySelector(selector);
 }
@@ -47319,7 +50323,7 @@ exports.engine = function(obj){
   return exports;
 };
 
-},{}],401:[function(_dereq_,module,exports){
+},{}],418:[function(_dereq_,module,exports){
 
 /**
  * Expose `parse`.
@@ -47433,11 +50437,11 @@ function parse(html, doc) {
   return fragment;
 }
 
-},{}],402:[function(_dereq_,module,exports){
-module.exports = _dereq_(404);
+},{}],419:[function(_dereq_,module,exports){
+module.exports = _dereq_(421);
 
-module.exports.Collection = _dereq_(403);
-},{"403":403,"404":404}],403:[function(_dereq_,module,exports){
+module.exports.Collection = _dereq_(420);
+},{"420":420,"421":421}],420:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -47534,10 +50538,10 @@ function isExtended(collection) {
 module.exports.extend = extend;
 
 module.exports.isExtended = isExtended;
-},{}],404:[function(_dereq_,module,exports){
+},{}],421:[function(_dereq_,module,exports){
 'use strict';
 
-var Collection = _dereq_(403);
+var Collection = _dereq_(420);
 
 function hasOwnProperty(e, property) {
   return Object.prototype.hasOwnProperty.call(e, property.name || property);
@@ -47726,6 +50730,6 @@ module.exports = Refs;
  * @property {boolean} [collection=false]
  * @property {boolean} [enumerable=false]
  */
-},{"403":403}]},{},[1])(1)
+},{"420":420}]},{},[1])(1)
 });
 //# sourceMappingURL=cmmn-modeler.js.map

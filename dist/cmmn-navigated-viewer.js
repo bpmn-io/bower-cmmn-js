@@ -1,5 +1,5 @@
 /*!
- * cmmn-js - cmmn-navigated-viewer v0.3.0
+ * cmmn-js - cmmn-navigated-viewer v0.4.0
 
  * Copyright 2014, 2015 camunda Services GmbH and other contributors
  *
@@ -8,7 +8,7 @@
  *
  * Source Code: https://github.com/bpmn-io/cmmn-js
  *
- * Date: 2016-05-19
+ * Date: 2016-06-07
  */
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.CmmnJS = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
@@ -399,7 +399,7 @@ Viewer.prototype._createContainer = function(options) {
     parent = domQuery(parent);
   }
 
-  container = domify('<div class="bjs-container"></div>');
+  container = domify('<div class="cjs-container"></div>');
 
   assign(container.style, {
     width: ensureUnit(options.width),
@@ -446,7 +446,7 @@ function addProjectLogo(container) {
   var linkMarkup =
     '<a href="http://bpmn.io" ' +
        'target="_blank" ' +
-       'class="bio-powered-by" ' +
+       'class="cjs-powered-by" ' +
        'title="Powered by bpmn.io" ' +
        'style="position: absolute; bottom: 15px; right: 15px; z-index: 100">' +
         '<img src="data:image/png;base64,' + logoData + '">' +
@@ -1084,6 +1084,7 @@ function CmmnRenderer(eventBus, styles, pathMap) {
       fill: 'white',
       stroke: 'black',
       strokeWidth: 2,
+      fillOpacity: 0.95,
       'pointer-events': 'all'
     });
 
@@ -1101,20 +1102,21 @@ function CmmnRenderer(eventBus, styles, pathMap) {
   function renderExternalLabel(p, element, align) {
     var name = getName(element);
 
-    if (isStandardEventVisible(element)) {
+    var standardEvent = getStandardEvent(element);
 
-      var standardEvent = getStandardEvent(element);
+    if (standardEvent) {
 
-      if (standardEvent) {
-        standardEvent = '[' + standardEvent + ']';
+      var standardEventVisible = isStandardEventVisible(element);
+      standardEvent = '[' + standardEvent + ']';
 
-        if (name) {
+      if (!name) {
+        name = standardEvent;
+        element.hidden = !standardEventVisible;
+      }
+      else {
+        if (standardEventVisible) {
           name = name + ' ' + standardEvent;
         }
-        else {
-          name = standardEvent;
-        }
-
       }
 
     }
@@ -1157,6 +1159,9 @@ function CmmnRenderer(eventBus, styles, pathMap) {
 
     // STAGE
     'cmmn:Stage': function(p, element, attrs) {
+
+      attrs = assign({ fillOpacity: 0.95 }, attrs);
+
       var rect;
       if (isCasePlanModel(element)) {
         return handlers['cmmn:CasePlanModel'](p, element);
@@ -1178,8 +1183,10 @@ function CmmnRenderer(eventBus, styles, pathMap) {
 
     // STAGE
     'cmmn:PlanFragment': function(p, element, attrs) {
+
       var rect = drawRect(p, element.width, element.height, TASK_BORDER_RADIUS, {
-        strokeDasharray: '10, 12'
+        strokeDasharray: '10, 12',
+        fillOpacity: 0.95
       });
 
       renderEmbeddedLabel(p, element, isCollapsed(element) ? 'center-middle' : 'left-top');
@@ -1189,7 +1196,9 @@ function CmmnRenderer(eventBus, styles, pathMap) {
     },
 
     'cmmn:CasePlanModel': function (p, element) {
-      var rect = drawRect(p, element.width, element.height);
+      var rect = drawRect(p, element.width, element.height, null, {
+        fillOpacity: 0.95
+      });
       renderCasePlanModelLabel(p, element);
       attachPlanningTableMarker(p, element);
       attachCasePlanModelMarkers(p, element);
@@ -2376,6 +2385,8 @@ CmmnImporter.prototype.root = function(diagram) {
   var element = this._elementFactory.createRoot(elementData(diagram));
 
   this._canvas.setRootElement(element);
+
+  return element;
 };
 
 
@@ -2591,6 +2602,8 @@ function CmmnTreeWalker(handler) {
   //   discretionary item
   var connections = [];
 
+  var discretionaryConnections = {};
+
   // list of cases to draw
   var cases = [];
 
@@ -2704,6 +2717,11 @@ function CmmnTreeWalker(handler) {
         if (is(cmmnElement, 'cmmn:Association')) {
           associations.push(di);
         }
+        else if (!cmmnElement) {
+          var source = di.sourceCMMNElementRef;
+          discretionaryConnections[source.id] = discretionaryConnections[source.id] || [];
+          discretionaryConnections[source.id].push(di);
+        }
         else {
           connections.push(function (ctx) {
             handleConnection(di, ctx);
@@ -2807,6 +2825,7 @@ function CmmnTreeWalker(handler) {
     handleDeferred(deferred);
 
     forEach(connections, function(d) { d(casePlanModelContext); });
+
   }
 
   function handleCasePlanModel(casePlanModel, context) {
@@ -2875,6 +2894,11 @@ function CmmnTreeWalker(handler) {
     }
     else if (is(definitionRef, 'cmmn:HumanTask')) {
       handlePlanningTable(definitionRef.planningTable, context);
+
+      var edges = discretionaryConnections[item.id];
+      forEach(edges, contextual(handleDiscretionaryConnection, context));
+      delete discretionaryConnections[item.id];
+
     }
   }
 
@@ -2916,6 +2940,12 @@ function CmmnTreeWalker(handler) {
 
   function handleAssociation(association, context) {
     visit(association, context);
+  }
+
+  function handleDiscretionaryConnection(connection, context) {
+    deferred.push(function() {
+      visit(connection, context);
+    });
   }
 
   function getEnclosedElements(elements, container) {
@@ -3062,7 +3092,7 @@ module.exports.isPlanningTableCollapsed = function (element) {
 module.exports.isStandardEventVisible = function (element) {
   element = getBusinessObject(element);
   var cmmnElement = element.cmmnElementRef;
-  return is(cmmnElement, 'cmmn:OnPart') && element.isStandardEventVisible;
+  return !!(is(cmmnElement, 'cmmn:OnPart') && element.isStandardEventVisible);
 };
 },{"16":16}],15:[function(_dereq_,module,exports){
 'use strict';
@@ -3349,6 +3379,78 @@ function getStandardEvent(element) {
 }
 
 module.exports.getStandardEvent = getStandardEvent;
+
+function getStandardEvents(element) {
+
+  if (is(element, 'cmmndi:CMMNEdge')) {
+    element = getBusinessObject(element).cmmnElementRef;
+  }
+
+  if (is(element, 'cmmn:OnPart')) {
+
+    if (is(element.sourceRef, 'cmmn:CaseFileItem')) {
+
+      return [
+        'addChild',
+        'addReference',
+        'create',
+        'delete',
+        'removeChild',
+        'removeReference',
+        'replace',
+        'update'
+      ];
+
+    }
+
+    if (is(element.exitCriterionRef, 'cmmn:ExitCriterion')) {
+      return [ 'exit' ];
+    }
+
+    if (is(element.sourceRef, 'cmmn:PlanItem')) {
+
+      var definition = getDefinition(element.sourceRef);
+      if (is(definition, 'cmmn:EventListener') || is(definition, 'cmmn:Milestone')) {
+
+
+        return [
+          'create',
+          'suspend',
+          'terminate',
+          'occur',
+          'resume'
+        ];
+
+      }
+
+      return [
+        'create',
+        'enable',
+        'start',
+        'disable',
+        'manualStart',
+        'suspend',
+        'fault',
+        'complete',
+        'terminate',
+        'exit',
+        'resume',
+        'reactivate',
+        'reenable',
+        'parentSuspend',
+        'parentResume'
+      ];
+
+    }
+
+  }
+
+  return [];
+
+}
+
+module.exports.getStandardEvents = getStandardEvents;
+
 },{}],17:[function(_dereq_,module,exports){
 /**
  * This file must not be changed or exchanged.
@@ -8100,6 +8202,13 @@ module.exports={
           "isReference": true
         },
         {
+          "name": "itemControl",
+          "type": "PlanItemControl",
+          "xml": {
+            "serialize": "property"
+          }
+        },
+        {
           "name": "entryCriteria",
           "type": "EntryCriterion",
           "isMany": true
@@ -8108,13 +8217,6 @@ module.exports={
           "name": "exitCriteria",
           "type": "ExitCriterion",
           "isMany": true
-        },
-        {
-          "name": "itemControl",
-          "type": "PlanItemControl",
-          "xml": {
-            "serialize": "property"
-          }
         }
       ]
     },
@@ -12541,8 +12643,10 @@ Overlays.prototype._init = function() {
 
     if (container) {
       domRemove(container.html);
-      var i = self._overlayContainers.indexOf();
-      self._overlayContainers.splice(i, 1);
+      var i = self._overlayContainers.indexOf(container);
+      if (i !== -1) {
+        self._overlayContainers.splice(i, 1);
+      }
     }
   });
 
